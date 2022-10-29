@@ -18,6 +18,9 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - name: Build the Docker Image
+    - name: Docker Build
       run: |
-        docker build -t schniebel/welcome-page:$(date +%s) .
+        docker build -t schniebel/welcome-page:${{ github.sha }} .
+    - name: Docker Push
+      run: |
+        docker push schniebel/welcome-page:${{ github.sha }}
