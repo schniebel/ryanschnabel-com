@@ -24,13 +24,6 @@ jobs:
     - name: Docker Push
       run: |
         docker push schniebel/welcome-page:${{ github.sha }}
-
-  Deploy:
-    name: Deploy Docker Image To Kubernetes Cluster
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v3
     - name: Create Kubeconfig
       run: | 
         mkdir ${HOME}/.kube
@@ -39,4 +32,3 @@ jobs:
       run: kubectl config use-context default
     - name: Deploy to Cluster
       run: kubectl apply -f config/kubernetes.yaml
-    
