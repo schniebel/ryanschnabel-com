@@ -12,18 +12,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - name: Docker Login
-      env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - name: Docker Build
-      run: |
-        docker build -t schniebel/welcome-page:${{ github.sha }} .
-    - name: Docker Push
-      run: |
-        docker push schniebel/welcome-page:${{ github.sha }}
     - name: Create Kubeconfig
       run: | 
         mkdir ${HOME}/.kube
