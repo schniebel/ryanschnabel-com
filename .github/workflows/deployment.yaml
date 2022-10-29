@@ -15,7 +15,4 @@ jobs:
     - name: Create Kubeconfig
       run: | 
         mkdir ${HOME}/.kube
-    - name: Use Context
-      run: kubectl config use-context default
-    - name: Deploy to Cluster
-      run: kubectl apply -f config/kubernetes.yaml
+        echo ${{ secrets.KUBE_CONFIG }} | base64 --decode > ${HOME}/.kube/config
