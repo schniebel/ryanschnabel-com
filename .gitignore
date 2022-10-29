@@ -1,2 +1,3 @@
 **/config/dockerConfig.json
 deployment.sh
+build-trigger
