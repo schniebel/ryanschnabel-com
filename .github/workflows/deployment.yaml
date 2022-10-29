@@ -33,7 +33,7 @@ jobs:
           platforms: linux/arm64/v8
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USER }}/welcome-page:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USER }}/welcome-page:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
