@@ -21,6 +21,9 @@ jobs:
     - name: Docker Build
       run: |
         docker build -t schniebel/welcome-page .
+    - name: Docker Tag
+      run: |
+        docker tag welcome-page schniebel/welcome-page
     - name: Docker Push
       run: |
         docker push schniebel/welcome-page
