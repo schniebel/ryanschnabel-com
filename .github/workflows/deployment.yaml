@@ -8,7 +8,7 @@ jobs:
   build:    
     runs-on: ubuntu-18.04    
     env:      
-      DOCKER_REGISTRY: schniebel      
+      DOCKER_REGISTRY: docker.io      
       DOCKER_IMAGE: schniebel/welcome-page      
       DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
