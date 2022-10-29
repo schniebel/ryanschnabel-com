@@ -1,3 +1,3 @@
 # ryanschnabel-com
 
-Repo holding frontend code and Kubernetes yaml config
+Repo holding code and Kubernetes configuration for webside.
