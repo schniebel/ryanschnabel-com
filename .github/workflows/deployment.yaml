@@ -9,21 +9,28 @@ jobs:
   Build:
     name: Deploy ryanschnabel.com
     runs-on: ubuntu-latest   
-    
+    env:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      DOCKER_TARGET_PLATFORM: linux/arm/v7    
     steps:
+    - name : Checkout the code
     - uses: actions/checkout@v2
+    
+    - name: Set up Docker Buildx
+      uses: crazy-max/ghaction-docker-buildx@v1      
+      with:        
+        version: latest
+    
+    
     - name: Docker Login
-      env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - name: Docker Build
+    
+    - name: Run Buildx (push image)
       run: |
-        docker build -t schniebel/welcome-page .
-    - name: Docker Tag
-      run: |
-        docker tag welcome-page schniebel/welcome-page
-    - name: Docker Push
-      run: |
-        docker push schniebel/welcome-page
+        docker buildx build \
+        --platform ${{ steps.prepare.outputs.docker_platform }} \ 
+        --tag ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }} \
+        --file ./Dockerfile \ 
+        --output type=image,push=true .
