@@ -45,5 +45,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            cd /usr/local/bin/kubernetes/repositories/ryanschnabel-com
+            cd ${{ secrets.PATH }}
             ./deployment.sh
