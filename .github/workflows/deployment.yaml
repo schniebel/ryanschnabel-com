@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  buildx:
+  Ryanschnabel-com Deployment:
     runs-on: ubuntu-latest
     
     steps:
@@ -46,4 +46,4 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd /usr/local/bin/kubernetes/repositories/ryanschnabel-com
-            ./deployment-test.sh
+            ./deployment.sh
