@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: welcome-nginx
+spec:
+  selector:
+    matchLabels:
+      app: welcome-nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: welcome-nginx
+    spec:
+      containers:
+        - image: schniebel/welcome-page
+          name: welcome-nginx
+          imagePullPolicy: Always
+      imagePullSecrets:
+       - name: regcred

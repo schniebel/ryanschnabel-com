@@ -2,6 +2,18 @@
 
 Repo holding code and Kubernetes configuration for webside.
 
+## Infrastructure Configuration
+
+[ryanschnabel.com](https://ryanschnabel.com) is hosted on a [K3](https://k3s.io/) Kubernetes cluster on Raspberry Pi 4s.
+
+Website is build Using [NGINX](https://hub.docker.com/_/nginx) containers and exposing/load balancing to outside traffic using [Traefik](https://traefik.io/traefik/)
+
+Configuration located in the config folder.
+
+`deployment.yaml` - defines deployment of pods
+
+`service.yaml` - defines Traefik ingress and service exposure to pods
+
 ## SSL Termination
 
 Uses Certbot with Letsencrypt as the CA, and configured with Cloud Flare. 
