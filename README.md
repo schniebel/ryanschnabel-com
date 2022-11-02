@@ -4,7 +4,10 @@ Repo holding code and Kubernetes configuration for webside.
 
 ## SSL Termination
 
-Uses Certbot with Letsencrypt as the CA, and configuring with Cloud Flare. Configuration in the SSL folder. 
+Uses Certbot with Letsencrypt as the CA, and configured with Cloud Flare. 
+
+Configuration located in the SSL folder. 
+
 Certbot installed via Helm, and uses values and CRDs below:
 
   kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.crds.yaml
