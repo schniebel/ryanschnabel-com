@@ -38,11 +38,6 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
       
-      - name: Sleep for 10s
-        uses: juliangruber/sleep-action@v1
-        with:
-          time: 10s
-        
       - name: Deploy To Kubernetes Cluster
         uses: appleboy/ssh-action@master
         with:
