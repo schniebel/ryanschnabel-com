@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - image: schniebel/welcome-page
-          name: welcome-nginx
-          imagePullPolicy: Always
+          name: welcome-nginx:{TAG}
+          imagePullPolicy: IfNotPresent
       imagePullSecrets:
        - name: regcred
