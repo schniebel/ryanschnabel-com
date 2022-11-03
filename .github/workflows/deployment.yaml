@@ -33,7 +33,7 @@ jobs:
           platforms: linux/arm64/v8
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USER }}/welcome-page:latest
+          tags: ${{ secrets.DOCKER_USER }}/welcome-page:${{ github.sha }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -46,4 +46,5 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd ${{ secrets.PATH }}
-            ./deployment.sh
+            TAG=${{ github.sha }}
+            TAG=$TAG ./deployment.sh
