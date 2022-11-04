@@ -38,6 +38,8 @@ Certbot installed via [Helm](https://helm.sh/), and uses values and [CRDs](https
 
 CI handled by [Github Actions](https://github.com/features/actions). The configuration of which can be found in the .github/workflows folder.
 
-Steps handle the authentication with [Docker Hub](https://hub.docker.com/) (which stores the image). The buiding and pushing of that image to my image repo (using the [buildx](https://github.com/docker/buildx) plugin to handle ARM64 architecture, which is what is running on the Raspberry Pi 4s)
+Steps handle 
 
-Github actions also has the authentication configured to allow it to execute kubectl commands in order to roll out new image changes to the ryanschnabel.com domain.
+- the authentication with [Docker Hub](https://hub.docker.com/) 
+- The buiding and pushing of that image to my image repo (using the [buildx](https://github.com/docker/buildx) plugin to handle ARM64 architecture, which is what is running on the Raspberry Pi 4s)
+- The execution of the kubectl commands that roll out the new image to the ryanschnabel.com domain.
