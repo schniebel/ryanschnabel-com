@@ -16,11 +16,11 @@ Configuration located in the config folder.
 
 ## SSL Termination
 
-Uses Certbot with Letsencrypt as the CA, and configured with Cloud Flare. 
+Uses [Certbot](https://certbot.eff.org/) with [Letsencrypt](https://letsencrypt.org/) as the CA, and configured with [Clouddflare](https://www.cloudflare.com/). 
 
 Configuration located in the SSL folder. 
 
-Certbot installed via Helm, and uses values and CRDs below:
+Certbot installed via [Helm](https://helm.sh/), and uses values and [CRDs](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions) below:
 
     kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.crds.yaml
     helm install cert-manager jetstack/cert-manager --namespace cert-manager --values=values.yaml --version v1.9.1
@@ -33,3 +33,11 @@ Certbot installed via Helm, and uses values and CRDs below:
 `certificate.yaml` - defines certificate that is usable by cluster
 
 `letsencrypt.yaml` - exposes certificate so it is usable by cluster
+
+## CI Pipeline
+
+CI handled by [Github Actions](https://github.com/features/actions). The configuration of which can be found in the .github/workflows folder.
+
+Steps handle the authentication with [Docker Hub](https://hub.docker.com/) (which stores the image). The buiding and pushing of that image to my image repo (using the [buildx](https://github.com/docker/buildx) plugin to handle ARM64 architecture, which is what is running on the Raspberry Pi 4s)
+
+Github actions also has the authentication configured to allow it to execute kubectl commands in order to roll out new image changes to the ryanschnabel.com domain.
