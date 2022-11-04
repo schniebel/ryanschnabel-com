@@ -40,6 +40,6 @@ CI handled by [Github Actions](https://github.com/features/actions). The configu
 
 Steps handle 
 
-- the authentication with [Docker Hub](https://hub.docker.com/) 
-- The buiding and pushing of that image to my image repo (using the [buildx](https://github.com/docker/buildx) plugin to handle ARM64 architecture, which is what is running on the Raspberry Pi 4s)
-- The execution of the kubectl commands that roll out the new image to the ryanschnabel.com domain.
+- Authentication with [Docker Hub](https://hub.docker.com/) 
+- Buiding and pushing of that image to my image repo (using the [buildx](https://github.com/docker/buildx) plugin to handle ARM64 architecture, which is what is running on the Raspberry Pi 4s)
+- Execution of the kubectl commands that roll out the new image to the ryanschnabel.com domain.
