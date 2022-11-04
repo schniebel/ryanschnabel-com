@@ -13,8 +13,8 @@ spec:
         app: welcome-nginx
     spec:
       containers:
-        - image: schniebel/welcome-page
-          name: {TAG}
-          imagePullPolicy: Always
+        - image: schniebel/welcome-page:{TAG}
+          name: welcome-nginx
+          imagePullPolicy: IfNotPresent
       imagePullSecrets:
        - name: regcred
