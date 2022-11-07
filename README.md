@@ -43,3 +43,9 @@ Steps handle
 - Authentication with [Docker Hub](https://hub.docker.com/) 
 - Buiding and pushing of that image to my image repo (using the [buildx](https://github.com/docker/buildx) plugin to handle ARM64 architecture, which is what is running on the Raspberry Pi 4s)
 - Execution of the kubectl commands that roll out the new image to the ryanschnabel.com domain.
+
+## Dynamic DNS
+
+My home lab network's ISP uses dynamic DNS. So a way is needed to make sure that my IP address on my home lab router matches what my DNS providor has its 'A' record for the domain.
+
+Cloudflare is the Domain Registrar/ DNS management for ryanschnabel.com. In order to keep the Dynamic IP address provided by my ISP matched with Cloudflare, I am using [K0p1's Cloudflare DDNS Updater](https://github.com/K0p1-Git/cloudflare-ddns-updater)
