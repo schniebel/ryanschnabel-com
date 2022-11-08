@@ -37,8 +37,8 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-      
-      - name: Deploy To Kubernetes Cluster
+        
+      - name: Deploy To Test On Kubernetes Cluster
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -47,4 +47,21 @@ jobs:
           script: |
             cd ${{ secrets.PATH }}
             TAG=${{ github.sha }}
-            TAG=$TAG ./deployment.sh
+            TAG=$TAG ./deployment-test.sh
+      
+      - name: Manual Approval Required
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: schniebel
+            
+      - name: Deploy To Production On Kubernetes Cluster
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd ${{ secrets.PATH }}
+            TAG=${{ github.sha }}
+            TAG=$TAG ./deployment-prod.sh
