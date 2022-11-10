@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: welcome-nginx-prod
+spec:
+  selector:
+    matchLabels:
+      app: welcome-nginx-prod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: welcome-nginx-prod
+    spec:
+      containers:
+        - image: schniebel/welcome-page:{TAG}
+          name: welcome-nginx-prod
+          imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+       - name: regcred
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: welcome-nginx-svc-prod
+spec:
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: welcome-nginx-prod
+    
+ ---
+ 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: welcome-nginx-ingress-prod
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: "ryanschnabel.io"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: welcome-nginx-svc-prod
+            port:
+              number: 80
+  tls:
+  - hosts:
+      - ryanschnabel.io
+    secretName: ryanschnabel-io-tls

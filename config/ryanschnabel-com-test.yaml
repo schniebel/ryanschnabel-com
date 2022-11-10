@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: welcome-nginx-test
+spec:
+  selector:
+    matchLabels:
+      app: welcome-nginx-test
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: welcome-nginx-test
+    spec:
+      containers:
+        - image: schniebel/welcome-page:{TAG}
+          name: welcome-nginx-test
+          imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+       - name: regcred
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: welcome-nginx-svc-test
+spec:
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: welcome-nginx-test
+    
+ ---
+ 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: welcome-nginx-ingress-test
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: "test.ryanschnabel.io"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: welcome-nginx-svc-test
+            port:
+              number: 80
+  tls:
+  - hosts:
+      - ryanschnabel.io
+    secretName: ryanschnabel-io-tls
