@@ -33,31 +33,6 @@ spec:
     app: welcome-nginx-test
     
 ---
- 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: welcome-nginx-ingress-test
-  annotations:
-    kubernetes.io/ingress.class: traefik
-spec:
-  rules:
-  - host: "test.ryanschnabel.io"
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: welcome-nginx-svc-test
-            port:
-              number: 80
-  tls:
-  - hosts:
-      - ryanschnabel.io
-    secretName: ryanschnabel-io-tls
-
-
 
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
