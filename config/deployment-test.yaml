@@ -16,25 +16,5 @@ spec:
         - image: schniebel/welcome-page:{TAG}
           name: welcome-nginx-test
           imagePullPolicy: IfNotPresent
-        - name: gatekeeper
-          image: carlosedp/keycloak-gatekeeper:latest
-          args:
-          - --config=/etc/keycloak-gatekeeper.conf
-          ports:
-          - containerPort: 3000
-            name: service
-          volumeMounts:
-          - name: gatekeeper-config
-            mountPath: /etc/keycloak-gatekeeper.conf
-            subPath: keycloak-gatekeeper.conf
-          - name: gatekeeper-files
-            mountPath: /html
-        volumes:
-        - name : gatekeeper-config
-          configMap:
-            name: gatekeeper-config
-        - name : gatekeeper-files
-          configMap:
-            name: gatekeeper-files
       imagePullSecrets:
        - name: regcred
