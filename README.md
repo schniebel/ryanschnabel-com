@@ -1,18 +1,28 @@
 # ryanschnabel-com
 
-Repo holding code and Kubernetes configuration for webside.
+Repo holding code and Kubernetes configuration for website.
 
 ## Infrastructure Configuration
 
 [ryanschnabel.com](https://ryanschnabel.com) is hosted on a [K3](https://k3s.io/) Kubernetes cluster on Raspberry Pi 4s.
 
-Website is build Using [NGINX](https://hub.docker.com/_/nginx) containers and exposing/load balancing to outside traffic using [Traefik](https://traefik.io/traefik/)
+Website is built Using [NGINX](https://hub.docker.com/_/nginx) containers and exposing/load balancing to outside traffic using [Traefik](https://traefik.io/traefik/)
 
-Configuration located in the config folder.
+Test environment used for testing changes before CI push to production available at [test.ryanschnabel.com](https://test.ryanschnabel.com)
 
-`deployment.yaml` - defines deployment of pods
+Configuration located in the [config](https://github.com/schniebel/ryanschnabel-com/tree/main/config) folder.
 
-`service.yaml` - defines Traefik ingress and service exposure to pods
+`auth-secret-template.yaml` - Template of secret used in test environment authorization
+
+`ingress-route.yaml` - Using [Traefik IngressRoute](https://doc.traefik.io/traefik/routing/providers/kubernetes-crd/#kind-ingressroute) object to handle routing of traffic to the test and production pods. As well as specify middleware used for basic auth in the test environment, and TLS secret used for SSL handshake.
+
+`middleware.yaml` - Using [traefik middleware](https://doc.traefik.io/traefik/middlewares/overview/) to define an authorization redirect to the test environment
+
+`ryanschnabel-com-prod.yaml` - Defines production pod deployments as well as service that exposes those pods to the cluster
+
+`ryanschnabel-com-test.yaml` - Defines test pod deployments and service that exposes those pods to the cluster
+
+`traefik-nodeport.yaml` - Exposes ingress route to external traffic
 
 ## SSL Termination
 
@@ -36,13 +46,15 @@ Certbot installed via [Helm](https://helm.sh/), and uses values and [CRDs](https
 
 ## CI Pipeline
 
-CI handled by [Github Actions](https://github.com/features/actions). The configuration of which can be found in the .github/workflows folder.
+CI handled by [Github Actions](https://github.com/features/actions). The configuration of which can be found in the [.github/workflows](https://github.com/schniebel/ryanschnabel-com/tree/main/.github/workflows) folder.
 
 Steps handle 
 
 - Authentication with [Docker Hub](https://hub.docker.com/) 
 - Buiding and pushing of that image to my image repo (using the [buildx](https://github.com/docker/buildx) plugin to handle ARM64 architecture, which is what is running on the Raspberry Pi 4s)
-- Execution of the kubectl commands that roll out the new image to the ryanschnabel.com domain.
+- Excecution of the kubectl commands that roll out new image to test.ryanschnabel.com for test verification.
+- Pause for manual approval after test deployment. Manual verification handled in automatically created github issue. And waits for positive approval for moving on to production deployment. Using [trstringer/manual-approval](https://github.com/trstringer/manual-approval) in Github action to achieve this.
+- After positive approval from manual verification execute the kubectl commands that roll out the new image to the production ryanschnabel.com domain. Note a manual rejection in previous step aborts the build pipeline.
 
 ## Dynamic DNS
 
