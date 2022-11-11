@@ -31,28 +31,3 @@ spec:
       port: 80
   selector:
     app: welcome-nginx-prod
-    
----
- 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: welcome-nginx-ingress-prod
-  annotations:
-    kubernetes.io/ingress.class: traefik
-spec:
-  rules:
-  - host: "ryanschnabel.io"
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: welcome-nginx-svc-prod
-            port:
-              number: 80
-  tls:
-  - hosts:
-      - ryanschnabel.io
-    secretName: ryanschnabel-io-tls
