@@ -42,37 +42,7 @@ spec:
   routes:
   - kind: Rule
     match: Host(`test.ryanschnabel.io`)
-#    priority: 10                    # [4]
-#    middlewares:                    # [5]
-#    - name: middleware1             # [6]
-#      namespace: default            # [7]
-    services:                       # [8]
+    services:
     - kind: Service
       name: welcome-nginx-svc-test
-#      namespace: default
-#      passHostHeader: true
-      port: 80                      # [9]
-#      responseForwarding:
-#        flushInterval: 1ms
-      scheme: https
-#      serversTransport: transport   # [10]
-#      sticky:
-#        cookie:
-#          httpOnly: true
-#          name: cookie
-#          secure: true
- #         sameSite: none
- #     strategy: RoundRobin
- #     weight: 10
-  tls:
-    secretName: ryanschnabel-io-tls
-    options:                        # [13]
-      name: opt                     # [14]
-      namespace: default            # [15]
-    certResolver: foo               # [16]
-    domains:                        # [17]
-    - main: test.ryanschnabel.io
-#      sans:
-#      - a.example.net
-#      - b.example.net
-
+      port: 80
