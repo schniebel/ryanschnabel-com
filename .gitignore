@@ -1,4 +1,4 @@
 **/config/dockerConfig.json
 deployment-test.sh
 deployment-prod.sh
-authsecret.yaml
+auth-secret.yaml
