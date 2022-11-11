@@ -4,4 +4,4 @@ metadata:
   name: nginx-basic-auth
 spec:
   basicAuth:
-    secret: authsecret
+    secret: auth-secret
