@@ -1,1 +1,18 @@
-
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: welcome-nginx-ingressroute
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`ryanschnabel.io`)
+    services:
+    - kind: Service
+      name: welcome-nginx-svc-prod
+      port: 80
+  - kind: Rule
+    match: Host(`test.ryanschnabel.io`)
+    services:
+    - kind: Service
+      name: welcome-nginx-svc-test
+      port: 80
