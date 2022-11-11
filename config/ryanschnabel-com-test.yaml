@@ -31,18 +31,3 @@ spec:
       port: 80
   selector:
     app: welcome-nginx-test
-    
----
-
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: welcome-nginx-ingressroute-test
-spec:
-  routes:
-  - kind: Rule
-    match: Host(`test.ryanschnabel.io`)
-    services:
-    - kind: Service
-      name: welcome-nginx-svc-test
-      port: 80
