@@ -8,6 +8,7 @@ Repo holding code and Kubernetes configuration for website.
 - [SSL Termination](#ssl-termination)
 - [CI Pipeline](#ci-pipeline)
 - [Dynamic DNS](#dynamic-dns)
+- [Dashboard](#dashboard)
 
 ## Infrastructure Configuration
 
@@ -21,7 +22,7 @@ Configuration located in the [config](https://github.com/schniebel/ryanschnabel-
 
 `auth-secret-template.yaml` - Template of secret used in test environment authorization
 
-`ingress-route.yaml` - Using [Traefik IngressRoute](https://doc.traefik.io/traefik/routing/providers/kubernetes-crd/#kind-ingressroute) object to handle routing of traffic to the test and production pods. As well as specify middleware used for basic auth in the test environment, and TLS secret used for SSL handshake.
+`ingress-route.yaml` - Using [Traefik IngressRoute](https://doc.traefik.io/traefik/routing/providers/kubernetes-crd/#kind-ingressroute) object to handle routing of traffic to the test pods, production pods, and Traefik Dashboard. As well as specify middleware used for basic auth in the test environment, and TLS secret used for SSL handshake.
 
 `middleware.yaml` - Using [traefik middleware](https://doc.traefik.io/traefik/middlewares/overview/) to define an authorization redirect to the test environment
 
@@ -68,3 +69,7 @@ Steps handle
 My home lab network's ISP uses dynamic DNS. So a way is needed to make sure that my IP address on my home lab router matches what my DNS providor has its 'A' record for the domain.
 
 Cloudflare is the Domain Registrar/ DNS management for ryanschnabel.com. In order to keep the Dynamic IP address provided by my ISP matched with Cloudflare, I am using [K0p1's Cloudflare DDNS Updater](https://github.com/K0p1-Git/cloudflare-ddns-updater)
+
+## Dashboard
+
+Traefik Dashboard for cluster routing available at [dashboard.ryanschnabel.com](https://dashboard.ryanschnabel.io). Dashboard exposed via ingress router mapping to TraefikService. Using same basic auth middleware used for the test environment.
