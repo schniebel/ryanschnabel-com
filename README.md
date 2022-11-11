@@ -2,6 +2,13 @@
 
 Repo holding code and Kubernetes configuration for website.
 
+## Table of Contents
+
+- [Infrastructure Configuration](#infrastructure-configuration)
+- [SSL Termination](#ssl-termination)
+- [CI Pipeline](#ci-pipeline)
+- [Dynamic DNS](#dynamic-dns)
+
 ## Infrastructure Configuration
 
 [ryanschnabel.com](https://ryanschnabel.com) is hosted on a [K3](https://k3s.io/) Kubernetes cluster on Raspberry Pi 4s.
