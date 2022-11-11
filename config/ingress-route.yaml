@@ -20,3 +20,5 @@ spec:
     secretName: ryanschnabel-io-tls
     domains:
     - main: ryanschnabel.io
+      sans:
+      - test.ryanschnabel.io
