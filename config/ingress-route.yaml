@@ -16,3 +16,7 @@ spec:
     - kind: Service
       name: welcome-nginx-svc-test
       port: 80
+  tls:
+    secretName: ryanschnabel-io-tls
+    domains:
+    - main: ryanschnabel.io
