@@ -6,5 +6,8 @@ EXPOSE 80
 COPY /html/welcome.html /usr/share/nginx/html/index.html
 # copy favicon
 COPY /assets/favicon.ico /usr/share/nginx/html/favicon.ico
+# copy images
+COPY /assets/github_logo.png /usr/share/nginx/html/github_logo.png
+COPY /assets/linkedin_logo.png /usr/share/nginx/html/linkedin_logo.png 
 # STOPSIGNAL SIGQUIT
 CMD ["nginx", "-g", "daemon off;"]
