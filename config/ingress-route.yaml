@@ -13,7 +13,7 @@ spec:
   - kind: Rule
     match: Host(`test.ryanschnabel.io`)
     middlewares:
-      - name: traefik-sso@kubernetescrd
+      - name: sso
     services:
     - kind: Service
       name: welcome-nginx-svc-test
@@ -49,7 +49,7 @@ spec:
     - name: traefik-sso
       port: 4181
     middlewares:
-      - name: traefik-sso@kubernetescrd
+      - name: sso
   tls:
     secretName: ryanschnabel-io-tls
     domains:
