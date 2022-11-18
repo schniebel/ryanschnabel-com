@@ -13,7 +13,7 @@ spec:
   - kind: Rule
     match: Host(`test.ryanschnabel.io`)
     middlewares:
-      - name: traefik-sso@kubernetescrd
+      - name: sso
     services:
     - kind: Service
       name: welcome-nginx-svc-test
