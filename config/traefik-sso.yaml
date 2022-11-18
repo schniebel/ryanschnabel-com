@@ -37,7 +37,7 @@ spec:
         - name: COOKIE_DOMAIN
           value: ryanschnabel.io
         - name: AUTH_HOST
-          value: test.ryanschnabel.io
+          value: auth.ryanschnabel.io
         - name: INSECURE_COOKIE
           value: "false"
         - name: URL_PATH 
