@@ -40,8 +40,8 @@ spec:
           value: auth.ryanschnabel.io
         - name: INSECURE_COOKIE
           value: "false"
-        # - name: URL_PATH 
-        #   value: /_oauth
+        - name: URL_PATH 
+          value: /_oauth
         - name: WHITELIST
           value: ryan.d.schnabel@gmail.com
         - name: LOG_LEVEL
