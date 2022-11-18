@@ -32,3 +32,27 @@ spec:
       sans:
       - test.ryanschnabel.io
       - dashboard.ryanschnabel.io
+ 
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-sso
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`auth.ryanschnabel.io`)
+    kind: Rule
+    services:
+    - name: traefik-sso
+      port: 4181
+    middlewares:
+      - name: traefik-sso@kubernetescrd
+  tls:
+    secretName: ryanschnabel-io-tls
+    domains:
+    - main: ryanschnabel.io
+      sans:
+      - auth.ryanschnabel.io
+      
