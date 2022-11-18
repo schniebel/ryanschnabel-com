@@ -13,7 +13,7 @@ spec:
   - kind: Rule
     match: Host(`test.ryanschnabel.io`)
     middlewares:
-      - name: nginx-basic-auth
+      - name: traefik-sso@kubernetescrd
     services:
     - kind: Service
       name: welcome-nginx-svc-test
@@ -21,7 +21,7 @@ spec:
   - kind: Rule
     match: Host(`dashboard.ryanschnabel.io`)
     middlewares:
-      - name: nginx-basic-auth
+      - name: traefik-sso@kubernetescrd
     services:
     - kind: TraefikService
       name: api@internal
