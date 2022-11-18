@@ -13,7 +13,7 @@ spec:
   - kind: Rule
     match: Host(`test.ryanschnabel.io`)
     middlewares:
-      - name: sso
+      - name: nginx-basic-auth
     services:
     - kind: Service
       name: welcome-nginx-svc-test
