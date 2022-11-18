@@ -5,6 +5,9 @@ metadata:
   labels:
     app: traefik-sso
 spec:
+  selector:
+    matchLabels: traefik-sso
+      app: welcome-nginx-test
   template:
     metadata:
       labels:
