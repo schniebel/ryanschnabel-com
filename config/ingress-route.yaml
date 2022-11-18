@@ -55,4 +55,6 @@ spec:
     - main: ryanschnabel.io
       sans:
       - auth.ryanschnabel.io
+      - test.ryanschnabel.io
+      - dashboard.ryanschnabel.io
       
