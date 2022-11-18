@@ -23,21 +23,21 @@ spec:
           valueFrom:
             secretKeyRef:
               name: traefik-sso
-              key: clientid
+              key: traefik-forward-auth-google-client-id
         - name: PROVIDERS_GOOGLE_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               name: traefik-sso
-              key: clientsecret
+              key: traefik-forward-auth-google-client-secret
         - name: SECRET
           valueFrom:
             secretKeyRef:
               name: traefik-sso
-              key: secret
+              key: traefik-forward-auth-secret
         - name: COOKIE_DOMAIN
           value: ryanschnabel.io
         - name: AUTH_HOST
-          value: auth.ryanschnabel.io
+          value: test.ryanschnabel.io
         - name: INSECURE_COOKIE
           value: "false"
         - name: URL_PATH 

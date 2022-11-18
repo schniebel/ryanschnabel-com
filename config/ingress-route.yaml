@@ -43,7 +43,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`auth.ryanschnabel.io`)
+  - match: Host(`test.ryanschnabel.io`)
     kind: Rule
     services:
     - name: traefik-sso
@@ -55,4 +55,4 @@ spec:
     domains:
     - main: ryanschnabel.io
       sans:
-      - auth.ryanschnabel.io    
+      - test.ryanschnabel.io    
