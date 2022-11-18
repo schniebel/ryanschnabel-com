@@ -21,7 +21,7 @@ spec:
   - kind: Rule
     match: Host(`dashboard.ryanschnabel.io`)
     middlewares:
-      - name: traefik-sso@kubernetescrd
+      - name: nginx-basic-auth
     services:
     - kind: TraefikService
       name: api@internal
@@ -43,7 +43,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`test.ryanschnabel.io`)
+  - match: Host(`auth.ryanschnabel.io`)
     kind: Rule
     services:
     - name: traefik-sso
@@ -55,4 +55,4 @@ spec:
     domains:
     - main: ryanschnabel.io
       sans:
-      - test.ryanschnabel.io    
+      - auth.ryanschnabel.io    
