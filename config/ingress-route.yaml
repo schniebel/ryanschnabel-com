@@ -13,7 +13,7 @@ spec:
   - kind: Rule
     match: Host(`test.ryanschnabel.io`)
     middlewares:
-      - name: sso
+      - name: nginx-basic-auth
     services:
     - kind: Service
       name: welcome-nginx-svc-test
@@ -25,6 +25,14 @@ spec:
     services:
     - kind: TraefikService
       name: api@internal
+   - kind: Rule
+    match: Host(`wyatt.ryanschnabel.io`)
+    middlewares:
+      - name: nginx-basic-auth
+    services:
+    - kind: Service
+      name: plex-kube-plex
+      port: 32400
   tls:
     secretName: ryanschnabel-io-tls
     domains:
