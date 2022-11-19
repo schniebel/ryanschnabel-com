@@ -25,7 +25,7 @@ spec:
     services:
     - kind: TraefikService
       name: api@internal
-   - kind: Rule
+  - kind: Rule
     match: Host(`wyatt.ryanschnabel.io`)
     middlewares:
       - name: nginx-basic-auth
