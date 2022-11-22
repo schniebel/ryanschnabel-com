@@ -11,12 +11,6 @@ spec:
     - kind: Service
       name: grafana
       port: 3000
-  - kind: Rule
-    match: Host(`alerts.ryanschnabel.io`)
-    services:
-    - kind: Service
-      name: alertmanager-main
-      port: 9093
   tls:
     secretName: ryanschnabel-io-tls
     domains:
