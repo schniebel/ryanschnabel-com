@@ -26,13 +26,13 @@ spec:
     - kind: TraefikService
       name: api@internal
   - kind: Rule
-    match: Host(`wyatt.ryanschnabel.io`)
+    match: Host(`monitoring.ryanschnabel.io`)
     middlewares:
       - name: nginx-basic-auth
     services:
     - kind: Service
-      name: plex-kube-plex
-      port: 32400
+      name: grafana
+      port: 3000
   tls:
     secretName: ryanschnabel-io-tls
     domains:
