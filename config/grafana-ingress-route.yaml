@@ -7,6 +7,8 @@ spec:
   routes:
   - kind: Rule
     match: Host(`monitoring.ryanschnabel.io`)
+    middlewares:
+      - name: nginx-basic-auth
     services:
     - kind: Service
       name: grafana
