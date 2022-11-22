@@ -25,14 +25,6 @@ spec:
     services:
     - kind: TraefikService
       name: api@internal
-  - kind: Rule
-    match: Host(`monitoring.ryanschnabel.io`)
-    middlewares:
-      - name: nginx-basic-auth
-    services:
-    - kind: Service
-      name: grafana
-      port: 3000
   tls:
     secretName: ryanschnabel-io-tls
     domains:

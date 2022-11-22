@@ -1,0 +1,21 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-ingressroute
+  namespace: monitoring
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`monitoring.ryanschnabel.io`)
+    middlewares:
+      - name: nginx-basic-auth
+    services:
+    - kind: Service
+      name: grafana
+      port: 3000
+  tls:
+    secretName: ryanschnabel-io-tls
+    domains:
+    - main: ryanschnabel.io
+      sans:
+      - monitoring.ryanschnabel.io
