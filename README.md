@@ -6,6 +6,7 @@ Repo holding code and Kubernetes configuration for website.
 
 - [Infrastructure Configuration](#infrastructure-configuration)
 - [SSL Termination](#ssl-termination)
+- [Cluster Monitoring (Grafana, Prometheus)](#cluster-monitoring)
 - [CI Pipeline](#ci-pipeline)
 - [Dynamic DNS](#dynamic-dns)
 - [Dashboard](#dashboard)
@@ -51,6 +52,12 @@ Certbot installed via [Helm](https://helm.sh/), and uses values and [CRDs](https
 `certificate.yaml` - defines certificate that is usable by cluster.
 
 `letsencrypt.yaml` - exposes certificate so it is usable by cluster.
+
+## Cluster Monitoring
+
+Cluster health and resources are monitored via Prometheus and displayed in dashboards using [Grafana](https://grafana.com/). Prometheus configuration and manifests generated via [Kube-Prometheus](https://github.com/prometheus-operator/kube-prometheus)
+
+Dashboard exposed at monitoring.ryanschnabel.com
 
 ## CI Pipeline
 
