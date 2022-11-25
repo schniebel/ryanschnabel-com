@@ -18,13 +18,13 @@ spec:
     - kind: Service
       name: welcome-nginx-svc-test
       port: 80
-#  - kind: Rule
-#    match: Host(`dashboard.ryanschnabel.io`)
-#    middlewares:
-#      - name: nginx-basic-auth
-#    services:
-#    - kind: TraefikService
-#      name: api@internal
+  - kind: Rule
+    match: Host(`dashboard.ryanschnabel.io`)
+    middlewares:
+      - name: nginx-basic-auth
+    services:
+    - kind: TraefikService
+      name: api@internal
   tls:
     secretName: ryanschnabel-io-tls
     domains:
@@ -32,27 +32,3 @@ spec:
       sans:
       - test.ryanschnabel.io
       - dashboard.ryanschnabel.io
- 
----
-
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: traefik-sso
-spec:
-  entryPoints:
-    - websecure
-  routes:
-  - match: Host(`auth.ryanschnabel.io`)
-    kind: Rule
-    services:
-    - name: traefik-sso
-      port: 4181
-    middlewares:
-      - name: traefik-sso@kubernetescrd
-  tls:
-    secretName: ryanschnabel-io-tls
-    domains:
-    - main: ryanschnabel.io
-      sans:
-      - auth.ryanschnabel.io    
