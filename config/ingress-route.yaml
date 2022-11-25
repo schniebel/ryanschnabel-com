@@ -18,13 +18,13 @@ spec:
     - kind: Service
       name: welcome-nginx-svc-test
       port: 80
-  - kind: Rule
-    match: Host(`dashboard.ryanschnabel.io`)
-    middlewares:
-      - name: nginx-basic-auth
-    services:
-    - kind: TraefikService
-      name: api@internal
+#  - kind: Rule
+#    match: Host(`dashboard.ryanschnabel.io`)
+#    middlewares:
+#      - name: nginx-basic-auth
+#    services:
+#    - kind: TraefikService
+#      name: api@internal
   tls:
     secretName: ryanschnabel-io-tls
     domains:
