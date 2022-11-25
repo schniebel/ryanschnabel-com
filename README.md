@@ -57,7 +57,7 @@ Certbot installed via [Helm](https://helm.sh/), and uses values and [CRDs](https
 
 Cluster health and resources are monitored via Prometheus and displayed in dashboards using [Grafana](https://grafana.com/). Prometheus configuration and manifests generated via [Kube-Prometheus](https://github.com/prometheus-operator/kube-prometheus)
 
-Dashboard exposed at monitoring.ryanschnabel.com
+Dashboard exposed at [moitoring.ryanschnabel.com](monitoring.ryanschnabel.com)
 
 ## CI Pipeline
 
