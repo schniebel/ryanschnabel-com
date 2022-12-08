@@ -6,7 +6,7 @@ metadata:
 spec:
   routes:
   - kind: Rule
-    match: Host(`monitoring.ryanschnabel.io`)
+    match: Host(`monitoring.ryanschnabel.com`)
     services:
     - kind: Service
       name: grafana
@@ -14,6 +14,6 @@ spec:
   tls:
     secretName: ryanschnabel-io-tls
     domains:
-    - main: ryanschnabel.io
+    - main: ryanschnabel.com
       sans:
-      - monitoring.ryanschnabel.io
+      - monitoring.ryanschnabel.com

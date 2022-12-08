@@ -5,13 +5,13 @@ metadata:
 spec:
   routes:
   - kind: Rule
-    match: Host(`ryanschnabel.io`)
+    match: Host(`ryanschnabel.com`)
     services:
     - kind: Service
       name: welcome-nginx-svc-prod
       port: 80
   - kind: Rule
-    match: Host(`test.ryanschnabel.io`)
+    match: Host(`test.ryanschnabel.com`)
     middlewares:
       - name: nginx-basic-auth
     services:
@@ -19,7 +19,7 @@ spec:
       name: welcome-nginx-svc-test
       port: 80
   - kind: Rule
-    match: Host(`dashboard.ryanschnabel.io`)
+    match: Host(`dashboard.ryanschnabel.com`)
     middlewares:
       - name: nginx-basic-auth
     services:
@@ -28,7 +28,7 @@ spec:
   tls:
     secretName: ryanschnabel-io-tls
     domains:
-    - main: ryanschnabel.io
+    - main: ryanschnabel.com
       sans:
-      - test.ryanschnabel.io
-      - dashboard.ryanschnabel.io
+      - test.ryanschnabel.com
+      - dashboard.ryanschnabel.com
