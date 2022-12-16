@@ -5,13 +5,13 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: ryan.schnabel@gmail.com
+    email: **your email here**
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
       - dns01:
           cloudflare:
-            email: ryan.schnabel@gmail.com
+            email: **your email here**
             apiTokenSecretRef:
               name: cloudflare-token-secret
               key: cloudflare-token
