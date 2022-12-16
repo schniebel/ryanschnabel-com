@@ -26,9 +26,4 @@ spec:
     - kind: TraefikService
       name: api@internal
   tls:
-    secretName: ryanschnabel-io-tls
-    domains:
-    - main: ryanschnabel.com
-      sans:
-      - test.ryanschnabel.com
-      - dashboard.ryanschnabel.com
+    secretName: ryanschnabel-com-production-tls
