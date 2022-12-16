@@ -12,8 +12,4 @@ spec:
       name: grafana
       port: 3000
   tls:
-    secretName: ryanschnabel-io-tls
-    domains:
-    - main: ryanschnabel.com
-      sans:
-      - monitoring.ryanschnabel.com
+    secretName: ryanschnabel-com-production-tls
