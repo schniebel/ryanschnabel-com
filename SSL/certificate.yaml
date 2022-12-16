@@ -4,7 +4,7 @@ metadata:
   name: ryanschnabel-com
   namespace: default
 spec:
-  secretName: ryanschnabel-com-tls
+  secretName: ryanschnabel-com-production-tls
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
