@@ -2,3 +2,4 @@
 deployment-test.sh
 deployment-prod.sh
 auth-secret.yaml
+auth-secret-monitoring.yaml
