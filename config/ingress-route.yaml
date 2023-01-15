@@ -14,6 +14,7 @@ spec:
     match: Host(`test.ryanschnabel.com`)
     middlewares:
       - name: nginx-basic-auth
+      #- name: traefik-sso@kubernetescrd
     services:
     - kind: Service
       name: welcome-nginx-svc-test

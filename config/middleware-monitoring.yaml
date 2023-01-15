@@ -1,0 +1,8 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nginx-basic-auth-monitoring
+  namespace: monitoring
+spec:
+  basicAuth:
+    secret: auth-secret-monitoring

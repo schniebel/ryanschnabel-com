@@ -11,5 +11,13 @@ spec:
     - kind: Service
       name: grafana
       port: 3000
+  - kind: Rule
+    match: Host(`alerts.ryanschnabel.com`)
+    middlewares:
+      - name: nginx-basic-auth-monitoring
+    services:
+    - kind: Service
+      name: alertmanager-main
+      port: 9093
   tls:
     secretName: ryanschnabel-com-production-tls
