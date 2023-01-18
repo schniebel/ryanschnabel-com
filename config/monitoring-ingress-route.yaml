@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: grafana-ingressroute
+  name: monitoring-ingressroute
   namespace: monitoring
 spec:
   routes:
@@ -19,5 +19,21 @@ spec:
     - kind: Service
       name: alertmanager-main
       port: 9093
+  - kind: Rule
+    match: Host(`prometheus.ryanschnabel.com`)
+    middlewares:
+      - name: nginx-basic-auth-monitoring
+    services:
+    - kind: Service
+      name: prometheus-operator
+      port: 8443
+  - kind: Rule
+    match: Host(`blackbox.ryanschnabel.com`)
+    middlewares:
+      - name: nginx-basic-auth-monitoring
+    services:
+    - kind: Service
+      name: blackbox-exporter
+      port: 9115
   tls:
     secretName: ryanschnabel-com-production-tls
