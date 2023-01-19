@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: prom-db-pvc
+  name: prom-db-openebs-pvc
   namespace: monitoring
 spec:
-  storageClassName: local-path
+  storageClassName: openebs-hostpath
   accessModes:
     - ReadWriteOnce
   resources:
