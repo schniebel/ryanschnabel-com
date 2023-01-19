@@ -3,3 +3,5 @@ deployment-test.sh
 deployment-prod.sh
 auth-secret.yaml
 auth-secret-monitoring.yaml
+grafana-admin-credentials.yaml
+alertmanager-secret.yaml
