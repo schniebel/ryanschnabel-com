@@ -7,6 +7,7 @@ Repo holding code and Kubernetes configuration for website.
 - [Infrastructure Configuration](#infrastructure-configuration)
 - [SSL Termination](#ssl-termination)
 - [Cluster Monitoring (Grafana, Prometheus)](#cluster-monitoring)
+- [Persistence](#persistence)
 - [CI Pipeline](#ci-pipeline)
 - [Dynamic DNS](#dynamic-dns)
 - [Dashboard](#dashboard)
@@ -61,6 +62,9 @@ Prometheus Data along with Grafana Settings persisted via Config files in the ma
 
 Dashboard exposed at [moitoring.ryanschnabel.com](monitoring.ryanschnabel.com)
 Alert Manager exposed at [alerts.ryanschnabel.com](alerts.ryanschnabel.com)
+
+## Persistence
+Persistence layer facilitated by NFS server running on one of the linux nodes in the cluster. Storage space from that NFS server is dynamically provisioned with [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)
 
 ## CI Pipeline
 
