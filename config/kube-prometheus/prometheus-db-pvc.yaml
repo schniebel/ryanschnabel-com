@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: prom-db-openebs-pvc
+  name: prom-db-nfs-pvc
   namespace: monitoring
 spec:
-  storageClassName: openebs-hostpath
+  storageClassName: managed-nfs-storage
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 100Gi

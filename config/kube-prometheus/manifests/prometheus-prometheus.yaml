@@ -49,7 +49,7 @@ spec:
   volumes:
   - name: prometheus-k8s-data
     persistentVolumeClaim:
-      claimName: prom-db-openebs-pvc
+      claimName: prom-db-nfs-pvc
   containers:
   - name: prometheus
     volumeMounts:
