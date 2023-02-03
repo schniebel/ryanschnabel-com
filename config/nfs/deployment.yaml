@@ -25,11 +25,11 @@ spec:
             - name: PROVISIONER_NAME
               value: ryanschnabel.com/nfs
             - name: NFS_SERVER
-              value: 192.168.50.11
+              value: 192.168.50.10
             - name: NFS_PATH
-              value: /srv/nfs/kubernetes
+              value: /mnt/nfs
       volumes:
         - name: nfs-client-root
           nfs:
-            server: 192.168.50.11
-            path: /srv/nfs/kubernetes
+            server: 192.168.50.10
+            path: /mnt/nfs
