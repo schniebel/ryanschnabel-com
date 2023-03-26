@@ -3,7 +3,7 @@ resource "null_resource" "install_k3_master" {
     connection {
       type        = "ssh"
       user        = "master"
-      private_key = file("/home/master/.ssh/id_rsa")
+      private_key = file("/home/master/.ssh/id_rsa_master_terraform")
       host        = "192.168.50.10"
     }
 
@@ -39,7 +39,7 @@ resource "null_resource" "setup_k3_slave1" {
     connection {
       type        = "ssh"
       user        = "master"
-      private_key = file("/home/master/.ssh/id_rsa")
+      private_key = file("/home/master/.ssh/id_rsa_master_terraform")
       host        = "192.168.50.10"
     }
 
