@@ -1,0 +1,26 @@
+name: Terraform Apply
+
+on:
+  push:
+    branches:
+      - infrastructure-as-code
+
+jobs:
+  terraform-apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Apply Terraform
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -o StrictHostKeyChecking=no master@ryanschnabel.io 'cd /usr/local/bin/repositories/ryanschnabel-com/terraform && sudo terraform apply -auto-approve'
