@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            cd ${{ secrets.TERRAFORM_PATH }}
+            cd /usr/local/bin/repositories/ryanschnabel-com
             git checkout infrastructure-as-code
             git pull
 
