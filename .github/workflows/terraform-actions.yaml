@@ -17,8 +17,8 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd /usr/local/bin/repositories/ryanschnabel-com
-            git checkout infrastructure-as-code
-            git pull
+            sudo git checkout infrastructure-as-code
+            sudo git pull
 
       - name: Checkout infrastructure-as-code branch
         uses: actions/checkout@v2
