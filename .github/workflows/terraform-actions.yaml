@@ -9,14 +9,14 @@ jobs:
   terraform-apply:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy To Test On Kubernetes Cluster
+      - name: Checkout Code on Rasp
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            cd ${{ secrets.PATH }}
+            cd ${{ secrets.TERRAFORM_PATH }}
             git checkout infrastructure-as-code
             git pull
 
