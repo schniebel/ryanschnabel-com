@@ -9,6 +9,17 @@ jobs:
   terraform-apply:
     runs-on: ubuntu-latest
     steps:
+      - name: Deploy To Test On Kubernetes Cluster
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd ${{ secrets.PATH }}
+            git checkout infrastructure-as-code
+            git pull
+
       - name: Checkout infrastructure-as-code branch
         uses: actions/checkout@v2
         with:
@@ -25,4 +36,4 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -o StrictHostKeyChecking=no master@ryanschnabel.io 'cd /usr/local/bin/repositories/ryanschnabel-com/terraform && sudo terraform apply -auto-approve'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'cd ${{ secrets.TERRAFORM_PATH }} && sudo terraform apply -auto-approve'
