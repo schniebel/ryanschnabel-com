@@ -9,8 +9,10 @@ jobs:
   terraform-apply:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout infrastructure-as-code branch
         uses: actions/checkout@v2
+        with:
+          ref: infrastructure-as-code
 
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
