@@ -9,17 +9,6 @@ jobs:
   terraform-apply:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code on Rasp
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          script: |
-            cd /usr/local/bin/repositories/ryanschnabel-com
-            sudo git checkout infrastructure-as-code
-            sudo git pull
-
       - name: Checkout infrastructure-as-code branch
         uses: actions/checkout@v2
         with:
