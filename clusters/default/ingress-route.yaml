@@ -2,6 +2,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: ryanschnabel-com-ingressroute
+  namespace: default
 spec:
   routes:
   - kind: Rule
