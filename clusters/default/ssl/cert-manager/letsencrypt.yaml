@@ -6,7 +6,6 @@ spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: ryan.schnabel@gmail.com
-          namespace: cert-manager
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
