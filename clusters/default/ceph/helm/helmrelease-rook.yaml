@@ -6,7 +6,8 @@ metadata:
 spec:
   chart:
     spec:
-      chart: cert-manager
+      chart: rook-ceph
+      version: 1.11
       sourceRef:
         kind: HelmRepository
         name: rook
