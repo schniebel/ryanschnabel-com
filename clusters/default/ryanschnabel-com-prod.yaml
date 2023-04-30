@@ -18,7 +18,7 @@ spec:
           name: welcome-nginx-prod
           imagePullPolicy: IfNotPresent
       imagePullSecrets:
-       - name: regcred
+       - name: docker-hub
 
 ---
 
