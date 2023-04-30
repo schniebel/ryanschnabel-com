@@ -6,6 +6,12 @@ metadata:
 spec:
   routes:
   - kind: Rule
+    match: Host(`ryanschnabel.com`)
+    services:
+    - kind: Service
+      name: welcome-nginx-svc-prod
+      port: 80
+  - kind: Rule
     match: Host(`dashboard.ryanschnabel.com`)
     services:
     - kind: TraefikService
