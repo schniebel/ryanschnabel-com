@@ -14,7 +14,7 @@ spec:
         app: welcome-nginx-prod
     spec:
       containers:
-        - image: schniebel/welcome-page:{TAG}
+        - image: schniebel/welcome-page:latest
           name: welcome-nginx-prod
           imagePullPolicy: IfNotPresent
       imagePullSecrets:
