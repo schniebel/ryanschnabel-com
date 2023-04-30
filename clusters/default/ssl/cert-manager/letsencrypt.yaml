@@ -19,10 +19,10 @@ spec:
               secretKeyRef:
                 name: cloudflare-email-secret
                 key: cloudflare-email
+                namespace: cert-manager
             apiTokenSecretRef:
               name: cloudflare-token-secret
               key: cloudflare-token
-              namespace: cert-manager
         selector:
           dnsZones:
           - ryanschnabel.com
