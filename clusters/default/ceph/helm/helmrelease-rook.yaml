@@ -23,7 +23,7 @@ spec:
       repository: rook/ceph
       # -- Image tag
       # @default -- `master`
-      tag: v1.11.0.287.g104f03f30
+      #tag: VERSION
       # -- Image pull policy
       pullPolicy: IfNotPresent
 
