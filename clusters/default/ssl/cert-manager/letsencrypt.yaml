@@ -6,20 +6,24 @@ spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email:
-      secretKeyRef:
-        name: cloudflare-email-secret
-        key: cloudflare-email
-        namespace: cert-manager
+      valueFrom:
+        jsonPath: '{.stringData.cloudflare-email}'
+        secretKeyRef:
+          name: cloudflare-email-secret
+          key: cloudflare-email
+          namespace: cert-manager
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
       - dns01:
           cloudflare:
             email:
-              secretKeyRef:
-                name: cloudflare-email-secret
-                key: cloudflare-email
-                namespace: cert-manager
+              valueFrom:
+                jsonPath: '{.stringData.cloudflare-email}'
+                secretKeyRef:
+                  name: cloudflare-email-secret
+                  key: cloudflare-email
+                  namespace: cert-manager
             apiTokenSecretRef:
               name: cloudflare-token-secret
               key: cloudflare-token
