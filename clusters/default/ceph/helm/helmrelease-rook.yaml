@@ -481,7 +481,7 @@ spec:
       cephcsi:
         # -- Ceph CSI image
         # @default -- `quay.io/cephcsi/cephcsi:v3.8.0`
-        image:
+        image: quay.io/cephcsi/cephcsi:v3.8.0-arm64
 
       registrar:
         # -- Kubernetes CSI registrar image
