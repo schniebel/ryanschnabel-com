@@ -622,7 +622,7 @@ spec:
     disableAdmissionController: true
 
     # -- Runs Ceph Pods as privileged to be able to write to `hostPaths` in OpenShift with SELinux restrictions.
-    hostpathRequiresPrivileged: false
+    hostpathRequiresPrivileged: true
 
     # -- Disable automatic orchestration when new devices are discovered.
     disableDeviceHotplug: false
