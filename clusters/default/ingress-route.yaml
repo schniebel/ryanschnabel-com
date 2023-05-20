@@ -18,3 +18,37 @@ spec:
       name: api@internal
   tls:
     secretName: ryanschnabel-com-production-tls
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: monitoring-ingressroute
+  namespace: monitoring
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`monitoring.ryanschnabel.com`)
+    services:
+    - kind: Service
+      name: grafana
+      port: 3000
+  - kind: Rule
+    match: Host(`alerts.ryanschnabel.com`)
+    middlewares:
+      - name: nginx-basic-auth-monitoring
+    services:
+    - kind: Service
+      name: alertmanager-main
+      port: 9093
+  - kind: Rule
+    match: Host(`prometheus.ryanschnabel.com`)
+    middlewares:
+      - name: nginx-basic-auth-monitoring
+    services:
+    - kind: Service
+      name: prometheus-adapter
+      port: 443
+  tls:
+    secretName: ryanschnabel-com-production-tls
