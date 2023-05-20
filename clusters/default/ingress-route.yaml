@@ -13,6 +13,8 @@ spec:
       port: 80
   - kind: Rule
     match: Host(`dashboard.ryanschnabel.com`)
+    middlewares:
+      - name: nginx-basic-auth
     services:
     - kind: TraefikService
       name: api@internal
