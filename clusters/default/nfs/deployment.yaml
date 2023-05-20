@@ -27,9 +27,9 @@ spec:
             - name: NFS_SERVER
               value: 192.168.50.10
             - name: NFS_PATH
-              value: /mnt/nfs
+              value: /mnt/nfs-mount
       volumes:
         - name: nfs-client-root
           nfs:
             server: 192.168.50.10
-            path: /mnt/nfs
+            path: /mnt/nfs-mount
