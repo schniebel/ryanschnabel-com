@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: wordpress
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: oci://registry-1.docker.io/bitnamicharts/wordpress
+  version: 16.1.4
