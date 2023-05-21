@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: cert-manager
+      chart: my-wordpress
       version: 16.1.4
       sourceRef:
         kind: HelmRepository
