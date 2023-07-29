@@ -92,6 +92,7 @@ spec:
           runAsUser: 65532
       nodeSelector:
         kubernetes.io/os: linux
+        kubernetes.io/hostname: prometheus
       serviceAccountName: blackbox-exporter
       volumes:
       - configMap:
