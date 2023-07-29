@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: prom-db-nfs-pvc
+  name: graf-pvc
   namespace: monitoring
 spec:
-  storageClassName: managed-nfs-storage
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+  storageClassName: local-path
   resources:
     requests:
       storage: 20Gi
