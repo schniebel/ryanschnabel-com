@@ -6259,6 +6259,8 @@ spec:
       labels:
         app: helm-controller
     spec:
+      nodeSelector:                                
+        kubernetes.io/hostname: slave1   
       containers:
       - args:
         - --events-addr=http://notification-controller.flux-system.svc.cluster.local./
