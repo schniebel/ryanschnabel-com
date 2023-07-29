@@ -147,7 +147,7 @@ spec:
       serviceAccountName: grafana
       volumes:
       - persistentVolumeClaim:
-          claimName: graf-nfs-pvc
+          claimName: graf-pvc
         name: grafana-storage
       - name: grafana-datasources
         secret:

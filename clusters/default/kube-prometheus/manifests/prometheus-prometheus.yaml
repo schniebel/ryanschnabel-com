@@ -50,7 +50,7 @@ spec:
   volumes:
   - name: prometheus-k8s-data
     persistentVolumeClaim:
-      claimName: prom-db-nfs-pvc
+      claimName: prom-pvc
   containers:
   - name: prometheus
     volumeMounts:
