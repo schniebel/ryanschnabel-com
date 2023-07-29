@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: local-static-provisioner
+      chart: ./helm/provisioner
       version: 1.0.0
       sourceRef:
         kind: GitRepository
