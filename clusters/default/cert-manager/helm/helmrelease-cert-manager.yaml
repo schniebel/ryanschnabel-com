@@ -16,6 +16,12 @@ spec:
   values:
     nodeSelector:
       kubernetes.io/hostname: slave1
+    webhook:
+      nodeSelector:
+        kubernetes.io/hostname: slave1
+    cainjector:
+      nodeSelector:
+        kubernetes.io/hostname: slave1
     installCRDs: false
     replicaCount: 3
     extraArgs:
