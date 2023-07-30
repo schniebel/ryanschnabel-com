@@ -1,0 +1,50 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: wsj-cronjob
+spec:
+  schedule: "0 5 * * *"  # Run daily at 5AM
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: wsj-app
+            image: your-app:latest
+            env:  # Define environment variables here.
+            - name: FROM_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: wsj-secrets
+                  key: from_email
+            - name: TO_EMAILS
+              valueFrom:
+                secretKeyRef:
+                  name: wsj-secrets
+                  key: to_emails
+            - name: ACCOUNT_SID
+              valueFrom:
+                secretKeyRef:
+                  name: wsj-secrets
+                  key: account_sid
+            - name: AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: wsj-secrets
+                  key: auth_token
+            - name: SENDGRID_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: wsj-secrets
+                  key: sendgrid_token
+            - name: PHONE_FROM
+              valueFrom:
+                secretKeyRef:
+                  name: wsj-secrets
+                  key: phone_from
+            - name: PHONE_TO
+              valueFrom:
+                secretKeyRef:
+                  name: wsj-secrets
+                  key: phone_to
+          restartPolicy: Never
