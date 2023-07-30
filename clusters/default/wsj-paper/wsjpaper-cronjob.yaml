@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: wsj-app
-            image: your-app:latest
+            image: schniebel/wsfpaper-ryanschnabel-com:latest
             env:  # Define environment variables here.
             - name: FROM_EMAIL
               valueFrom:
