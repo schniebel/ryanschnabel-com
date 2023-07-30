@@ -52,5 +52,13 @@ spec:
     - kind: Service
       name: prometheus-adapter
       port: 443
+  - kind: Rule
+    match: Host(`logs.ryanschnabel.com`)
+    middlewares:
+      - name: nginx-basic-auth-monitoring
+    services:
+    - kind: Service
+      name: kibana
+      port: 5601
   tls:
     secretName: ryanschnabel-com-production-tls
