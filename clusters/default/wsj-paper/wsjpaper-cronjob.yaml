@@ -48,3 +48,5 @@ spec:
                   name: wsj-secrets
                   key: phone_to
           restartPolicy: Never
+          nodeSelector:
+            kubernetes.io/hostname: slave1
