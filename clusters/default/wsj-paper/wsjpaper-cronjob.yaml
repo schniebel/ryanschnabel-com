@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: wsj-cronjob
+  namespace: wsjpaper
 spec:
   schedule: "0 5 * * *"  # Run daily at 5AM
   jobTemplate:
