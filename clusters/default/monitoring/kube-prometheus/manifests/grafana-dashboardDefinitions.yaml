@@ -36003,7 +36003,7 @@ items:
         "panels": [
           {
             "collapsed": false,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "gridPos": {
               "h": 1,
               "w": 24,
@@ -36016,7 +36016,7 @@ items:
             "type": "row"
           },
           {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "fieldConfig": {
               "defaults": {
                 "color": {
@@ -36090,7 +36090,7 @@ items:
             "type": "stat"
           },
           {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "fieldConfig": {
               "defaults": {
                 "color": {
@@ -36164,7 +36164,7 @@ items:
             "type": "stat"
           },
           {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "fieldConfig": {
               "defaults": {
                 "color": {
@@ -36238,7 +36238,7 @@ items:
             "type": "stat"
           },
           {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "fieldConfig": {
               "defaults": {
                 "color": {
@@ -36305,7 +36305,7 @@ items:
             "type": "stat"
           },
           {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "fieldConfig": {
               "defaults": {
                 "color": {
@@ -36379,7 +36379,7 @@ items:
             "type": "stat"
           },
           {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "fieldConfig": {
               "defaults": {
                 "color": {
@@ -36454,7 +36454,7 @@ items:
           },
           {
             "collapsed": false,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "gridPos": {
               "h": 1,
               "w": 24,
@@ -36467,7 +36467,7 @@ items:
             "type": "row"
           },
           {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "fieldConfig": {
               "defaults": {
                 "color": {
@@ -36804,7 +36804,7 @@ items:
             "type": "table"
           },
           {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "fieldConfig": {
               "defaults": {
                 "custom": {
@@ -36921,7 +36921,7 @@ items:
           },
           {
             "collapsed": false,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "gridPos": {
               "h": 1,
               "w": 24,
@@ -36938,7 +36938,7 @@ items:
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "fieldConfig": {
               "defaults": {
                 "custom": {}
@@ -37032,7 +37032,7 @@ items:
           },
           {
             "collapsed": true,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "$datasource",
             "gridPos": {
               "h": 1,
               "w": 24,
@@ -37046,7 +37046,7 @@ items:
                 "bars": false,
                 "dashLength": 10,
                 "dashes": false,
-                "datasource": "${DS_PROMETHEUS}",
+                "datasource": "$datasource",
                 "fieldConfig": {
                   "defaults": {
                     "custom": {}
@@ -37144,7 +37144,7 @@ items:
                 "bars": false,
                 "dashLength": 10,
                 "dashes": false,
-                "datasource": "${DS_PROMETHEUS}",
+                "datasource": "$datasource",
                 "fieldConfig": {
                   "defaults": {
                     "custom": {}
@@ -37241,7 +37241,7 @@ items:
                 "bars": false,
                 "dashLength": 10,
                 "dashes": false,
-                "datasource": "${DS_PROMETHEUS}",
+                "datasource": "$datasource",
                 "fieldConfig": {
                   "defaults": {
                     "custom": {}
@@ -37368,7 +37368,7 @@ items:
             {
               "allValue": ".*",
               "current": {},
-              "datasource": "${DS_PROMETHEUS}",
+              "datasource": "$datasource",
               "definition": "label_values(namespace)",
               "error": null,
               "hide": 0,
