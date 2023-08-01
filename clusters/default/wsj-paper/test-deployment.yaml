@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: welcome-nginx-prod
+  namespace: wsjpaper
+spec:
+  selector:
+    matchLabels:
+      app: welcome-nginx-prod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: welcome-nginx-prod
+    spec:
+      containers:
+        - image: schniebel/welcome-page:latest
+          name: welcome-nginx-prod
+          imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+       - name: docker-hub
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: welcome-nginx-svc-prod
+  namespace: wsjpaper
+spec:
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: welcome-nginx-prod
