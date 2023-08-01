@@ -49,5 +49,7 @@ spec:
                   name: wsj-secrets
                   key: phone_to
           restartPolicy: Never
+          imagePullSecrets:
+          - name: docker-hub
           nodeSelector:
             kubernetes.io/hostname: slave1
