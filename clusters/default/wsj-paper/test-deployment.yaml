@@ -14,7 +14,7 @@ spec:
         app: welcome-nginx-prod
     spec:
       containers:
-        - image: schniebel/wsfpaper-ryanschnabel-com:latest
+        - image: schniebel/welcome-page:latest
           name: welcome-nginx-prod
           imagePullPolicy: IfNotPresent
       imagePullSecrets:
