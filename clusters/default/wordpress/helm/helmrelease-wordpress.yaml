@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: my-release
+      chart: wordpress
       version: 17.0.4
       sourceRef:
         kind: HelmRepository
