@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kelseyschnabel-com
+  namespace: kelsey
+spec:
+  selector:
+    matchLabels:
+      app: kelseyschnabel-com
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kelseyschnabel-com
+    spec:
+      containers:
+        - image: schniebel/kelseyschnabel-com:f13f8c3b599f01e845b09abe54d73624564dc923
+          name: kelseyschnabel-com
+          imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+       - name: docker-hub
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kelseyschnabel-com-svc
+  namespace: kelsey
+spec:
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: kelseyschnabel-com

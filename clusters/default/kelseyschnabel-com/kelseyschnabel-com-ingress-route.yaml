@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kelseyschnabel-com-ingressroute
+  namespace: kelsey
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`kelseyschnabel.com`)
+    services:
+    - kind: Service
+      name: kelseyschnabel-com-svc
+      port: 80
+  tls:
+    secretName: kelseyschnabel-com-production-tls

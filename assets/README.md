@@ -1,1 +1,0 @@
-Folder holding image assets.
