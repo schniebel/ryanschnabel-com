@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wordpress-nfs-pvc
+  name: wordpress-pvc
   namespace: wordpress
 spec:
-  storageClassName: managed-nfs-storage
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+  storageClassName: local-path
   resources:
     requests:
       storage: 10Gi

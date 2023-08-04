@@ -13,7 +13,9 @@ spec:
         name: wordpress
         namespace: flux-system
   interval: 1h
-#  values:
-#    persistence:
-#      storageClass: managed-nfs-storage
-#      existingClaim: wordpress-nfs-pvc
+  values:
+    nodeSelector:
+      kubernetes.io/hostname: slave1
+    persistence:
+      storageClass: local-path
+      existingClaim: wordpress-pvc
