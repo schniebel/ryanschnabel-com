@@ -6,8 +6,8 @@ metadata:
 spec:
   chart:
     spec:
-      chart: my-wordpress
-      version: 16.1.4
+      chart: my-release
+      version: 17.0.4
       sourceRef:
         kind: HelmRepository
         name: wordpress
