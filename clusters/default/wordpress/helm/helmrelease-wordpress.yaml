@@ -16,6 +16,10 @@ spec:
   values:
     nodeSelector:
       kubernetes.io/hostname: slave1
+    mariadb:
+      primary:
+        nodeSelector:
+          kubernetes.io/hostname: slave1    
     persistence:
       storageClass: local-path
       existingClaim: wordpress-pvc
