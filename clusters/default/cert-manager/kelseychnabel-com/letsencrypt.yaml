@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-kelsey-schnabel
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: ryan.schnabel@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-kelsey-schnabel
+    solvers:
+      - dns01:
+          cloudflare:
+            email: ryan.schnabel@gmail.com
+            apiTokenSecretRef:
+              name: cloudflare-token-secret
+              key: cloudflare-token
+        selector:
+          dnsZones:
+          - kelseyschnabel.com
+          - '*.kelseyschnabel.com'

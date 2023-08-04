@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kelseychnabel-com
+  namespace: default
+spec:
+  secretName: kelseyschnabel-com-production-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: kelseyschnabel.com
+  dnsNames:
+  - kelseyschnabel.com
+  - '*.kelseyschnabel.com'
