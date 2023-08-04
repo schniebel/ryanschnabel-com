@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: kelseyschnabel-com-production-tls
   issuerRef:
-    name: letsencrypt-production
+    name: letsencrypt-kelsey-schnabel
     kind: ClusterIssuer
   commonName: kelseyschnabel.com
   dnsNames:
