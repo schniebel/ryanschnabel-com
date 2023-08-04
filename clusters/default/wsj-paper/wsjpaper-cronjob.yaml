@@ -5,13 +5,14 @@ metadata:
   namespace: wsjpaper
 spec:
   schedule: "0 5 * * *"  # Run daily at 5AM
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: wsj-app
-            image: schniebel/wsfpaper-ryanschnabel-com:8a56281f9bd183ef4f76a8d6f2079d1651921960
+            image: schniebel/wsfpaper-ryanschnabel-com:698acd685733336c8a8f557b39df357e32e58f3a
             env:  # Define environment variables here.
             - name: FROM_EMAIL
               valueFrom:
