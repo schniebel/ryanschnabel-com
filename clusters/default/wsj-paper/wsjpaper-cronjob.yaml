@@ -12,7 +12,7 @@ spec:
         spec:
           containers:
           - name: wsj-app
-            image: schniebel/wsfpaper-ryanschnabel-com:698acd685733336c8a8f557b39df357e32e58f3a
+            image: schniebel/wsfpaper-ryanschnabel-com:c62da4a4ab8deb9d8d94ef3c34bb0d911c687741
             env:  # Define environment variables here.
             - name: FROM_EMAIL
               valueFrom:
