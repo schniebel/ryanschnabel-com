@@ -13,6 +13,8 @@ spec:
       labels:
         app: kelseyschnabel-com
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: slave1    
       containers:
         - image: schniebel/kelseyschnabel-com:f13f8c3b599f01e845b09abe54d73624564dc923
           name: kelseyschnabel-com

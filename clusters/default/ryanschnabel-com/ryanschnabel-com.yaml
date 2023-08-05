@@ -13,6 +13,8 @@ spec:
       labels:
         app: welcome-nginx-prod
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: slave1    
       containers:
         - image: schniebel/welcome-page:latest
           name: welcome-nginx-prod
