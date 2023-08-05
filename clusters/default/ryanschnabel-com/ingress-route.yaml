@@ -18,5 +18,3 @@ spec:
     services:
     - kind: TraefikService
       name: api@internal
-  #tls:
-  #  secretName: ryanschnabel-com-production-tls
