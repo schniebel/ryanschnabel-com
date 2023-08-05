@@ -7,9 +7,11 @@ spec:
   routes:
   - kind: Rule
     match: Host(`kelseyschnabel.com`)
+    middlewares:
+      - name: nginx-basic-auth    
     services:
     - kind: Service
       name: kelseyschnabel-com-svc
       port: 80
-  tls:
-    secretName: kelseyschnabel-com-production-tls
+  #tls:
+  #  secretName: kelseyschnabel-com-production-tls
