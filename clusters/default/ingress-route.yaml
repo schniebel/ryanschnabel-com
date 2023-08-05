@@ -36,29 +36,5 @@ spec:
     - kind: Service
       name: grafana
       port: 3000
-  - kind: Rule
-    match: Host(`alerts.ryanschnabel.com`)
-    middlewares:
-      - name: nginx-basic-auth-monitoring
-    services:
-    - kind: Service
-      name: alertmanager-main
-      port: 9093
-  - kind: Rule
-    match: Host(`prometheus.ryanschnabel.com`)
-    middlewares:
-      - name: nginx-basic-auth-monitoring
-    services:
-    - kind: Service
-      name: prometheus-adapter
-      port: 443
-  - kind: Rule
-    match: Host(`logs.ryanschnabel.com`)
-    middlewares:
-      - name: nginx-basic-auth-monitoring
-    services:
-    - kind: Service
-      name: kibana
-      port: 5601
   tls:
     secretName: ryanschnabel-com-production-tls
