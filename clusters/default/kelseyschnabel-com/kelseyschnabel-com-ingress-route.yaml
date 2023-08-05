@@ -11,5 +11,5 @@ spec:
     - kind: Service
       name: kelseyschnabel-com-svc
       port: 80
-  tls:
-    secretName: kelseyschnabel-com-production-tls
+  #tls:
+  #  secretName: kelseyschnabel-com-production-tls
