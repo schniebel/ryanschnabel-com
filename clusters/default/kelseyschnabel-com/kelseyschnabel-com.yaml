@@ -16,7 +16,7 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: slave1    
       containers:
-        - image: schniebel/kelseyschnabel-com:f13f8c3b599f01e845b09abe54d73624564dc923
+        - image: schniebel/kelseyschnabel-com:4f3dcfcd2a93dd4c12b1718fa309dc5c495dc6e5
           name: kelseyschnabel-com
           imagePullPolicy: IfNotPresent
       imagePullSecrets:
