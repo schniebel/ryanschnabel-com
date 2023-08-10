@@ -7,8 +7,6 @@ spec:
   routes:
   - kind: Rule
     match: Host(`kelseyschnabel.com`)
-    middlewares:
-      - name: nginx-basic-auth    
     services:
     - kind: Service
       name: kelseyschnabel-com-svc
