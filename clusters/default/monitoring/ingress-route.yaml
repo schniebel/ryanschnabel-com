@@ -11,5 +11,5 @@ spec:
     - kind: Service
       name: grafana
       port: 3000
-  tls:
-    secretName: ryanschnabel-com-production-tls
+  #tls:
+  #  secretName: ryanschnabel-com-production-tls
