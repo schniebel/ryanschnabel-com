@@ -23,3 +23,5 @@ spec:
     persistence:
       storageClass: local-path
       existingClaim: wordpress-pvc
+    service:
+      type: ClusterIP

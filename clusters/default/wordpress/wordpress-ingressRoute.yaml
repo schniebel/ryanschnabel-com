@@ -1,12 +1,12 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: monitoring-ingressroute
-  namespace: monitoring
+  name: wordpress-ingressroute
+  namespace: wordpress
 spec:
   routes:
   - kind: Rule
-    match: Host(`monitoring.ryanschnabel.com`)
+    match: Host(`ryanschnabel.com`)
     services:
     - kind: Service
       name: grafana
