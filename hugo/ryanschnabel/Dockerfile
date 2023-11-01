@@ -1,11 +1,18 @@
-FROM klakegg/hugo:0.111.3-ubuntu AS builder
+FROM ubuntu:latest as STAGEONE
 
-WORKDIR /src
-COPY . .
+# install hugo
+ENV HUGO_VERSION=0.54.0
+ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz /tmp/
+RUN tar -xf /tmp/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -C /usr/local/bin/
 
-RUN ls -al /src
+# install syntax highlighting
+RUN apt-get update
+RUN apt-get install -y python3-pygments
 
-RUN hugo --config hugo.toml
+# build site
+COPY source /source
+RUN hugo --source=/source/ --destination=/public/
 
-FROM nginx:alpine
-COPY --from=builder /src/public /usr/share/nginx/html
+FROM nginx:stable-alpine
+COPY --from=STAGEONE /public/ /usr/share/nginx/html/
+EXPOSE 80
