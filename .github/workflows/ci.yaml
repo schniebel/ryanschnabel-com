@@ -30,17 +30,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t schniebel/ryanschnabel-com:${{ github.sha }} .
+          docker build -t schniebel/ryanschnabel-com:${{ github.sha }} ./hugo
           docker push schniebel/ryanschnabel-com:${{ github.sha }}
-
-      - name: Update deployment.yaml with new image tag
-        run: |
-          ssed -i 's|schniebel/ryanschnabel-com:.*|schniebel/ryanschnabel-com:'${{ github.sha }}'|' ./clusters/default/ryanschnabel/deployment.yaml
-
-      - name: Commit and push changes
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<github-actions@github.com>"
-          git add deployment.yaml
-          git commit -m "Update ryanschnabel image tag in deployment.yaml to ${{ github.sha }}"
-          git push
