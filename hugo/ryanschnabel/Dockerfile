@@ -1,5 +1,3 @@
-hugo/ryanschnabel/Dockerfile
-
 FROM klakegg/hugo:0.89.4 AS builder
 
 WORKDIR /src
