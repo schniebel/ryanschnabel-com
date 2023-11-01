@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    #paths:
-    #  - hugo/**
+    paths:
+      - hugo/**
 
 jobs:
   build:
