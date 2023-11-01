@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ryanschnabel-ingressroute
+  namespace: ryanschnabel
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`ryanschnabel.com`)
+    services:
+    - kind: Service
+      name: ryanschnabel
+      port: 80
