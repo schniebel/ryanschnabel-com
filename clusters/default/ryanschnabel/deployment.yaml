@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ryanschnabel
+  namespace: ryanschnabel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ryanschnabel
+  template:
+    metadata:
+      labels:
+        app: ryanschnabel
+    spec:
+      containers:
+      - name: ryanschnabel
+        image: schniebel/ryanschnabel-com:latest
+        ports:
+        - containerPort: 80
