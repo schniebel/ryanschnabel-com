@@ -1,4 +1,4 @@
-FROM klakegg/hugo:0.89.4 AS builder
+FROM klakegg/hugo:0.111.3-ubuntu AS builder
 
 WORKDIR /src
 COPY . .
