@@ -10,7 +10,7 @@ RUN apt-get update
 RUN apt-get install -y python3-pygments
 
 # build site
-COPY ryanschnabel /source
+COPY ryanschnabel /source/
 RUN hugo --source=/source/ --destination=/public/
 
 FROM nginx:stable-alpine
