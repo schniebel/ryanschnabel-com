@@ -10,8 +10,8 @@ RUN apt-get update
 RUN apt-get install -y python3-pygments
 
 # build site
-COPY source /source
-RUN hugo --source=/source/ --destination=/public/
+COPY ryanschnabel /ryanschnabel
+RUN hugo --ryanschnabel=/ryanschnabel/ --destination=/public/
 
 FROM nginx:stable-alpine
 COPY --from=STAGEONE /public/ /usr/share/nginx/html/
