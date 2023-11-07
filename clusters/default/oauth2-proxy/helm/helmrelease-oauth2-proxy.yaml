@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: oauth2-proxy
+  namespace: oauth2-proxy
+spec:
+  chart:
+    spec:
+      chart: ./helm/oauth2-proxy
+      version: 6.18.1
+      sourceRef:
+        kind: GitRepository
+        name: oauth2-proxy
+        namespace: flux-system
+  interval: 1m
+  values:
+    nodeSelector:
+      kubernetes.io/hostname: slave1
+    image:
+      tag: v7.5.1-arm64
+    config:
+      clientSecret: oauth2-proxy
+    extraArgs:
+      provider: "google"
+      email_domains:
+        - "ryan.d.schnabel@gmail.com"
+      upstreams:
+        - "http://grafana.monitoring.svc.cluster.local:3000"
+      redirect_url: "https://monitoring.ryanschnabel.com/oauth2/callback"
