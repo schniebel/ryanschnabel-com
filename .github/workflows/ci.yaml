@@ -45,41 +45,10 @@ jobs:
         run: |
           sed -i 's|schniebel/ryanschnabel-com:.*|schniebel/ryanschnabel-com:'${{ github.sha }}'|' ./clusters/default/ryanschnabel-com/deployment.yaml
       
-      - name: Checkout a new branch for the changes
-        run: |
-          git checkout -b update-deployment-${{ github.sha }}
-      
       - name: Commit and push changes
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<github-actions@github.com>"
           git add .
           git commit -m "Update ryanschnabel image tag in deployment.yaml to ${{ github.sha }}"
-          git push --set-upstream origin update-deployment-${{ github.sha }}
-
-      - name: Create Pull Request
-        uses: repo-sync/pull-request@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "Update ryanschnabel image tag to ${{ github.sha }}"
-          pr_body: ":robot: This is an automated pull request to update the container tag to ${{ github.sha }}"
-          pr_label: "automated-pr"
-          source_branch: update-deployment-${{ github.sha }}      
-          destination_branch: main
-
-      - name: Get Pull Request Number
-        id: get-pr
-        run: |
-          PR_NUMBER=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/pulls?head=${{ github.actor }}:update-deployment-${{ github.sha }}" \
-            | jq '.[0].number')
-          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
-          echo "::set-output name=pr_number::$PR_NUMBER"
-
-      - name: Enable auto-merge for the pull request
-        if: env.PR_NUMBER > 0
-        uses: peter-evans/enable-pull-request-automerge@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.get-pr.outputs.pr_number }}
-          merge-method: merge
+          git push
