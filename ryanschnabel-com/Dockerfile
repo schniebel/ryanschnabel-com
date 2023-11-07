@@ -10,10 +10,12 @@ RUN apt-get update
 RUN apt-get install -y python3-pygments
 
 # build site
-COPY source /source
-RUN hugo --source=/source/ --destination=/public/
+RUN hugo --config hugo.toml
 
-RUN ls -la /source/public
+#COPY source /source
+#RUN hugo --source=/source/ --destination=/public/
+
+#RUN ls -la /source/public
 
 # nginx
 # FROM arm64v8/nginx:1.24-perl
