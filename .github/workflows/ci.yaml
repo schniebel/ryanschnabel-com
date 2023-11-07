@@ -64,4 +64,5 @@ jobs:
           pr_title: "Update ryanschnabel image tag to ${{ github.sha }}"
           pr_body: ":robot: This is an automated pull request to update the container tag to ${{ github.sha }}"
           pr_label: "automated-pr"
-          branch: update-deployment-${{ github.sha }}      
+          source_branch: update-deployment-${{ github.sha }}      
+          destination_branch: main
