@@ -43,7 +43,7 @@ jobs:
       
       - name: Update deployment.yaml with new image tag
         run: |
-          ssed -i 's|schniebel/ryanschnabel-com:.*|schniebel/ryanschnabel-com:'${{ github.sha }}'|' ./clusters/default/ryanschnabel/deployment.yaml
+          sed -i 's|schniebel/ryanschnabel-com:.*|schniebel/ryanschnabel-com:'${{ github.sha }}'|' ./clusters/default/ryanschnabel/deployment.yaml
       - name: Commit and push changes
         run: |
           git config user.name "GitHub Actions Bot"
