@@ -12,8 +12,6 @@ RUN apt-get install -y python3-pygments
 # build site
 WORKDIR /src
 COPY . .
-RUN ls -la
-RUN ls -la /src/static/img
 RUN hugo --config hugo.toml --logLevel info
 
 #COPY source /source

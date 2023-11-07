@@ -33,6 +33,15 @@ jobs:
         uses: docker/setup-qemu-action@v2
 
       - name: Build and push Docker image
-        run: |
-          docker build -t schniebel/ryanschnabel-com:${{ github.sha }} ./ryanschnabel-com
-          docker push schniebel/ryanschnabel-com:${{ github.sha }}
+        uses: docker/build-push-action@v2
+        with:
+          context: ./ryanschnabel-com
+          file: ./ryanschnabel-com/Dockerfile
+          push: true
+          tags: schniebel/ryanschnabel-com:${{ github.sha }}
+          platforms: linux/arm64
+
+#      - name: Build and push Docker image
+#        run: |
+#          docker build -t schniebel/ryanschnabel-com:${{ github.sha }} ./ryanschnabel-com
+#          docker push schniebel/ryanschnabel-com:${{ github.sha }}
