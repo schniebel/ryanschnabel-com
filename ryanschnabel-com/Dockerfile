@@ -1,4 +1,3 @@
-
 # install hugo
 ENV HUGO_VERSION=0.41
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz /tmp/
@@ -12,6 +11,7 @@ RUN apt-get install -y python3-pygments
 COPY source /source
 RUN hugo --source=/source/ --destination=/public/
 
+# nginx
 FROM arm64v8/nginx:1.24-perl
 RUN apk --update add curl bash
 RUN rm /etc/nginx/conf.d/default.conf
