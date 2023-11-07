@@ -12,7 +12,8 @@ RUN apt-get install -y python3-pygments
 # build site
 WORKDIR /src
 COPY . .
-RUN hugo --config hugo.toml
+RUN ls -la
+RUN hugo --config hugo.toml --verbose
 
 #COPY source /source
 #RUN hugo --source=/source/ --destination=/public/
