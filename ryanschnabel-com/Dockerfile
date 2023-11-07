@@ -10,6 +10,7 @@ RUN apt-get update
 RUN apt-get install -y python3-pygments
 
 # build site
+RUN ls
 RUN hugo --config hugo.toml
 
 #COPY source /source
