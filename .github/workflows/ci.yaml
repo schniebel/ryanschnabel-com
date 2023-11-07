@@ -48,6 +48,6 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<github-actions@github.com>"
-          git add deployment.yaml
+          git add .
           git commit -m "Update ryanschnabel image tag in deployment.yaml to ${{ github.sha }}"
           git push
