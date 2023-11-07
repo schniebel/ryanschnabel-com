@@ -67,6 +67,3 @@ _merge = "none"
       # for more information.
       # This defaults to false to cover the case of not having control over the linked site.
       rel-me = true
-
-#test
-      
