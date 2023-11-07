@@ -7,3 +7,6 @@
 [submodule "hugo/ryanschnabel/themes/vncnt-hugo-ryanschnabel"]
 	path = hugo/ryanschnabel/themes/vncnt-hugo-ryanschnabel
 	url = https://github.com/schniebel/vncnt-hugo-ryanschnabel
+[submodule "ryanschnabel-com/themes/vncnt-hugo"]
+	path = ryanschnabel-com/themes/vncnt-hugo
+	url = https://github.com/fncnt/vncnt-hugo
