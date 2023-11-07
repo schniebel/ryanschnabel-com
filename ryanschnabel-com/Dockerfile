@@ -16,16 +16,3 @@ RUN hugo --config hugo.toml --logLevel info
 
 FROM arm64v8/nginx:1.24-perl
 COPY --from=STAGEONE /src/public /usr/share/nginx/html
-
-#COPY source /source
-#RUN hugo --source=/source/ --destination=/public/
-
-#RUN ls -la /source/public
-
-# nginx
-# FROM arm64v8/nginx:1.24-perl
-# RUN apk --update add curl bash
-# RUN rm /etc/nginx/conf.d/default.conf
-# COPY modules/nginx.luiscachog.io.conf /etc/nginx/conf.d/luiscachog.io.conf
-# COPY --from=STAGEONE /public/ /usr/share/nginx/html/
-# EXPOSE 80 443
