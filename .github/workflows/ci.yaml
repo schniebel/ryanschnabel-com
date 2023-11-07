@@ -58,7 +58,6 @@ jobs:
           git push --set-upstream origin update-deployment-${{ github.sha }}
 
       - name: Create Pull Request
-        id: pr
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -68,9 +67,19 @@ jobs:
           source_branch: update-deployment-${{ github.sha }}      
           destination_branch: main
 
+      - name: Get Pull Request Number
+        id: get-pr
+        run: |
+          PR_NUMBER=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls?head=${{ github.actor }}:update-deployment-${{ github.sha }}" \
+            | jq '.[0].number')
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+          echo "::set-output name=pr_number::$PR_NUMBER"
+
       - name: Enable auto-merge for the pull request
+        if: env.PR_NUMBER > 0
         uses: peter-evans/enable-pull-request-automerge@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.pr.outputs.pr }}
+          pull-request-number: ${{ steps.get-pr.outputs.pr_number }}
           merge-method: merge
