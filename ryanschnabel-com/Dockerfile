@@ -1,4 +1,4 @@
-FROM debian:buster as builder
+FROM debian:buster as STAGEONE
 
 # install hugo
 ENV HUGO_VERSION=0.120.3
