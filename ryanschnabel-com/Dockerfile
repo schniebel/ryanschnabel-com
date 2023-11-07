@@ -1,6 +1,7 @@
+FROM debian:buster as builder
+
 # install hugo
 ENV HUGO_VERSION=0.120.3
-
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-arm64.tar.gz /tmp
 RUN tar -xf /tmp/hugo_${HUGO_VERSION}_linux-arm64.tar.gz -C /usr/local/bin/
 
