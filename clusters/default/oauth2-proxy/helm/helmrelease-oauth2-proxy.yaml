@@ -22,8 +22,6 @@ spec:
       existingSecret: oauth2-proxy
     extraArgs:
       provider: "google"
-      email_domains:
-        - "ryan.d.schnabel@gmail.com"
       upstreams:
         - "http://grafana.monitoring.svc.cluster.local:3000"
       redirect_url: "https://monitoring.ryanschnabel.com/oauth2/callback"
