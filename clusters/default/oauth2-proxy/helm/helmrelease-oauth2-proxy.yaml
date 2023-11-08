@@ -22,5 +22,3 @@ spec:
       existingSecret: oauth2-proxy
     extraArgs:
       provider: "google"
-      upstreams:
-        - "http://grafana.monitoring.svc.cluster.local:3000"
