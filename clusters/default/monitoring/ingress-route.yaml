@@ -7,6 +7,9 @@ spec:
   routes:
   - kind: Rule
     match: Host(`monitoring.ryanschnabel.com`)
+    middlewares:
+      - name: auth
+        namespace: monitoring
     services:
     - kind: Service
       name: grafana
