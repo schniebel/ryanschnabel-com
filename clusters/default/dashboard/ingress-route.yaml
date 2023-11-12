@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard-ingressroute
+  namespace: dashboard
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`dashboard.ryanschnabel.com`)
+    middlewares:
+      - name: nginx-basic-auth
+    services:
+    - kind: TraefikService
+      name: api@internal
