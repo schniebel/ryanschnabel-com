@@ -7,6 +7,9 @@ spec:
   routes:
   - kind: Rule
     match: Host(`dashboard.ryanschnabel.com`)
+    middlewares:
+      - name: auth
+        namespace: dashboard    
     services:
     - kind: TraefikService
       name: api@internal
