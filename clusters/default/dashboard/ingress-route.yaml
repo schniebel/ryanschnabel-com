@@ -8,7 +8,7 @@ spec:
   - kind: Rule
     match: Host(`dashboard.ryanschnabel.com`)
     middlewares:
-      - name: dashboard-auth
+      - name: auth
         namespace: dashboard    
     services:
     - kind: TraefikService
