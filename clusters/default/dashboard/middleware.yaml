@@ -5,7 +5,7 @@ metadata:
   namespace: dashboard
 spec:
   forwardAuth:
-    address: http://oauth2-proxy.oauth2-proxy.svc.cluster.local:4180/oauth2/auth
+    address: http://oauth2-proxy.oauth2-proxy.svc.cluster.local:44180/oauth2/auth
     trustForwardHeader: true
     authResponseHeaders:
       - "X-Forwarded-User"
