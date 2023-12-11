@@ -1,11 +1,10 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: auth
+  name: traefik-forward-auth
   namespace: dashboard
 spec:
   forwardAuth:
-    address: http://oauth2-proxy.oauth2-proxy.svc.cluster.local:44180/oauth2/auth
-    trustForwardHeader: true
+    address: http://traefik-forward-auth:4181
     authResponseHeaders:
-      - "X-Forwarded-User"
+      - X-Forwarded-User

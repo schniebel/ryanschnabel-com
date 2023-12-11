@@ -6,10 +6,7 @@ metadata:
 spec:
   routes:
   - kind: Rule
-    match: Host(`dashboard.ryanschnabel.com`)
-    middlewares:
-      - name: auth
-        namespace: dashboard    
+    match: Host(`dashboard.ryanschnabel.com`)  
     services:
     - kind: TraefikService
       name: api@internal
