@@ -5,5 +5,5 @@ metadata:
   namespace: dashboard
 spec:
   forwardAuth:
-    address: http://oauth2-proxy.oauth2-proxy.svc.cluster.local:80
+    address: http://traefik-forward-auth.traefik-forward-auth.svc.cluster.local:4181
     trustForwardHeader: true
