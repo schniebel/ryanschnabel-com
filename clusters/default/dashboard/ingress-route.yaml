@@ -6,10 +6,9 @@ metadata:
 spec:
   routes:
   - kind: Rule
-    match: Host(`dashboard.ryanschnabel.com`)
+    match: Host(`dashboard.ryanschnabel.com`)  
     services:
-    - kind: Service
-      name: ryanschnabel
-      port: 80
+    - kind: TraefikService
+      name: api@internal
     middlewares:
       - name: oauth-auth
