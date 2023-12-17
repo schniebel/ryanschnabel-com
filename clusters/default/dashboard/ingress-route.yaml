@@ -11,4 +11,4 @@ spec:
     - kind: TraefikService
       name: api@internal
     middlewares:
-      - name: oauth-auth
+      - name: traefik-forward-auth

@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: oauth-auth
+  name: traefik-forward-auth
   namespace: dashboard
 spec:
   forwardAuth:
