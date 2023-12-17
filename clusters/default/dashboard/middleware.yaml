@@ -2,7 +2,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: oauth-auth
-  namespace: oauth2-proxy
+  namespace: dashboard
 spec:
   forwardAuth:
     address: http://oauth2-proxy.oauth2-proxy.svc.cluster.local:44180

@@ -2,7 +2,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: dashboard-ingressroute
-  namespace: oauth2-proxy
+  namespace: dashboard
 spec:
   routes:
   - kind: Rule
