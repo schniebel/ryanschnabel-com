@@ -45,5 +45,7 @@ spec:
             secretKeyRef:
               name: traefik-forward-auth-secrets
               key: traefik-forward-auth-secret
+        - name: WHITELIST
+          value: "ryan.d.schnabel@gmail.com"
       nodeSelector:
         kubernetes.io/hostname: slave1
