@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ryanschnabel
-  namespace: dashboard
+  namespace: oauth2-proxy
 spec:
   replicas: 1
   selector:
