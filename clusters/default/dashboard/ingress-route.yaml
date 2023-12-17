@@ -11,5 +11,5 @@ spec:
     - kind: Service
       name: ryanschnabel
       port: 80
-    middlewares:
-      - name: oauth-auth
+    #middlewares:
+    #  - name: oauth-auth
