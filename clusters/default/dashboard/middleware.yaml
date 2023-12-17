@@ -6,4 +6,5 @@ metadata:
 spec:
   forwardAuth:
     address: http://traefik-forward-auth.traefik-forward-auth.svc.cluster.local:4181
-    trustForwardHeader: true
+    authResponseHeaders:
+      - X-Forwarded-User
