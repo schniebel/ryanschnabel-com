@@ -22,3 +22,4 @@ spec:
       existingSecret: oauth2-proxy
     extraArgs:
       provider: "google"
+      reverse-proxy: "true"
