@@ -51,7 +51,7 @@ spec:
           - name: GF_AUTH_GOOGLE_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
-                name: grafana-admin-credentials
+                name: grafana-oauth-credentials
                 key: GF_AUTH_GOOGLE_CLIENT_SECRET
         image: grafana/grafana:8.3.3
         name: grafana
