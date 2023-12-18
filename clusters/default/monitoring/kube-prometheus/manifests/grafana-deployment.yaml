@@ -39,6 +39,20 @@ spec:
               secretKeyRef:
                 name: grafana-admin-credentials
                 key: GF_SECURITY_ADMIN_PASSWORD
+          - name: GF_AUTH_GOOGLE_ENABLED
+            value: "true"
+          - name: GF_AUTH_GOOGLE_ALLOW_SIGN_UP
+            value: "false"
+          - name: GF_AUTH_GOOGLE_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: grafana-oauth-credentials
+                key: GF_AUTH_GOOGLE_CLIENT_ID
+          - name: GF_AUTH_GOOGLE_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: grafana-admin-credentials
+                key: GF_AUTH_GOOGLE_CLIENT_SECRET
         image: grafana/grafana:8.3.3
         name: grafana
         ports:
