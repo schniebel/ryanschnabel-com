@@ -15,7 +15,7 @@ spec:
   interval: 1m
   values:
     securityContext:
-      fsGroup: 1000 
+      fsGroup: 65534 
     image:
       repository: maxlbch/pms-docker-arm64
       tag: latest
