@@ -14,12 +14,14 @@ spec:
         namespace: flux-system
   interval: 1m
   values:
+    claimToken: ""
     image:
       repository: maxlbch/pms-docker-arm64
       tag: latest
     kubePlex:
-      repository: lucashalbert/kube-plex
-      tag: arm64v8-alpha-0.0.1
+      image:
+        repository: lucashalbert/kube-plex
+        tag: arm64v8-alpha-0.0.1
     nodeSelector:
       beta.kubernetes.io/arch: arm64
     persistence:
@@ -29,3 +31,8 @@ spec:
         claimName: "plex-data-pvc"
       config:
         claimName: "plex-config-pvc"
+  valuesFrom:
+    - kind: Secret
+      name: kube-plex-claim-token
+      valuesKey: CLAIM_TOKEN
+      targetPath: claimToken
