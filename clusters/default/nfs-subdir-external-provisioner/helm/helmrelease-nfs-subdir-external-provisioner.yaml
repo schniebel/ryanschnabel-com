@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nfs-subdir-external-provisioner
+  namespace: nfs-provisioning
+spec:
+  chart:
+    spec:
+      chart: ./charts/nfs-subdir-external-provisioner
+      version: 4.0.18
+      sourceRef:
+        kind: GitRepository
+        name: nfs-provisioning
+        namespace: nfs-subdir-external-provisioner
+  interval: 1h
+  values:
+    nfs:
+      server: 192.168.50.10
+      path: /opt/dynamic-storage
+    nodeSelector:
+      kubernetes.io/hostname: master
