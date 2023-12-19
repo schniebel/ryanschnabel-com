@@ -12,7 +12,7 @@ spec:
         kind: GitRepository
         name: nfs-subdir-external-provisioner
         namespace: nfs-provisioning
-  interval: 1h
+  interval: 1m
   values:
     nfs:
       server: 192.168.50.10
