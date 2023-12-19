@@ -14,7 +14,8 @@ spec:
         namespace: flux-system
   interval: 1m
   values:
-    claimToken: ""
+    securityContext:
+      fsGroup: 1000 
     image:
       repository: maxlbch/pms-docker-arm64
       tag: latest
