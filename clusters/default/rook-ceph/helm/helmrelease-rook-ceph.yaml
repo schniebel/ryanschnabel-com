@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  chart:
+    spec:
+      chart: ./deploy/charts/rook-ceph-cluster
+      version: 0.0.1
+      sourceRef:
+        kind: GitRepository
+        name: rook-ceph
+        namespace: flux-system
+  interval: 1m
+  values:
+    nodeSelector:
+      beta.kubernetes.io/arch: arm64
+    cephClusterSpec:
+      cephVersion:
+        image: quay.io/ceph/ceph-arm64:v18.2.1-20231215
