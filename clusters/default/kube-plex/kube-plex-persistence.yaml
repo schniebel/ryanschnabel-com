@@ -33,6 +33,7 @@ kind: PersistentVolume
 metadata:
   name: iscsi-pv
 spec:
+  storageClassName: local-path
   capacity:
     storage: 20Gi
   accessModes:
@@ -53,6 +54,7 @@ metadata:
   name: iscsi-pvc
   namespace: kube-plex
 spec:
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:
