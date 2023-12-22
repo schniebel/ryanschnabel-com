@@ -1,37 +1,37 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: kube-plex
-  namespace: kube-plex
-spec:
-  chart:
-    spec:
-      chart: ./charts/kube-plex
-      version: 0.2.7
-      sourceRef:
-        kind: GitRepository
-        name: kube-plex
-        namespace: flux-system
-  interval: 1m
-  values:
-    image:
-      repository: maxlbch/pms-docker-arm64
-      tag: latest
-    kubePlex:
-      image:
-        repository: lucashalbert/kube-plex
-        tag: arm64v8-alpha-0.0.1
-    nodeSelector:
-      beta.kubernetes.io/arch: arm64
-    persistence:
-      transcode:
-        claimName: "plex-transcode-pvc"
-      data:
-        claimName: "plex-data-pvc"
-      config:
-        claimName: "plex-config-pvc"
-  valuesFrom:
-    - kind: Secret
-      name: kube-plex-claim-token
-      valuesKey: CLAIM_TOKEN
-      targetPath: claimToken
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: kube-plex
+#   namespace: kube-plex
+# spec:
+#   chart:
+#     spec:
+#       chart: ./charts/kube-plex
+#       version: 0.2.7
+#       sourceRef:
+#         kind: GitRepository
+#         name: kube-plex
+#         namespace: flux-system
+#   interval: 1m
+#   values:
+#     image:
+#       repository: maxlbch/pms-docker-arm64
+#       tag: latest
+#     kubePlex:
+#       image:
+#         repository: lucashalbert/kube-plex
+#         tag: arm64v8-alpha-0.0.1
+#     nodeSelector:
+#       beta.kubernetes.io/arch: arm64
+#     persistence:
+#       transcode:
+#         claimName: "plex-transcode-pvc"
+#       data:
+#         claimName: "plex-data-pvc"
+#       config:
+#         claimName: "plex-config-pvc"
+#   valuesFrom:
+#     - kind: Secret
+#       name: kube-plex-claim-token
+#       valuesKey: CLAIM_TOKEN
+#       targetPath: claimToken
