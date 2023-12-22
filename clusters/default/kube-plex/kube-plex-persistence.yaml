@@ -28,36 +28,36 @@ spec:
 
 ---
 
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: iscsi-pv
-spec:
-  storageClassName: ""
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  iscsi:
-    targetPortal: 34.134.176.229:3260
-    iqn: iqn.2022-12.com.ryanschnabel:iscsi.target1
-    lun: 0
-    fsType: ext4
-    readOnly: false
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: iscsi-pv
+# spec:
+#   storageClassName: ""
+#   capacity:
+#     storage: 20Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   persistentVolumeReclaimPolicy: Retain
+#   iscsi:
+#     targetPortal: 34.134.176.229:3260
+#     iqn: iqn.2022-12.com.ryanschnabel:iscsi.target1
+#     lun: 0
+#     fsType: ext4
+#     readOnly: false
 
----
+# ---
 
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: plex-config-pvc
-  namespace: kube-plex
-spec:
-  storageClassName: ""
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 20Gi
-  volumeName: iscsi-pv
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: plex-config-pvc
+#   namespace: kube-plex
+# spec:
+#   storageClassName: ""
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 20Gi
+#   volumeName: iscsi-pv
