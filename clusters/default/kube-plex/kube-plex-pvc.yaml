@@ -28,16 +28,17 @@ spec:
 
 ---
 
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: plex-config-pvc
-#   namespace: kube-plex
-# spec:
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 20Gi
-#   storageClassName: "" 
-#   volumeName: iscsi-pv
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plex-config-pvc
+  namespace: kube-plex
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: ""
+  volumeMode: Block 
+  volumeName: iscsi-pv
