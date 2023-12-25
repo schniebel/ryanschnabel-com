@@ -32,7 +32,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: plex-config-pvc
-  namespace: plex
+  namespace: kube-plex
 spec:
   accessModes:
     - ReadWriteOnce
