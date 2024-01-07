@@ -11,7 +11,7 @@ func helloWorldHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    http.HandleFunc("/", helloWorldHandler)
+    http.HandleFunc("/helloworld", helloWorldHandler)
     log.Println("Server starting on port 8080...")
     err := http.ListenAndServe(":8080", nil)
     if err != nil {
