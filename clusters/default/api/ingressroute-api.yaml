@@ -8,6 +8,6 @@ spec:
   - kind: Rule
     match: Host(`api.ryanschnabel.io`)
     services:
-    - kind: api-service
-      name: ryanschnabel
+    - kind: Service
+      name: api-service
       port: 8080
