@@ -3,7 +3,7 @@ name: ryanschnabel API Deployment
 on:
   push:
     branches:
-      - api
+      - main
     paths:
       - api/**
 
