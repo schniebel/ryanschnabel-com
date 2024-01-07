@@ -41,14 +41,14 @@ jobs:
           tags: schniebel/ryanschnabel-api:${{ github.sha }}
           platforms: linux/arm64
       
-      # - name: Update deployment.yaml with new image tag
-      #   run: |
-      #     sed -i 's|schniebel/ryanschnabel-com:.*|schniebel/ryanschnabel-com:'${{ github.sha }}'|' ./clusters/default/ryanschnabel-com/deployment.yaml
+      - name: Update deployment.yaml with new image tag
+        run: |
+          sed -i 's|schniebel/ryanschnabel-api:.*|schniebel/ryanschnabel-api:'${{ github.sha }}'|' ./clusters/default/api/deployment-api.yaml
       
-      # - name: Commit and push changes
-      #   run: |
-      #     git config user.name "GitHub Actions Bot"
-      #     git config user.email "<github-actions@github.com>"
-      #     git add .
-      #     git commit -m "Update ryanschnabel image tag in deployment.yaml to ${{ github.sha }}"
-      #     git push
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<github-actions@github.com>"
+          git add .
+          git commit -m "Update api image tag in deployment-api.yaml to ${{ github.sha }}"
+          git push
