@@ -17,6 +17,6 @@ spec:
         kubernetes.io/hostname: master
       containers:
       - name: api
-        image: schniebel/ryanschnabel-com:a620f445bb1fa5fb268d7ec21bf600e87d7e067c
+        image: schniebel/ryanschnabel-api:a620f445bb1fa5fb268d7ec21bf600e87d7e067c
         ports:
         - containerPort: 8080
