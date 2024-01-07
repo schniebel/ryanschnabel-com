@@ -1,6 +1,6 @@
 FROM golang:1.17 as builder
 WORKDIR /app
-COPY go.mod
+COPY go.mod ./
 # Copy go.sum only if it exists
 COPY go.sum* ./
 RUN go mod download
