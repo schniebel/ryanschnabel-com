@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: master
+      containers:
+      - name: api
+        image: a620f445bb1fa5fb268d7ec21bf600e87d7e067c
+        ports:
+        - containerPort: 8080
