@@ -10,3 +10,6 @@
 [submodule "ryanschnabel-com/themes/vncnt-hugo"]
 	path = ryanschnabel-com/themes/vncnt-hugo
 	url = https://github.com/fncnt/vncnt-hugo
+[submodule "admin/themes/glim-midnight"]
+	path = admin/themes/glim-midnight
+	url = https://github.com/mansoorbarri/glim-midnight

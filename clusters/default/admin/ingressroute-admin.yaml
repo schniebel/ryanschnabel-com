@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: admin-ingressroute
+  namespace: admin
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`admin.ryanschnabel.com`)
+    services:
+    - kind: Service
+      name: admin
+      port: 80
