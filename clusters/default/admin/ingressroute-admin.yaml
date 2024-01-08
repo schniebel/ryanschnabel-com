@@ -11,3 +11,5 @@ spec:
     - kind: Service
       name: admin
       port: 80
+    middlewares:
+      - name: traefik-forward-auth
