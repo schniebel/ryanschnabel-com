@@ -48,4 +48,4 @@ spec:
         - name: WHITELIST
           value: "ryan.d.schnabel@gmail.com,ryan.schnabel@gmail.com"
       nodeSelector:
-        kubernetes.io/hostname: slave1
+        kubernetes.io/hostname: master
