@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: admin
-        image: schniebel/admin:437577764fcbec3100d923509db39557ea39e2e0
+        image: schniebel/admin:b83b78d0b2fa566c4ff1510c066db08a8339deb4
         ports:
         - containerPort: 80
