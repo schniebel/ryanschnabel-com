@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('callApiButton').addEventListener('click', function() {
-        document.getElementById('apiResponse').textContent = 'Yolo';
+        var inputText = document.getElementById('inputText').value;
+        document.getElementById('apiResponse').textContent = 'Yolo ' + inputText;
     });
 });
