@@ -12,5 +12,5 @@ spec:
       name: api-service
       port: 8080
     middlewares:
-      - name: cors-middleware
+      #- name: cors-middleware
       - name: traefik-forward-auth
