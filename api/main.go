@@ -13,11 +13,9 @@ func helloWorldHandler(w http.ResponseWriter, r *http.Request) {
 func corsMiddleware(next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         // Set CORS headers
-        //w.Header().Set("Access-Control-Allow-Origin", "https://admin.ryanschnabel.com")
-        //w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-        //w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-
-        w.Header().Set("Access-Control-Allow-Origin", "*")
+        w.Header().Set("Access-Control-Allow-Origin", "https://admin.ryanschnabel.com")
+        w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+        w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
         
         // Check if it's a preflight request
         if r.Method == http.MethodOptions {
