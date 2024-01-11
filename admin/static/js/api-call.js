@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('callApiButton').addEventListener('click', function() {
         var inputText = document.getElementById('inputText').value;
         
-        fetch('http://api-service.api.svc.cluster.local:8080/helloworld')
+        fetch('https://api.ryanschnabel.com:8080/helloworld')
             .then(response => response.text())
             .then(data => {
                 var combinedResponse = data + ' ' + inputText;
