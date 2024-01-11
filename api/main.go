@@ -32,7 +32,6 @@ func main() {
     mux := http.NewServeMux()
     mux.HandleFunc("/helloworld", helloWorldHandler)
 
-    // Apply CORS middleware
     handlerWithCors := corsMiddleware(mux)
 
     log.Println("Server starting on port 8080...")
