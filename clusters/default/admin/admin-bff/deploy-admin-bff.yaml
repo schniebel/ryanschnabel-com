@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-bff
+  namespace: admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-bff
+  template:
+    metadata:
+      labels:
+        app: admin-bff
+    spec:
+      containers:
+      - name: admin-bff
+        image: schniebel/admin-bff:843c1314085cbe8a39ad1ee888802c080979840e
+        ports:
+        - containerPort: 80

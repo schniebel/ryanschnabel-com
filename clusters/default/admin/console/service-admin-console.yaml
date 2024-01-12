@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin
+  name: admin-console
   namespace: admin
 spec:
   selector:
-    app: admin
+    app: admin-console
   ports:
     - protocol: TCP
       port: 80

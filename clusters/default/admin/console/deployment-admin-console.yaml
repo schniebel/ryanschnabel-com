@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: admin
+  name: admin-console
   namespace: admin
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: admin
+      app: admin-console
   template:
     metadata:
       labels:
-        app: admin
+        app: admin-console
     spec:
       containers:
-      - name: admin
+      - name: admin-console
         image: schniebel/admin:bf63ba3cca8090a33520c26cc151211aa71af50d
         ports:
         - containerPort: 80
