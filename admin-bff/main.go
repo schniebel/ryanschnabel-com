@@ -28,6 +28,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
     // Read the request body
     var requestData struct {
         EndpointVar string `json:"endpointVar"`
+        InputText   string `json:"inputText"` 
     }
 
     body, err := ioutil.ReadAll(r.Body)
@@ -45,15 +46,12 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Received variable: %s", requestData.EndpointVar)
 
     // Forward the request to the actual API
-    forwardToAPI(requestData.EndpointVar, w, r)
+    forwardToAPI(requestData.EndpointVar, requestData.InputText, w, r)
 }
 
 func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
-    // Define your API base URL
-    apiBaseURL := "https://api.ryanschnabel.com/"
-
-    // Construct the full API URL
-    apiURL := apiBaseURL + endpoint
+    
+    apiURL := fmt.Sprintf("https://api.ryanschnabel.com/%s?inputText=%s", endpoint, url.QueryEscape(inputText))
 
     // Create a new request to your API
     apiReq, err := http.NewRequest(r.Method, apiURL, r.Body)

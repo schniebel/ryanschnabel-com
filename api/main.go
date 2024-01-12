@@ -8,7 +8,10 @@ import (
 )
 
 func helloWorldHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hello World!")
+
+    inputText := r.URL.Query().Get("inputText")
+
+    fmt.Fprintf(w, "Hello World %s", inputText)
 }
 
 func validateAPIKeyMiddleware(next http.Handler) http.Handler {
