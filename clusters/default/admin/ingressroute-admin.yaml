@@ -9,14 +9,14 @@ spec:
       match: Host(`admin.ryanschnabel.com`) && PathPrefix(`/bff`)
       services:
       - kind: Service
-        name: bff-service
+        name: admin-bff
         port: 80
 
     - kind: Rule
       match: Host(`admin.ryanschnabel.com`) && !PathPrefix(`/bff`)
       services:
       - kind: Service
-        name: admin
+        name: admin-console
         port: 80
       middlewares:
       - name: traefik-forward-auth
