@@ -11,7 +11,7 @@ import (
 
 func main() {
     http.HandleFunc("/bff/", handleRequest)
-    log.Println("BFF server starting on port 8080...")
+    log.Println("BFF server starting on port 5000...")
     if err := http.ListenAndServe(":5000", nil); err != nil {
         log.Fatal("ListenAndServe: ", err)
     }
@@ -55,6 +55,7 @@ func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
     apiURL := apiBaseURL + endpoint
 
     // Create a new request to your API
+    fmt.Fprintf(w, "apiURL: %s", apiURL)
     apiReq, err := http.NewRequest(r.Method, apiURL, r.Body)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -66,6 +67,7 @@ func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
 
     // Forward the request to the API
     client := &http.Client{}
+    fmt.Fprintf(w, "sending request to api: %s", apiReq)
     apiResp, err := client.Do(apiReq)
     if err != nil {
         http.Error(w, err.Error(), http.StatusBadGateway)
@@ -74,6 +76,7 @@ func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
     defer apiResp.Body.Close()
 
     // Copy the API response to the client response
+    fmt.Fprintf(w, "response from api: %s", apiResp)
     w.WriteHeader(apiResp.StatusCode)
     if _, err := io.Copy(w, apiResp.Body); err != nil {
         log.Println("Failed to copy response:", err)
