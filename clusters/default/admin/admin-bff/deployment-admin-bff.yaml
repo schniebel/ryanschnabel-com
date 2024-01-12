@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: admin-bff
-        image: schniebel/admin-bff:4b97677707eea7e783a00d8c36cd0eb58ea0ee46
+        image: schniebel/admin-bff:7ee302bc9d0fc404222c62d0ae9155c381a92388
         ports:
         - containerPort: 80
         env:
