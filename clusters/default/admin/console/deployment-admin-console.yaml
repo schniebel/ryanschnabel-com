@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: admin-console
-        image: schniebel/admin:bf63ba3cca8090a33520c26cc151211aa71af50d
+        image: schniebel/admin:3cd86102398aee7825d0a44c60f9a5b6f080ae65
         ports:
         - containerPort: 80

@@ -43,12 +43,12 @@ jobs:
       
       - name: Update deployment.yaml with new image tag
         run: |
-          sed -i 's|schniebel/admin:.*|schniebel/admin:'${{ github.sha }}'|' ./clusters/default/admin/deployment-admin.yaml
+          sed -i 's|schniebel/admin:.*|schniebel/admin:'${{ github.sha }}'|' ./clusters/default/admin/console/deployment-admin-console.yaml
       
       - name: Commit and push changes
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<github-actions@github.com>"
           git add .
-          git commit -m "Update admin image tag in deployment-admin.yaml to ${{ github.sha }}"
+          git commit -m "Update admin console image tag in deployment-admin-console.yaml to ${{ github.sha }}"
           git push
