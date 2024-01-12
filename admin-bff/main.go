@@ -3,9 +3,11 @@ package main
 import (
     "encoding/json"
     "fmt"
+    "io"
     "io/ioutil"
     "log"
     "net/http"
+    "strings"
 )
 
 func main() {
