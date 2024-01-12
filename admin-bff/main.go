@@ -7,6 +7,7 @@ import (
     "io/ioutil"
     "log"
     "net/http"
+    "net/url"
     "os"
 )
 
@@ -49,7 +50,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
     forwardToAPI(requestData.EndpointVar, requestData.InputText, w, r)
 }
 
-func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
+func forwardToAPI(endpoint string, inputText string, w http.ResponseWriter, r *http.Request) {
     
     apiURL := fmt.Sprintf("https://api.ryanschnabel.com/%s?inputText=%s", endpoint, url.QueryEscape(inputText))
 
