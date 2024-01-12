@@ -20,3 +20,9 @@ spec:
         image: schniebel/ryanschnabel-api:d931161c0833822fbf59798e76c8299a4a4156c0
         ports:
         - containerPort: 8080
+        env:
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-key-secret
+              key: API_KEY

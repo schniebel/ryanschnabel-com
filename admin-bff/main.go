@@ -7,6 +7,7 @@ import (
     "io/ioutil"
     "log"
     "net/http"
+    "os"
 )
 
 func main() {
@@ -61,7 +62,8 @@ func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    apiReq.Header.Add("Authorization", "Bearer Your-API-Key")
+    apiKey := os.Getenv("API_KEY")
+    apiReq.Header.Add("Authorization", "Bearer " + apiKey)
 
     // Forward the request to the API
     client := &http.Client{}

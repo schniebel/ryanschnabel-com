@@ -18,3 +18,9 @@ spec:
         image: schniebel/admin-bff:fb95e1f639b9c241cddcb550b900cd940225ea13
         ports:
         - containerPort: 80
+        env:
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-key-secret
+              key: API_KEY

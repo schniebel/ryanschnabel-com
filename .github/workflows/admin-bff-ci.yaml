@@ -41,6 +41,9 @@ jobs:
           tags: schniebel/admin-bff:${{ github.sha }}
           platforms: linux/arm64
       
+      - name: Pull latest changes from the repository
+        run: git pull origin main
+
       - name: Update deployment.yaml with new image tag
         run: |
           sed -i 's|schniebel/admin-bff:.*|schniebel/admin-bff:'${{ github.sha }}'|' ./clusters/default/admin/admin-bff/deployment-admin-bff.yaml
