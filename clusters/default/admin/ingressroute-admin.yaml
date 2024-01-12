@@ -5,11 +5,18 @@ metadata:
   namespace: admin
 spec:
   routes:
-  - kind: Rule
-    match: Host(`admin.ryanschnabel.com`)
-    services:
-    - kind: Service
-      name: admin
-      port: 80
-    middlewares:
+    - kind: Rule
+      match: Host(`admin.ryanschnabel.com`) && PathPrefix(`/bff`)
+      services:
+      - kind: Service
+        name: bff-service
+        port: 80
+
+    - kind: Rule
+      match: Host(`admin.ryanschnabel.com`) && !PathPrefix(`/bff`)
+      services:
+      - kind: Service
+        name: admin
+        port: 80
+      middlewares:
       - name: traefik-forward-auth
