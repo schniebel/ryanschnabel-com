@@ -1,10 +1,11 @@
 package main
 
 import (
-    "io"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
     "log"
     "net/http"
-    "strings"
 )
 
 func main() {
@@ -16,18 +17,33 @@ func main() {
 }
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
-    // Extract the endpoint variable from the URL path
-    path := strings.TrimPrefix(r.URL.Path, "/bff/")
-    endpointVar := strings.Split(path, "/")[0]
-
-    // Check if the endpoint variable is "helloworld"
-    if endpointVar == "helloworld" {
-        // Forward the request to the "helloworld" API endpoint
-        forwardToAPI("helloworld", w, r)
-    } else {
-        // Handle other cases or return an error
-        http.Error(w, "Invalid endpoint", http.StatusBadRequest)
+    
+    if r.Method != http.MethodPost {
+        http.Error(w, "Only POST method is allowed", http.StatusMethodNotAllowed)
+        return
     }
+
+    // Read the request body
+    var requestData struct {
+        EndpointVar string `json:"endpointVar"`
+    }
+
+    body, err := ioutil.ReadAll(r.Body)
+    if err != nil {
+        http.Error(w, "Error reading request body", http.StatusInternalServerError)
+        return
+    }
+
+    if err := json.Unmarshal(body, &requestData); err != nil {
+        http.Error(w, "Error parsing request body", http.StatusBadRequest)
+        return
+    }
+
+    // Use requestData.EndpointVar as needed
+    fmt.Fprintf(w, "Received variable: %s", requestData.EndpointVar)
+
+    // Forward the request to the actual API
+    forwardToAPI(requestData.EndpointVar, w, r)
 }
 
 func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
@@ -45,7 +61,7 @@ func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
     }
 
     // Add your API key here. Replace "Your-API-Key" with your actual API key
-    apiReq.Header.Add("Authorization", "Bearer Your-API-Key")
+    //apiReq.Header.Add("Authorization", "Bearer Your-API-Key")
 
     // Forward the request to the API
     client := &http.Client{}
