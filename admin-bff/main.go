@@ -55,19 +55,16 @@ func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
     apiURL := apiBaseURL + endpoint
 
     // Create a new request to your API
-    fmt.Fprintf(w, "apiURL: %s", apiURL)
     apiReq, err := http.NewRequest(r.Method, apiURL, r.Body)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
 
-    // Add your API key here. Replace "Your-API-Key" with your actual API key
-    //apiReq.Header.Add("Authorization", "Bearer Your-API-Key")
+    apiReq.Header.Add("Authorization", "Bearer Your-API-Key")
 
     // Forward the request to the API
     client := &http.Client{}
-    fmt.Fprintf(w, "sending request to api: %s", apiReq)
     apiResp, err := client.Do(apiReq)
     if err != nil {
         http.Error(w, err.Error(), http.StatusBadGateway)
@@ -76,7 +73,6 @@ func forwardToAPI(endpoint string, w http.ResponseWriter, r *http.Request) {
     defer apiResp.Body.Close()
 
     // Copy the API response to the client response
-    fmt.Fprintf(w, "response from api: %s", apiResp)
     w.WriteHeader(apiResp.StatusCode)
     if _, err := io.Copy(w, apiResp.Body); err != nil {
         log.Println("Failed to copy response:", err)
