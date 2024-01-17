@@ -46,6 +46,9 @@ spec:
               name: traefik-forward-auth-secrets
               key: traefik-forward-auth-secret
         - name: WHITELIST
-          value: "ryan.d.schnabel@gmail.com,ryan.schnabel@gmail.com"
+          valueFrom:
+            secretKeyRef:
+              name: whitelist-secret
+              key: whitelist
       nodeSelector:
         kubernetes.io/hostname: master
