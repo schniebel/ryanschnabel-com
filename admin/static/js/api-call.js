@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // The data to send in the request body
         const requestData = {
-            endpointVar: 'helloworld',
+            endpointVar: 'getUsers',
             inputText: inputText
         };
 
