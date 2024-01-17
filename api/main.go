@@ -11,6 +11,8 @@ func helloWorldHandler(w http.ResponseWriter, r *http.Request) {
 
     inputText := r.URL.Query().Get("inputText")
 
+    log.Printf("API received inputText: %s", inputText) // Add this line for debugging
+
     fmt.Fprintf(w, "Hello World %s", inputText)
 }
 

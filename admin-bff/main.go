@@ -43,9 +43,6 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    // Use requestData.EndpointVar as needed
-    fmt.Fprintf(w, "Received variable: %s", requestData.EndpointVar)
-
     // Forward the request to the actual API
     forwardToAPI(requestData.EndpointVar, requestData.InputText, w, r)
 }
