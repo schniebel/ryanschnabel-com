@@ -11,5 +11,3 @@ spec:
     - kind: Service
       name: api-service
       port: 8080
-    middlewares:
-      - name: traefik-forward-auth
