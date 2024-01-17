@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: ryanschnabel
-        image: schniebel/ryanschnabel-com:22d5014385af5ef30e9f30af27736fabb3c59dcf
+        image: schniebel/ryanschnabel-com:9e573418ab5de2518ed8cf356d945cc3cf002b7e
         ports:
         - containerPort: 80
