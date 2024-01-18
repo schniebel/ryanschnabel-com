@@ -1,27 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('retrieveAuthorizedUsersButton').addEventListener('click', function() {
+        // ... existing fetch for getUsers ...
 
-        fetch('https://admin.ryanschnabel.com/bff/getUsers', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.text())
         .then(data => {
             const usersArray = data.split(',');
 
-            // Get the div element
             const usersDiv = document.getElementById('whitelistedUsers');
-
-            // Clear the current content
             usersDiv.innerHTML = '';
 
-            // Create a span for each user, append it to the div, and add a line break
             usersArray.forEach(user => {
                 const userSpan = document.createElement('span');
                 userSpan.textContent = user.trim();
                 usersDiv.appendChild(userSpan);
+
+                // Create Remove User Button
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove User';
+                removeButton.onclick = function() { removeUser(user.trim()); };
+                usersDiv.appendChild(removeButton);
+
                 usersDiv.appendChild(document.createElement('br'));
             });
         })
@@ -54,3 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function removeUser(userEmail) {
+    // Implement the logic to remove the user
+    // For example, you might send a DELETE request to your backend
+    console.log('Remove user:', userEmail);
+    // Add here the code to call your backend to remove the user
+}
