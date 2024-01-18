@@ -1,12 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('retrieveAuthorizedUsersButton').addEventListener('click', function() {
-        // Retrieve the input text
-        const inputText = document.getElementById('inputText').value;
 
-        // The data to send in the request body
         const requestData = {
             endpointVar: 'getUsers',
-            inputText: inputText
         };
 
         // Making a POST request to the BFF
