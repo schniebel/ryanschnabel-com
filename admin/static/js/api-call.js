@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('retrieveAuthorizedUsersButton').addEventListener('click', function() {
-        // ... existing fetch for getUsers ...
-
+        fetch('https://admin.ryanschnabel.com/bff/getUsers', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.text())
         .then(data => {
             const usersArray = data.split(',');
 
