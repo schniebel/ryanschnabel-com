@@ -9,8 +9,14 @@ import (
     metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
     "k8s.io/client-go/kubernetes"
     "k8s.io/client-go/rest"
+    "strings"
 )
 
+var (
+    secretName    string
+    namespace     string
+    secretDataKey string
+)
 
 func getUsersHandler(w http.ResponseWriter, r *http.Request) {
 
