@@ -18,11 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 userSpan.textContent = user.trim();
                 usersDiv.appendChild(userSpan);
 
-                // Create Remove User Button
-                const removeButton = document.createElement('button');
-                removeButton.textContent = 'Remove User';
-                removeButton.onclick = function() { removeUser(user.trim()); };
-                usersDiv.appendChild(removeButton);
+                if (user !== 'ryan.d.schnabel@gmail.com' && user !== 'ryan.schnabel@gmail.com') {
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove User';
+                    removeButton.onclick = function() { removeUser(user); };
+                    usersDiv.appendChild(removeButton);
+                }
 
                 usersDiv.appendChild(document.createElement('br'));
             });
@@ -58,8 +59,25 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function removeUser(userEmail) {
-    // Implement the logic to remove the user
-    // For example, you might send a DELETE request to your backend
-    console.log('Remove user:', userEmail);
-    // Add here the code to call your backend to remove the user
+
+    const requestData = {
+        endpointVar: 'removeUser',
+        inputText: userEmail
+    };
+
+    fetch('https://admin.ryanschnabel.com/bff/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        // Update UI or show confirmation message
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
