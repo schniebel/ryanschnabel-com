@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('callApiButton').addEventListener('click', function() {
+    document.getElementById('retrieveAuthorizedUsersButton').addEventListener('click', function() {
         // Retrieve the input text
         const inputText = document.getElementById('inputText').value;
 
@@ -19,9 +19,20 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.text())
         .then(data => {
-            // Handle the response data
-            console.log(data);
-            document.getElementById('whitelistedUsers').textContent = data;
+            const usersArray = data.split(',');
+
+            // Get the list element
+            const userList = document.getElementById('whitelistedUsers');
+
+            // Clear the current list
+            userList.innerHTML = '';
+
+            // Create a list item for each user and append it to the list
+            usersArray.forEach(user => {
+                const listItem = document.createElement('li');
+                listItem.textContent = user.trim();
+                userList.appendChild(listItem);
+            });
         })
         .catch(error => {
             // Handle any errors
