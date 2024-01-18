@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('retrieveAuthorizedUsersButton').addEventListener('click', function() {
-
         const requestData = {
             endpointVar: 'getUsers',
         };
 
-        // Making a POST request to the BFF
         fetch('https://admin.ryanschnabel.com/bff/', {
             method: 'POST',
             headers: {
@@ -17,21 +15,21 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             const usersArray = data.split(',');
 
-            // Get the list element
-            const userList = document.getElementById('whitelistedUsers');
+            // Get the div element
+            const usersDiv = document.getElementById('whitelistedUsers');
 
-            // Clear the current list
-            userList.innerHTML = '';
+            // Clear the current content
+            usersDiv.innerHTML = '';
 
-            // Create a list item for each user and append it to the list
+            // Create a span for each user, append it to the div, and add a line break
             usersArray.forEach(user => {
-                const listItem = document.createElement('li');
-                listItem.textContent = user.trim();
-                userList.appendChild(listItem);
+                const userSpan = document.createElement('span');
+                userSpan.textContent = user.trim();
+                usersDiv.appendChild(userSpan);
+                usersDiv.appendChild(document.createElement('br'));
             });
         })
         .catch(error => {
-            // Handle any errors
             console.error('Error:', error);
         });
     });
