@@ -20,36 +20,41 @@ func main() {
 }
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
-    
-    if r.Method != http.MethodPost {
-        http.Error(w, "Only POST method is allowed", http.StatusMethodNotAllowed)
-        return
-    }
+    var endpointVar, inputText string
 
-    // Read the request body
-    var requestData struct {
-        EndpointVar string `json:"endpointVar"`
-        InputText   string `json:"inputText"` 
-    }
-
-    body, err := ioutil.ReadAll(r.Body)
-    if err != nil {
-        http.Error(w, "Error reading request body", http.StatusInternalServerError)
-        return
-    }
-
-    if err := json.Unmarshal(body, &requestData); err != nil {
-        http.Error(w, "Error parsing request body", http.StatusBadRequest)
-        return
+    if r.Method == http.MethodPost || r.Method == http.MethodPut {
+        var requestData struct {
+            EndpointVar string `json:"endpointVar"`
+            InputText   string `json:"inputText"` 
+        }
+        body, err := ioutil.ReadAll(r.Body)
+        if err != nil {
+            http.Error(w, "Error reading request body", http.StatusInternalServerError)
+            return
+        }
+        if err := json.Unmarshal(body, &requestData); err != nil {
+            http.Error(w, "Error parsing request body", http.StatusBadRequest)
+            return
+        }
+        endpointVar = requestData.EndpointVar
+        inputText = requestData.InputText
+    } else if r.Method == http.MethodGet {
+        // Extract data from the URL for GET requests
+        endpointVar = strings.TrimPrefix(r.URL.Path, "/bff/")
     }
 
     // Forward the request to the actual API
-    forwardToAPI(requestData.EndpointVar, requestData.InputText, w, r)
+    forwardToAPI(endpointVar, inputText, w, r)
 }
 
 func forwardToAPI(endpoint string, inputText string, w http.ResponseWriter, r *http.Request) {
     
-    apiURL := fmt.Sprintf("https://api.ryanschnabel.com/%s?inputText=%s", endpoint, url.QueryEscape(inputText))
+    domain := os.Getenv("DOMAIN")
+    if domain == "" {
+        log.Fatal("DOMAIN environment variable not set")
+    }
+
+    apiURL := fmt.Sprintf("https://%s/%s?inputText=%s", domain, endpoint, url.QueryEscape(inputText))
 
     // Create a new request to your API
     apiReq, err := http.NewRequest(r.Method, apiURL, r.Body)

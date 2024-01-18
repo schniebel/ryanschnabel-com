@@ -11,23 +11,8 @@ import (
     "k8s.io/client-go/rest"
 )
 
-func helloWorldHandler(w http.ResponseWriter, r *http.Request) {
-
-    inputText := r.URL.Query().Get("inputText")
-
-    fmt.Fprintf(w, "Hello World %s", inputText)
-}
 
 func getUsersHandler(w http.ResponseWriter, r *http.Request) {
-    secretName := os.Getenv("SECRET_NAME")
-    namespace := os.Getenv("SECRET_NAMESPACE")
-    secretDataKey := os.Getenv("SECRET_DATA_KEY")
-
-    if secretName == "" || namespace == "" || secretDataKey == "" {
-        log.Println("Secret configuration environment variables are not set properly")
-        http.Error(w, "Server misconfiguration", http.StatusInternalServerError)
-        return
-    }
 
     users, err := getKubernetesSecretData(secretName, namespace, secretDataKey)
     if err != nil {
@@ -37,6 +22,42 @@ func getUsersHandler(w http.ResponseWriter, r *http.Request) {
 
     fmt.Fprintf(w, "%s", users)
 }
+
+func addUserHandler(w http.ResponseWriter, r *http.Request) {
+    inputText := r.URL.Query().Get("inputText")
+    if inputText == "" {
+        http.Error(w, "No input text provided", http.StatusBadRequest)
+        return
+    }
+
+    // Retrieve current users
+    currentUsers, err := getKubernetesSecretData(secretName, namespace, secretDataKey)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    // Split into array and check for existence
+    usersArray := strings.Split(currentUsers, ",")
+    for _, user := range usersArray {
+        if user == inputText {
+            http.Error(w, "User already is authorized", http.StatusConflict)
+            return
+        }
+    }
+
+    // Add the new user
+    updatedUsers := strings.Join(append(usersArray, inputText), ",")
+
+    // Update the secret
+    if err := updateKubernetesSecretData(secretName, namespace, secretDataKey, updatedUsers); err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    fmt.Fprintf(w, "User added successfully")
+}
+
 
 func getKubernetesSecretData(secretName, namespace, secretDataKey string) (string, error) {
     config, err := rest.InClusterConfig()
@@ -62,6 +83,30 @@ func getKubernetesSecretData(secretName, namespace, secretDataKey string) (strin
     return string(secretData), nil
 }
 
+func updateKubernetesSecretData(secretName, namespace, secretDataKey, updatedData string) error {
+    config, err := rest.InClusterConfig()
+    if err != nil {
+        return err
+    }
+
+    clientset, err := kubernetes.NewForConfig(config)
+    if err != nil {
+        return err
+    }
+
+    secret, err := clientset.CoreV1().Secrets(namespace).Get(context.TODO(), secretName, metav1.GetOptions{})
+    if err != nil {
+        return err
+    }
+
+    // Update secret data
+    secret.Data[secretDataKey] = []byte(updatedData)
+
+    _, err = clientset.CoreV1().Secrets(namespace).Update(context.TODO(), secret, metav1.UpdateOptions{})
+    return err
+}
+
+
 func validateAPIKeyMiddleware(next http.Handler) http.Handler {
     apiKey := os.Getenv("API_KEY")
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -75,9 +120,18 @@ func validateAPIKeyMiddleware(next http.Handler) http.Handler {
 }
 
 func main() {
+
+    secretName = os.Getenv("SECRET_NAME")
+    namespace = os.Getenv("SECRET_NAMESPACE")
+    secretDataKey = os.Getenv("SECRET_DATA_KEY")
+
+    if secretName == "" || namespace == "" || secretDataKey == "" {
+        log.Fatal("Secret configuration environment variables are not set properly")
+    }
+
     mux := http.NewServeMux()
-    mux.HandleFunc("/helloworld", helloWorldHandler)
     mux.HandleFunc("/getUsers", getUsersHandler)
+    mux.HandleFunc("/addUser", addUserHandler)
 
     // Apply the API key validation middleware
     handler := validateAPIKeyMiddleware(mux)

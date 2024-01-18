@@ -24,3 +24,5 @@ spec:
             secretKeyRef:
               name: api-key-secret
               key: API_KEY
+        - name: DOMAIN
+          value: "api.ryanschnabel.com"

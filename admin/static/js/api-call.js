@@ -1,15 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('retrieveAuthorizedUsersButton').addEventListener('click', function() {
-        const requestData = {
-            endpointVar: 'getUsers',
-        };
 
-        fetch('https://admin.ryanschnabel.com/bff/', {
-            method: 'POST',
+        fetch('https://admin.ryanschnabel.com/bff/getUsers', {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
+            }
         })
         .then(response => response.text())
         .then(data => {
@@ -28,6 +24,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 usersDiv.appendChild(userSpan);
                 usersDiv.appendChild(document.createElement('br'));
             });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    document.getElementById('addUserButton').addEventListener('click', function() {
+        const inputText = document.getElementById('inputText').value;
+        const requestData = {
+            endpointVar: 'addUser',
+            inputText: inputText
+        };
+
+        fetch('https://admin.ryanschnabel.com/bff/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Process the response data
+            console.log(data);
+            // You can also update the UI here based on the response
         })
         .catch(error => {
             console.error('Error:', error);
