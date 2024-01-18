@@ -19,7 +19,17 @@ func helloWorldHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getUsersHandler(w http.ResponseWriter, r *http.Request) {
-    users, err := getKubernetesSecretData("whitelist-secret", "traefik-forward-auth")
+    secretName := os.Getenv("SECRET_NAME")
+    namespace := os.Getenv("SECRET_NAMESPACE")
+    secretDataKey := os.Getenv("SECRET_DATA_KEY")
+
+    if secretName == "" || namespace == "" || secretDataKey == "" {
+        log.Println("Secret configuration environment variables are not set properly")
+        http.Error(w, "Server misconfiguration", http.StatusInternalServerError)
+        return
+    }
+
+    users, err := getKubernetesSecretData(secretName, namespace, secretDataKey)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -28,7 +38,7 @@ func getUsersHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Whitelisted users: %s", users)
 }
 
-func getKubernetesSecretData(secretName, namespace string) (string, error) {
+func getKubernetesSecretData(secretName, namespace, secretDataKey string) (string, error) {
     config, err := rest.InClusterConfig()
     if err != nil {
         return "", err
@@ -44,12 +54,12 @@ func getKubernetesSecretData(secretName, namespace string) (string, error) {
         return "", err
     }
 
-    whitelistData, ok := secret.Data["whitelist"]
+    secretData, ok := secret.Data[secretDataKey]
     if !ok {
-        return "", fmt.Errorf("whitelist key not found in secret")
+        return "", fmt.Errorf("%s key not found in secret", secretDataKey)
     }
 
-    return string(whitelistData), nil
+    return string(secretData), nil
 }
 
 func validateAPIKeyMiddleware(next http.Handler) http.Handler {

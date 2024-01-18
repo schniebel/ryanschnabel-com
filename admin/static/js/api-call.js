@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             // Handle the response data
             console.log(data);
+            document.getElementById('whitelistedUsers').textContent = data;
         })
         .catch(error => {
             // Handle any errors
