@@ -35,7 +35,7 @@ func getUsersHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    fmt.Fprintf(w, "Whitelisted users: %s", users)
+    fmt.Fprintf(w, "%s", users)
 }
 
 func getKubernetesSecretData(secretName, namespace, secretDataKey string) (string, error) {
