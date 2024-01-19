@@ -33,3 +33,9 @@ spec:
           value: "traefik-forward-auth"
         - name: SECRET_DATA_KEY
           value: "whitelist"
+        - name: SECRET_NAME
+          value: "whitelist-secret"
+        - name: DEPLOYMENT_NAME
+          value: "traefik-forward-auth"
+        - name: DEPLOYMENT_NAMESPACE
+          value: "traefik-forward-auth""

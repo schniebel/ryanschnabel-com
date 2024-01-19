@@ -48,9 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.text())
         .then(data => {
-            // Process the response data
             console.log(data);
-            // You can also update the UI here based on the response
         })
         .catch(error => {
             console.error('Error:', error);
@@ -75,7 +73,6 @@ function removeUser(userEmail) {
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        // Update UI or show confirmation message
     })
     .catch(error => {
         console.error('Error:', error);
