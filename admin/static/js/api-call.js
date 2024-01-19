@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    document.getElementById('addUserButton').addEventListener('click', function() {
-        const inputText = document.getElementById('inputText').value;
+    // Function to add a user
+    function addUser() {
+        const inputText = document.getElementById('inputText');
         const requestData = {
             endpointVar: 'addUser',
-            inputText: inputText
+            inputText: inputText.value
         };
 
         fetch('https://admin.ryanschnabel.com/bff/', {
@@ -17,14 +18,23 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.text())
         .then(data => {
             console.log(data);
-            fetchAndDisplayUsers(); // Refresh the user list after adding a user
+            fetchAndDisplayUsers(); 
+            inputText.value = '';
         })
         .catch(error => {
             console.error('Error:', error);
         });
+    }
+
+    document.getElementById('addUserButton').addEventListener('click', addUser);
+
+    document.getElementById('inputText').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            addUser();
+        }
     });
 
-    // Initially load users
     fetchAndDisplayUsers();
 });
 
