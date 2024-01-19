@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('retrieveAuthorizedUsersButton').addEventListener('click', fetchAndDisplayUsers);
 
     document.getElementById('addUserButton').addEventListener('click', function() {
         const inputText = document.getElementById('inputText').value;
