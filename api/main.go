@@ -36,6 +36,13 @@ type GrafanaUser struct {
     OrgId    int    `json:"OrgId"`
 }
 
+type GrafanaUserResponse struct {
+    ID    int    `json:"id"`
+    Name  string `json:"name"`
+    Login string `json:"login"`
+    Email string `json:"email"`
+}
+
 func getUsersHandler(w http.ResponseWriter, r *http.Request) {
     usersArray, err := getKubernetesSecretData(secretName, namespace, secretDataKey)
     if err != nil {
@@ -54,14 +61,12 @@ func addUserHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    // Retrieve current users
     usersArray, err := getKubernetesSecretData(secretName, namespace, secretDataKey)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
 
-    // Check for existence
     for _, user := range usersArray {
         if user == inputText {
             http.Error(w, "User already is authorized", http.StatusConflict)
@@ -69,10 +74,8 @@ func addUserHandler(w http.ResponseWriter, r *http.Request) {
         }
     }
 
-    // Add the new user
     updatedUsers := strings.Join(append(usersArray, inputText), ",")
 
-    // Update the secret
     if err := updateKubernetesSecretData(secretName, namespace, secretDataKey, updatedUsers); err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -125,7 +128,6 @@ func removeUserHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    // Check if user exists in the list
     var userExists bool
     var updatedUsers []string
     for _, user := range usersArray {
@@ -136,13 +138,11 @@ func removeUserHandler(w http.ResponseWriter, r *http.Request) {
         }
     }
 
-    // If user does not exist, return an error
     if !userExists {
         http.Error(w, "User already removed", http.StatusNotFound)
         return
     }
 
-    // Update the secret with the modified list
     if err := updateKubernetesSecretData(secretName, namespace, secretDataKey, strings.Join(updatedUsers, ",")); err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -153,7 +153,13 @@ func removeUserHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    fmt.Fprintf(w, "User removed successfully and deployment restarted")
+    err = removeGrafanaUser()
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    fmt.Fprintf(w, "User removed from kubernetes and grafana")
 }
 
 func getKubernetesSecretData(secretName, namespace, secretDataKey string) ([]string, error) {
@@ -177,7 +183,6 @@ func getKubernetesSecretData(secretName, namespace, secretDataKey string) ([]str
         return nil, fmt.Errorf("%s key not found in secret", secretDataKey)
     }
 
-    // Split the secret data into an array
     usersArray := strings.Split(string(secretData), ",")
     return usersArray, nil
 }
@@ -198,7 +203,6 @@ func updateKubernetesSecretData(secretName, namespace, secretDataKey, updatedDat
         return err
     }
 
-    // Update secret data
     secret.Data[secretDataKey] = []byte(updatedData)
 
     _, err = clientset.CoreV1().Secrets(namespace).Update(context.TODO(), secret, metav1.UpdateOptions{})
@@ -207,12 +211,11 @@ func updateKubernetesSecretData(secretName, namespace, secretDataKey, updatedDat
 
 func addGrafanaUser(user GrafanaUser) error {
 
-    username, password, err := getGrafanaCredentials()
+    auth, err := getGrafanaAuth()
     if err != nil {
         return fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
 
-    auth := base64.StdEncoding.EncodeToString([]byte(username + ":" + password))
     grafanaURL := "https://" + grafanaDomain + "/api/admin/users"
 
     userData, err := json.Marshal(user)
@@ -242,7 +245,106 @@ func addGrafanaUser(user GrafanaUser) error {
     return nil
 }
 
-func getGrafanaCredentials() (string, string, error) {
+func removeGrafanaUser() error {
+
+    inputText := r.URL.Query().Get("inputText")
+
+    users, err := getGrafanaUsers()
+    if err != nil {
+        log.Fatalf("Failed to get Grafana users: %v", err)
+    }
+
+    var userID int
+    userID := 0
+    for _, user := range users {
+        if user.Email == inputText {
+            userID = user.ID
+            break
+        }
+    }
+
+    if userID == 0 {
+        log.Println("User not found")
+    } else {
+        log.Printf("Found user ID: %d", userID)
+    }
+
+    err = deleteGrafanaUser(userID)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    return nil
+}
+
+func getGrafanaUsers() ([]GrafanaUserResponse, error) {
+
+    auth, err := getGrafanaAuth()
+    if err != nil {
+        return nil, fmt.Errorf("failed to get Grafana credentials: %w", err)
+    }
+
+    grafanaURL := "https://" + grafanaDomain + "/api/users"
+
+    req, err := http.NewRequest("GET", grafanaURL, nil)
+    if err != nil {
+        return nil, fmt.Errorf("failed to create Grafana request: %w", err)
+    }
+
+    req.Header.Set("Authorization", "Basic " + auth)
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        return nil, fmt.Errorf("failed to send Grafana request: %w", err)
+    }
+    defer resp.Body.Close()
+
+    if resp.StatusCode != http.StatusOK {
+        return nil, fmt.Errorf("Grafana API request failed with status code: %d", resp.StatusCode)
+    }
+
+    var users []GrafanaUserResponse
+    if err := json.NewDecoder(resp.Body).Decode(&users); err != nil {
+        return nil, fmt.Errorf("failed to decode Grafana response: %w", err)
+    }
+
+    return users, nil
+}
+
+func deleteGrafanaUser(userID int) error {
+    auth, err := getGrafanaAuth()
+    if err != nil {
+        return fmt.Errorf("failed to get Grafana credentials: %w", err)
+    }
+
+    grafanaURL := fmt.Sprintf("https://%s/api/admin/users/%d", grafanaDomain, userID)
+
+    req, err := http.NewRequest("DELETE", grafanaURL, nil)
+    if err != nil {
+        return fmt.Errorf("failed to create Grafana DELETE request: %w", err)
+    }
+
+    req.Header.Set("Authorization", "Basic " + auth)
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        return fmt.Errorf("failed to send Grafana DELETE request: %w", err)
+    }
+    defer resp.Body.Close()
+
+    if resp.StatusCode != http.StatusOK {
+        return fmt.Errorf("Grafana DELETE API request failed with status code: %d", resp.StatusCode)
+    }
+
+    return nil
+}
+
+func getGrafanaAuth() (string, string, error) {
     config, err := rest.InClusterConfig()
     if err != nil {
         return "", "", fmt.Errorf("failed to get in-cluster config: %w", err)
@@ -268,7 +370,9 @@ func getGrafanaCredentials() (string, string, error) {
         return "", "", fmt.Errorf("password not found in secret")
     }
 
-    return string(username), string(password), nil
+    auth := base64.StdEncoding.EncodeToString([]byte(username + ":" + password))
+
+    return string(auth), nil
 }
 
 func generateRandomPassword(length int) (string, error) {
@@ -296,13 +400,11 @@ func rolloutRestartDeployment(deploymentName, namespace string) error {
 
     deploymentsClient := clientset.AppsV1().Deployments(namespace)
 
-    // Get the current deployment
     deployment, err := deploymentsClient.Get(context.TODO(), deploymentName, metav1.GetOptions{})
     if err != nil {
         return err
     }
 
-    // Update the deployment's annotations to trigger a restart
     if deployment.Spec.Template.Annotations == nil {
         deployment.Spec.Template.Annotations = make(map[string]string)
     }
@@ -344,7 +446,6 @@ func main() {
     mux.HandleFunc("/addUser", addUserHandler)
     mux.HandleFunc("/removeUser", removeUserHandler)
 
-    // Apply the API key validation middleware
     handler := validateAPIKeyMiddleware(mux)
 
     log.Println("Server starting on port 8080...")
