@@ -13,7 +13,7 @@ import (
 
 func GetUsersHandler(secretName, namespace, secretDataKey string) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
-		usersArray, err := GetKubernetesSecretData(secretName, namespace, secretDataKey)
+		usersArray, err := kubernetes.GetKubernetesSecretData(secretName, namespace, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -32,7 +32,7 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 			return
 		}
 	
-		usersArray, err := GetKubernetesSecretData(secretName, namespace, secretDataKey)
+		usersArray, err := kubernetes.GetKubernetesSecretData(secretName, namespace, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -47,17 +47,17 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 	
 		updatedUsers := strings.Join(append(usersArray, inputText), ",")
 	
-		if err := UpdateKubernetesSecretData(secretName, namespace, secretDataKey, updatedUsers); err != nil {
+		if err := kubernetes.UpdateKubernetesSecretData(secretName, namespace, secretDataKey, updatedUsers); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	
-		if err := RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
+		if err := kubernetes.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
 			http.Error(w, fmt.Sprintf("Failed to restart deployment: %v", err), http.StatusInternalServerError)
 			return
 		}
 	
-		password, err := GenerateRandomPassword(9)
+		password, err := utils.GenerateRandomPassword(9)
 		if err != nil {
 			http.Error(w, "Failed to generate random password: "+err.Error(), http.StatusInternalServerError)
 			return
@@ -71,7 +71,7 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 			OrgId:    1,
 		}
 	
-		err = AddGrafanaUserAPICall(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret, grafanaUser)
+		err = grafana.AddGrafanaUserAPICall(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret, grafanaUser)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -95,7 +95,7 @@ func RemoveUserHandler(secretName, namespace, secretDataKey, deploymentName, dep
 			return
 		}
 	
-		usersArray, err := GetKubernetesSecretData(secretName, namespace, secretDataKey)
+		usersArray, err := kubernetes.GetKubernetesSecretData(secretName, namespace, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -116,17 +116,17 @@ func RemoveUserHandler(secretName, namespace, secretDataKey, deploymentName, dep
 			return
 		}
 	
-		if err := UpdateKubernetesSecretData(secretName, namespace, secretDataKey, strings.Join(updatedUsers, ",")); err != nil {
+		if err := kubernetes.UpdateKubernetesSecretData(secretName, namespace, secretDataKey, strings.Join(updatedUsers, ",")); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	
-		if err := RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
+		if err := kubernetes.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
 			http.Error(w, fmt.Sprintf("Failed to restart deployment: %v", err), http.StatusInternalServerError)
 			return
 		}
 	
-		err = RemoveGrafanaUser(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret, w, r)
+		err = grafana.RemoveGrafanaUser(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret, w, r)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

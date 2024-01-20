@@ -39,7 +39,7 @@ func main() {
     mux.HandleFunc("/addUser", handler.AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploymentNamespace, grafanaDomain, grafanaNamespace, grafanaCredentialsSecret))
     mux.HandleFunc("/removeUser", handler.RemoveUserHandler(secretName, namespace, secretDataKey, deploymentName, deploymentNamespace, grafanaDomain, grafanaNamespace, grafanaCredentialsSecret))
 
-    handler := validateAPIKeyMiddleware(mux)
+    handler := utils.ValidateAPIKeyMiddleware(mux)
 
     log.Println("Server starting on port 8080...")
     err := http.ListenAndServe(":8080", handler)
