@@ -4,12 +4,19 @@ import (
     "fmt"
     "net/http"
     "strings"
-    "time"
 
     "github.com/schniebel/ryanschnabel-com/api/pkg/grafana"
     "github.com/schniebel/ryanschnabel-com/api/pkg/kubernetes"
     "github.com/schniebel/ryanschnabel-com/api/pkg/utils"
 )
+
+type GrafanaUser struct {
+    Name     string `json:"name"`
+    Email    string `json:"email"`
+    Login    string `json:"login"`
+    Password string `json:"password"`
+    OrgId    int    `json:"OrgId"`
+}
 
 func GetUsersHandler(secretName, namespace, secretDataKey string) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
