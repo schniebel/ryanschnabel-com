@@ -347,33 +347,30 @@ func deleteGrafanaUser(userID int) error {
 func getGrafanaAuth() (string, error) {
     config, err := rest.InClusterConfig()
     if err != nil {
-        return "", "", fmt.Errorf("failed to get in-cluster config: %w", err)
+        return "", fmt.Errorf("failed to get in-cluster config: %w", err)
     }
 
     clientset, err := kubernetes.NewForConfig(config)
     if err != nil {
-        return "", "", fmt.Errorf("failed to create kubernetes client: %w", err)
+        return "", fmt.Errorf("failed to create kubernetes client: %w", err)
     }
 
     secret, err := clientset.CoreV1().Secrets(grafanaNamespace).Get(context.TODO(), grafanaCredentialsSecret, metav1.GetOptions{})
     if err != nil {
-        return "", "", fmt.Errorf("failed to get secret: %w", err)
+        return "", fmt.Errorf("failed to get secret: %w", err)
     }
 
     username, ok := secret.Data["GF_SECURITY_ADMIN_USER"]
     if !ok {
-        return "", "", fmt.Errorf("username not found in secret")
+        return "", fmt.Errorf("username not found in secret")
     }
 
     password, ok := secret.Data["GF_SECURITY_ADMIN_PASSWORD"]
     if !ok {
-        return "", "", fmt.Errorf("password not found in secret")
+        return "", fmt.Errorf("password not found in secret")
     }
 
-    usernameStr := string(username)
-    passwordStr := string(password)
-
-    auth := base64.StdEncoding.EncodeToString([]byte(usernameStr + ":" + passwordStr))
+    auth := base64.StdEncoding.EncodeToString([]byte(string(username) + ":" + string(password)))
     return auth, nil
 }
 
