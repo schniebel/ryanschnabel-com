@@ -153,7 +153,7 @@ func removeUserHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    err = removeGrafanaUser(r)
+    err = removeGrafanaUser(w, r)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -245,13 +245,13 @@ func addGrafanaUserAPICall(user GrafanaUser) error {
     return nil
 }
 
-func removeGrafanaUser(r *http.Request) error {
+func removeGrafanaUser(w http.ResponseWriter, r *http.Request) error {
 
     inputText := r.URL.Query().Get("inputText")
 
     users, err := getGrafanaUsers()
     if err != nil {
-        return fmt.Errorf("Failed to get Grafana users: %w", err)
+        return nil, fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
 
     var userID int
