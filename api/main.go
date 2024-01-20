@@ -100,7 +100,7 @@ func addUserHandler(w http.ResponseWriter, r *http.Request) {
         OrgId:    1,
     }
 
-    err = addGrafanaUser(grafanaUser)
+    err = addGrafanaUserAPICall(grafanaUser)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -209,7 +209,7 @@ func updateKubernetesSecretData(secretName, namespace, secretDataKey, updatedDat
     return err
 }
 
-func addGrafanaUser(user GrafanaUser) error {
+func addGrafanaUserAPICall(user GrafanaUser) error {
 
     auth, err := getGrafanaAuth()
     if err != nil {
@@ -251,7 +251,7 @@ func removeGrafanaUser() error {
 
     users, err := getGrafanaUsers()
     if err != nil {
-        log.Fatalf("Failed to get Grafana users: %v", err)
+        return fmt.Errorf("Failed to get Grafana users: %w", err)
     }
 
     var userID int
@@ -269,7 +269,7 @@ func removeGrafanaUser() error {
         log.Printf("Found user ID: %d", userID)
     }
 
-    err = deleteGrafanaUser(userID)
+    err = removeGrafanaUserAPICall(userID)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -344,7 +344,7 @@ func deleteGrafanaUser(userID int) error {
     return nil
 }
 
-func getGrafanaAuth() (string, string, error) {
+func getGrafanaAuth() (string, error) {
     config, err := rest.InClusterConfig()
     if err != nil {
         return "", "", fmt.Errorf("failed to get in-cluster config: %w", err)
@@ -370,9 +370,11 @@ func getGrafanaAuth() (string, string, error) {
         return "", "", fmt.Errorf("password not found in secret")
     }
 
-    auth := base64.StdEncoding.EncodeToString([]byte(username + ":" + password))
+    usernameStr := string(username)
+    passwordStr := string(password)
 
-    return string(auth), nil
+    auth := base64.StdEncoding.EncodeToString([]byte(usernameStr + ":" + passwordStr))
+    return auth, nil
 }
 
 func generateRandomPassword(length int) (string, error) {
