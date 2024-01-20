@@ -4,6 +4,7 @@ import (
     "fmt"
     "net/http"
     "strings"
+	"log"
 
     "github.com/schniebel/ryanschnabel-com/api/pkg/grafana"
     "github.com/schniebel/ryanschnabel-com/api/pkg/kubernetes"
@@ -86,7 +87,7 @@ func AddUserHandler() http.HandlerFunc {
 		}
 
 		slackMessage := fmt.Sprintf("user %s added", inputText)
-		err := slack.SendSlackMessage("admin", slackMessage)
+		err = slack.SendSlackMessage("admin", slackMessage)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -147,7 +148,7 @@ func RemoveUserHandler() http.HandlerFunc {
 		}
 
 		slackMessage := fmt.Sprintf("user %s removed", inputText)
-		err := slack.SendSlackMessage("admin", slackMessage)
+		err = slack.SendSlackMessage("admin", slackMessage)
 		if err != nil {
 			log.Fatal(err)
 		}
