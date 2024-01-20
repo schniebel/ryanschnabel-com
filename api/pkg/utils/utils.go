@@ -4,6 +4,7 @@ import (
     "crypto/rand"
     "net/http"
     "os"
+	"fmt"
 )
 
 func GenerateRandomPassword(length int) (string, error) {
