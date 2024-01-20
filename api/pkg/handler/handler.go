@@ -89,7 +89,9 @@ func AddUserHandler() http.HandlerFunc {
 		slackMessage := fmt.Sprintf("user %s added", inputText)
 		err = slack.SendSlackMessage("admin", slackMessage)
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Error sending slack message: %v", err)
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
+			return
 		}
 	
 		fmt.Fprintf(w, "User added successfully to both Kubernetes and Grafana")
@@ -150,7 +152,9 @@ func RemoveUserHandler() http.HandlerFunc {
 		slackMessage := fmt.Sprintf("user %s removed", inputText)
 		err = slack.SendSlackMessage("admin", slackMessage)
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Error sending slack message: %v", err)
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
+			return
 		}
 	
 		fmt.Fprintf(w, "User removed from kubernetes and grafana")
