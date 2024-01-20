@@ -282,7 +282,7 @@ func getGrafanaUsers() ([]GrafanaUserResponse, error) {
 
     auth, err := getGrafanaAuth()
     if err != nil {
-        return nil, fmt.Errorf("failed to get Grafana credentials: %w", err)
+        return fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
 
     grafanaURL := "https://" + grafanaDomain + "/api/users"
