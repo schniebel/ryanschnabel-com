@@ -27,7 +27,7 @@ type GrafanaUserResponse struct {
 
 func AddGrafanaUserAPICall(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret string, user GrafanaUser) error {
 
-    auth, err := GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret)
+    auth, err := kubernetes.GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret)
     if err != nil {
         return fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
@@ -96,7 +96,7 @@ func RemoveGrafanaUser(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret
 
 func getGrafanaUsers(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret string) ([]GrafanaUserResponse, error) {
 
-    auth, err := GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret)
+    auth, err := kubernetes.GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret)
     if err != nil {
         return nil, fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
@@ -131,7 +131,7 @@ func getGrafanaUsers(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret s
 }
 
 func removeGrafanaUserAPICall(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret string, userID int) error {
-    auth, err := GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret)
+    auth, err := kubernetes.GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret)
     if err != nil {
         return fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
