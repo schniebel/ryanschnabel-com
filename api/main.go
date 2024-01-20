@@ -270,7 +270,7 @@ func getGrafanaCredentials() (string, string, error) {
 
     decodedUsername, err := base64.StdEncoding.DecodeString(string(encodedUsername))
     if err != nil {
-        return "", "", fmt.Errorf("failed to decode username: %w", err)
+        return "", "", fmt.Errorf("failed to decode username '%s': %w", string(encodedUsername), err)
     }
 
     decodedPassword, err := base64.StdEncoding.DecodeString(string(encodedPassword))
