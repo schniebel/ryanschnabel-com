@@ -37,3 +37,9 @@ spec:
           value: "traefik-forward-auth"
         - name: DEPLOYMENT_NAMESPACE
           value: "traefik-forward-auth"
+        - name: GRAFANA_DOMAIN
+          value: "monitoring.ryanschnabel.com"
+        - name: GRAFANA_NAMESPACE
+          value: "monitoring"
+        - name: GRAFANA_CREDENTIALS_SECRET
+          value: "grafana-admin-credentials"

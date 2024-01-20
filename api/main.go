@@ -11,15 +11,30 @@ import (
     "k8s.io/client-go/rest"
     "strings"
     "time"
+    "bytes"
+    "encoding/json"
+    "crypto/rand"
+    "encoding/base64"
 )
 
 var (
-    secretName          string
-    namespace           string
-    secretDataKey       string
-    deploymentName      string
-    deploymentNamespace string
+    secretName               string
+    namespace                string
+    secretDataKey            string
+    deploymentName           string
+    deploymentNamespace      string
+    grafanaDomain            string
+    grafanaNamespace         string
+    grafanaCredentialsSecret string
 )
+
+type GrafanaUser struct {
+    Name     string `json:"name"`
+    Email    string `json:"email"`
+    Login    string `json:"login"`
+    Password string `json:"password"`
+    OrgId    int    `json:"OrgId"`
+}
 
 func getUsersHandler(w http.ResponseWriter, r *http.Request) {
     usersArray, err := getKubernetesSecretData(secretName, namespace, secretDataKey)
@@ -68,7 +83,21 @@ func addUserHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    fmt.Fprintf(w, "User added successfully and deployment restarted")
+    grafanaUser := GrafanaUser{
+        Name:     inputText,
+        Email:    inputText,
+        Login:    inputText,
+        Password: generateRandomPassword(9),
+        OrgId:    1,
+    }
+
+    err := addGrafanaUser(grafanaUser)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    fmt.Fprintf(w, "User added successfully to both Kubernetes and Grafana")
 }
 
 func removeUserHandler(w http.ResponseWriter, r *http.Request) {
@@ -170,6 +199,94 @@ func updateKubernetesSecretData(secretName, namespace, secretDataKey, updatedDat
     return err
 }
 
+func addGrafanaUser(user GrafanaUser) error {
+
+    username, password, err := getGrafanaCredentials()
+    if err != nil {
+        return fmt.Errorf("failed to get Grafana credentials: %w", err)
+    }
+
+    auth := base64.StdEncoding.EncodeToString([]byte(username + ":" + password))
+    grafanaURL := "https://" + grafanaDomain + "/api/admin/users"
+
+    req.Header.Set("Authorization", "Basic " + auth)
+    req.Header.Set("Content-Type", "application/json")
+
+    userData, err := json.Marshal(user)
+    if err != nil {
+        return fmt.Errorf("failed to marshal Grafana user data: %w", err)
+    }
+
+    req, err := http.NewRequest("POST", grafanaURL, bytes.NewBuffer(userData))
+    if err != nil {
+        return fmt.Errorf("failed to create Grafana request: %w", err)
+    }
+   
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        return fmt.Errorf("failed to send Grafana request: %w", err)
+    }
+    defer resp.Body.Close()
+
+    if resp.StatusCode != http.StatusOK {
+        return fmt.Errorf("Grafana API request failed with status code: %d", resp.StatusCode)
+    }
+
+    return nil
+}
+
+func getGrafanaCredentials() (string, string, error) {
+    config, err := rest.InClusterConfig()
+    if err != nil {
+        return "", "", fmt.Errorf("failed to get in-cluster config: %w", err)
+    }
+
+    clientset, err := kubernetes.NewForConfig(config)
+    if err != nil {
+        return "", "", fmt.Errorf("failed to create kubernetes client: %w", err)
+    }
+
+    secret, err := clientset.CoreV1().Secrets(grafanaNamespace).Get(context.TODO(), grafanaCredentialsSecret, metav1.GetOptions{})
+    if err != nil {
+        return "", "", fmt.Errorf("failed to get secret: %w", err)
+    }
+
+    encodedUsername, ok := secret.Data["GF_SECURITY_ADMIN_USER"]
+    if !ok {
+        return "", "", fmt.Errorf("username not found in secret")
+    }
+
+    encodedPassword, ok := secret.Data["GF_SECURITY_ADMIN_PASSWORD"]
+    if !ok {
+        return "", "", fmt.Errorf("password not found in secret")
+    }
+
+    decodedUsername, err := base64.StdEncoding.DecodeString(string(encodedUsername))
+    if err != nil {
+        return "", "", fmt.Errorf("failed to decode username: %w", err)
+    }
+
+    decodedPassword, err := base64.StdEncoding.DecodeString(string(encodedPassword))
+    if err != nil {
+        return "", "", fmt.Errorf("failed to decode password: %w", err)
+    }
+
+    return string(decodedUsername), string(decodedPassword), nil
+}
+
+func generateRandomPassword(length int) (string, error) {
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    b := make([]byte, length)
+    if _, err := rand.Read(b); err != nil {
+        return "", err
+    }
+    for i := 0; i < length; i++ {
+        b[i] = charset[int(b[i])%len(charset)]
+    }
+    return string(b), nil
+}
+
 func rolloutRestartDeployment(deploymentName, namespace string) error {
     config, err := rest.InClusterConfig()
     if err != nil {
@@ -218,8 +335,11 @@ func main() {
     secretDataKey = os.Getenv("SECRET_DATA_KEY")
     deploymentName = os.Getenv("DEPLOYMENT_NAME")
     deploymentNamespace = os.Getenv("DEPLOYMENT_NAMESPACE")
-
-    if secretName == "" || namespace == "" || secretDataKey == "" {
+    grafanaDomain = os.Getenv("GRAFANA_DOMAIN")
+    grafanaNamespace = os.Getenv("GRAFANA_NAMESPACE")
+    grafanaCredentialsSecret = os.Getenv("GRAFANA_CREDENTIALS_SECRET")
+    
+    if secretName == "" || namespace == "" || secretDataKey == "" || grafanaDomain == "" || grafanaNamespace == ""|| grafanaCredentialsSecret == "" {
         log.Fatal("Secret configuration environment variables are not set properly")
     }
 
