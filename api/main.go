@@ -258,27 +258,17 @@ func getGrafanaCredentials() (string, string, error) {
         return "", "", fmt.Errorf("failed to get secret: %w", err)
     }
 
-    encodedUsername, ok := secret.Data["GF_SECURITY_ADMIN_USER"]
+    username, ok := secret.Data["GF_SECURITY_ADMIN_USER"]
     if !ok {
         return "", "", fmt.Errorf("username not found in secret")
     }
 
-    encodedPassword, ok := secret.Data["GF_SECURITY_ADMIN_PASSWORD"]
+    password, ok := secret.Data["GF_SECURITY_ADMIN_PASSWORD"]
     if !ok {
         return "", "", fmt.Errorf("password not found in secret")
     }
 
-    decodedUsername, err := base64.StdEncoding.DecodeString(string(encodedUsername))
-    if err != nil {
-        return "", "", fmt.Errorf("failed to decode username '%s': %w", string(encodedUsername), err)
-    }
-
-    decodedPassword, err := base64.StdEncoding.DecodeString(string(encodedPassword))
-    if err != nil {
-        return "", "", fmt.Errorf("failed to decode password: %w", err)
-    }
-
-    return string(decodedUsername), string(decodedPassword), nil
+    return string(username), string(password), nil
 }
 
 func generateRandomPassword(length int) (string, error) {
