@@ -10,13 +10,13 @@ import (
     "github.com/schniebel/ryanschnabel-com/api/pkg/utils"
 )
 
-var {
+var (
 	secretName = "whitelist-secret"
 	secretNamespace = "traefik-forward-auth"
 	secretDataKey = "whitelist"
 	deploymentName = "traefik-forward-auth"
 	deploymentNamespace = "traefik-forward-auth"
-}
+)
 
 func GetUsersHandler() http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
