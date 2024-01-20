@@ -103,7 +103,7 @@ func addUserHandler(w http.ResponseWriter, r *http.Request) {
     err = addGrafanaUserAPICall(grafanaUser)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
+        return err
     }
 
     fmt.Fprintf(w, "User added successfully to both Kubernetes and Grafana")
@@ -153,7 +153,7 @@ func removeUserHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    err = removeGrafanaUser()
+    err = removeGrafanaUser(w)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -245,7 +245,7 @@ func addGrafanaUserAPICall(user GrafanaUser) error {
     return nil
 }
 
-func removeGrafanaUser() error {
+func removeGrafanaUser(w http.ResponseWriter) error {
 
     inputText := r.URL.Query().Get("inputText")
 
@@ -255,7 +255,7 @@ func removeGrafanaUser() error {
     }
 
     var userID int
-    userID := 0
+    userID = 0
     for _, user := range users {
         if user.Email == inputText {
             userID = user.ID
@@ -272,7 +272,7 @@ func removeGrafanaUser() error {
     err = removeGrafanaUserAPICall(userID)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
+        return err
     }
 
     return nil
@@ -314,7 +314,7 @@ func getGrafanaUsers() ([]GrafanaUserResponse, error) {
     return users, nil
 }
 
-func deleteGrafanaUser(userID int) error {
+func removeGrafanaUserAPICall(userID int) error {
     auth, err := getGrafanaAuth()
     if err != nil {
         return fmt.Errorf("failed to get Grafana credentials: %w", err)
