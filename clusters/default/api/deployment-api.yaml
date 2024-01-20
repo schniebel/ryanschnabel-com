@@ -27,5 +27,10 @@ spec:
             secretKeyRef:
               name: api-key-secret
               key: API_KEY
+        - name: SLACK_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: slack-token
+              key: TOKEN
         - name: GRAFANA_DOMAIN
           value: "monitoring.ryanschnabel.com"

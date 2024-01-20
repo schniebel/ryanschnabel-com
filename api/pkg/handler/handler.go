@@ -8,6 +8,7 @@ import (
     "github.com/schniebel/ryanschnabel-com/api/pkg/grafana"
     "github.com/schniebel/ryanschnabel-com/api/pkg/kubernetes"
     "github.com/schniebel/ryanschnabel-com/api/pkg/utils"
+	"github.com/schniebel/ryanschnabel-com/api/pkg/slack"
 )
 
 var (
@@ -83,6 +84,12 @@ func AddUserHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+
+		slackMessage := fmt.Sprintf("user %s added", inputText)
+		err := slack.SendSlackMessage("admin", slackMessage)
+		if err != nil {
+			log.Fatal(err)
+		}
 	
 		fmt.Fprintf(w, "User added successfully to both Kubernetes and Grafana")
 	}
@@ -137,6 +144,12 @@ func RemoveUserHandler() http.HandlerFunc {
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
+		}
+
+		slackMessage := fmt.Sprintf("user %s removed", inputText)
+		err := slack.SendSlackMessage("admin", slackMessage)
+		if err != nil {
+			log.Fatal(err)
 		}
 	
 		fmt.Fprintf(w, "User removed from kubernetes and grafana")
