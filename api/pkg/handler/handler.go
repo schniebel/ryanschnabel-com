@@ -13,7 +13,7 @@ import (
 
 func GetUsersHandler(secretName, namespace, secretDataKey string) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
-		usersArray, err := kubernetes.GetKubernetesSecretData(secretName, namespace, secretDataKey)
+		usersArray, err := k8s.GetKubernetesSecretData(secretName, namespace, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -32,7 +32,7 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 			return
 		}
 	
-		usersArray, err := kubernetes.GetKubernetesSecretData(secretName, namespace, secretDataKey)
+		usersArray, err := k8s.GetKubernetesSecretData(secretName, namespace, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -47,12 +47,12 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 	
 		updatedUsers := strings.Join(append(usersArray, inputText), ",")
 	
-		if err := kubernetes.UpdateKubernetesSecretData(secretName, namespace, secretDataKey, updatedUsers); err != nil {
+		if err := k8s.UpdateKubernetesSecretData(secretName, namespace, secretDataKey, updatedUsers); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	
-		if err := kubernetes.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
+		if err := k8s.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
 			http.Error(w, fmt.Sprintf("Failed to restart deployment: %v", err), http.StatusInternalServerError)
 			return
 		}
@@ -95,7 +95,7 @@ func RemoveUserHandler(secretName, namespace, secretDataKey, deploymentName, dep
 			return
 		}
 	
-		usersArray, err := kubernetes.GetKubernetesSecretData(secretName, namespace, secretDataKey)
+		usersArray, err := k8s.GetKubernetesSecretData(secretName, namespace, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -116,12 +116,12 @@ func RemoveUserHandler(secretName, namespace, secretDataKey, deploymentName, dep
 			return
 		}
 	
-		if err := kubernetes.UpdateKubernetesSecretData(secretName, namespace, secretDataKey, strings.Join(updatedUsers, ",")); err != nil {
+		if err := k8s.UpdateKubernetesSecretData(secretName, namespace, secretDataKey, strings.Join(updatedUsers, ",")); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	
-		if err := kubernetes.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
+		if err := k8s.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
 			http.Error(w, fmt.Sprintf("Failed to restart deployment: %v", err), http.StatusInternalServerError)
 			return
 		}
