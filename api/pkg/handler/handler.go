@@ -62,7 +62,7 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 			return
 		}
 	
-		grafanaUser := GrafanaUser{
+		grafanaUser := grafana.GrafanaUser{
 			Name:     inputText,
 			Email:    inputText,
 			Login:    inputText,
