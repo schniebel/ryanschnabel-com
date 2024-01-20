@@ -97,7 +97,7 @@ func addUserHandler(w http.ResponseWriter, r *http.Request) {
         OrgId:    1,
     }
 
-    err := addGrafanaUser(grafanaUser)
+    err = addGrafanaUser(grafanaUser)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -215,6 +215,11 @@ func addGrafanaUser(user GrafanaUser) error {
     auth := base64.StdEncoding.EncodeToString([]byte(username + ":" + password))
     grafanaURL := "https://" + grafanaDomain + "/api/admin/users"
 
+    userData, err := json.Marshal(user)
+    if err != nil {
+        return fmt.Errorf("failed to marshal Grafana user data: %w", err)
+    }
+
     req, err := http.NewRequest("POST", grafanaURL, bytes.NewBuffer(userData))
     if err != nil {
         return fmt.Errorf("failed to create Grafana request: %w", err)
@@ -222,11 +227,6 @@ func addGrafanaUser(user GrafanaUser) error {
 
     req.Header.Set("Authorization", "Basic " + auth)
     req.Header.Set("Content-Type", "application/json")
-
-    userData, err := json.Marshal(user)
-    if err != nil {
-        return fmt.Errorf("failed to marshal Grafana user data: %w", err)
-    }
    
     client := &http.Client{}
     resp, err := client.Do(req)
