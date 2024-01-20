@@ -103,7 +103,7 @@ func addUserHandler(w http.ResponseWriter, r *http.Request) {
     err = addGrafanaUserAPICall(grafanaUser)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
-        return err
+        return
     }
 
     fmt.Fprintf(w, "User added successfully to both Kubernetes and Grafana")
@@ -153,7 +153,7 @@ func removeUserHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    err = removeGrafanaUser(w)
+    err = removeGrafanaUser(r)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -245,7 +245,7 @@ func addGrafanaUserAPICall(user GrafanaUser) error {
     return nil
 }
 
-func removeGrafanaUser(w http.ResponseWriter) error {
+func removeGrafanaUser(r *http.Request) error {
 
     inputText := r.URL.Query().Get("inputText")
 
