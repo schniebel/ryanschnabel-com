@@ -87,7 +87,11 @@ func RolloutRestartDeployment(deploymentName, namespace string) error {
     return err
 }
 
-func GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret string) (string, error) {
+func GetGrafanaAuth() (string, error) {
+
+    grafanaNamespace = "monitoring"
+    grafanaCredentialsSecret = "grafana-admin-credentials"
+
     config, err := rest.InClusterConfig()
     if err != nil {
         return "", fmt.Errorf("failed to get in-cluster config: %w", err)

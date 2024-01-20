@@ -10,9 +10,9 @@ import (
     "github.com/schniebel/ryanschnabel-com/api/pkg/utils"
 )
 
-func GetUsersHandler(secretName, namespace, secretDataKey string) http.HandlerFunc {
+func GetUsersHandler() http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
-		usersArray, err := k8s.GetKubernetesSecretData(secretName, namespace, secretDataKey)
+		usersArray, err := k8s.GetKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -23,7 +23,7 @@ func GetUsersHandler(secretName, namespace, secretDataKey string) http.HandlerFu
 	}
 }
 
-func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploymentNamespace, grafanaDomain, grafanaNamespace, grafanaCredentialsSecret string) http.HandlerFunc {
+func AddUserHandler() http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
 		inputText := r.URL.Query().Get("inputText")
 		if inputText == "" {
@@ -31,7 +31,7 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 			return
 		}
 	
-		usersArray, err := k8s.GetKubernetesSecretData(secretName, namespace, secretDataKey)
+		usersArray, err := k8s.GetKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -46,12 +46,12 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 	
 		updatedUsers := strings.Join(append(usersArray, inputText), ",")
 	
-		if err := k8s.UpdateKubernetesSecretData(secretName, namespace, secretDataKey, updatedUsers); err != nil {
+		if err := k8s.UpdateKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist", updatedUsers); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	
-		if err := k8s.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
+		if err := k8s.RolloutRestartDeployment("traefik-forward-auth", "traefik-forward-auth"); err != nil {
 			http.Error(w, fmt.Sprintf("Failed to restart deployment: %v", err), http.StatusInternalServerError)
 			return
 		}
@@ -70,7 +70,7 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 			OrgId:    1,
 		}
 	
-		err = grafana.AddGrafanaUserAPICall(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret, grafanaUser)
+		err = grafana.AddGrafanaUserAPICall(grafanaUser)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -80,7 +80,7 @@ func AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploy
 	}
 }
 
-func RemoveUserHandler(secretName, namespace, secretDataKey, deploymentName, deploymentNamespace, grafanaDomain, grafanaNamespace, grafanaCredentialsSecret string) http.HandlerFunc {
+func RemoveUserHandler() http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
 		inputText := r.URL.Query().Get("inputText")
 		if inputText == "" {
@@ -94,7 +94,7 @@ func RemoveUserHandler(secretName, namespace, secretDataKey, deploymentName, dep
 			return
 		}
 	
-		usersArray, err := k8s.GetKubernetesSecretData(secretName, namespace, secretDataKey)
+		usersArray, err := k8s.GetKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -115,17 +115,17 @@ func RemoveUserHandler(secretName, namespace, secretDataKey, deploymentName, dep
 			return
 		}
 	
-		if err := k8s.UpdateKubernetesSecretData(secretName, namespace, secretDataKey, strings.Join(updatedUsers, ",")); err != nil {
+		if err := k8s.UpdateKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist", strings.Join(updatedUsers, ",")); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	
-		if err := k8s.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
+		if err := k8s.RolloutRestartDeployment("traefik-forward-auth", "traefik-forward-auth"); err != nil {
 			http.Error(w, fmt.Sprintf("Failed to restart deployment: %v", err), http.StatusInternalServerError)
 			return
 		}
 	
-		err = grafana.RemoveGrafanaUser(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret, w, r)
+		err = grafana.RemoveGrafanaUser(w, r)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
