@@ -6,9 +6,9 @@ import (
     "strings"
     "time"
 
-    "api/pkg/grafana"
-    "api/pkg/kubernetes"
-    "api/pkg/utils"
+    "github.com/schniebel/ryanschnabel-com/api/pkg/grafana"
+    "github.com/schniebel/ryanschnabel-com/api/pkg/kubernetes"
+    "github.com/schniebel/ryanschnabel-com/api/pkg/utils"
 )
 
 func getUsersHandler(w http.ResponseWriter, r *http.Request) {

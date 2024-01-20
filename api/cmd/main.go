@@ -4,8 +4,8 @@ import (
     "log"
     "net/http"
     "os"
-    "api/pkg/handler"
-    "api/pkg/utils"
+    "github.com/schniebel/ryanschnabel-com/api/pkg/handler"
+    "github.com/schniebel/ryanschnabel-com/api/pkg/utils"
 )
 
 var (

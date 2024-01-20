@@ -84,3 +84,33 @@ func rolloutRestartDeployment(deploymentName, namespace string) error {
     _, err = deploymentsClient.Update(context.TODO(), deployment, metav1.UpdateOptions{})
     return err
 }
+
+func getGrafanaAuth() (string, error) {
+    config, err := rest.InClusterConfig()
+    if err != nil {
+        return "", fmt.Errorf("failed to get in-cluster config: %w", err)
+    }
+
+    clientset, err := kubernetes.NewForConfig(config)
+    if err != nil {
+        return "", fmt.Errorf("failed to create kubernetes client: %w", err)
+    }
+
+    secret, err := clientset.CoreV1().Secrets(grafanaNamespace).Get(context.TODO(), grafanaCredentialsSecret, metav1.GetOptions{})
+    if err != nil {
+        return "", fmt.Errorf("failed to get secret: %w", err)
+    }
+
+    username, ok := secret.Data["GF_SECURITY_ADMIN_USER"]
+    if !ok {
+        return "", fmt.Errorf("username not found in secret")
+    }
+
+    password, ok := secret.Data["GF_SECURITY_ADMIN_PASSWORD"]
+    if !ok {
+        return "", fmt.Errorf("password not found in secret")
+    }
+
+    auth := base64.StdEncoding.EncodeToString([]byte(string(username) + ":" + string(password)))
+    return auth, nil
+}
