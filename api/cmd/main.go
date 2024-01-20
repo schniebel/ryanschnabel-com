@@ -3,7 +3,6 @@ package main
 import (
     "log"
     "net/http"
-    "os"
     "github.com/schniebel/ryanschnabel-com/api/pkg/handler"
     "github.com/schniebel/ryanschnabel-com/api/pkg/utils"
 )
