@@ -25,14 +25,17 @@ type GrafanaUserResponse struct {
     Email string `json:"email"`
 }
 
+var (
+    grafanaDomain = os.Getenv("GRAFANA_DOMAIN")	
+    grafanaURL string
+)
+
 func AddGrafanaUserAPICall(user GrafanaUser) error {
 
     auth, err := k8s.GetGrafanaAuth()
     if err != nil {
         return fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
-
-    grafanaDomain = os.Getenv("GRAFANA_DOMAIN")	
 
     grafanaURL := "https://" + grafanaDomain + "/api/admin/users"
 
@@ -66,7 +69,6 @@ func AddGrafanaUserAPICall(user GrafanaUser) error {
 func RemoveGrafanaUser(w http.ResponseWriter, r *http.Request) error {
 
     inputText := r.URL.Query().Get("inputText")
-    grafanaCredentialsSecret = "grafana-admin-credentials"
     
     users, err := getGrafanaUsers()
     if err != nil {
@@ -98,8 +100,6 @@ func RemoveGrafanaUser(w http.ResponseWriter, r *http.Request) error {
 }
 
 func getGrafanaUsers() ([]GrafanaUserResponse, error) {
-
-    grafanaDomain = os.Getenv("GRAFANA_DOMAIN")
 
     auth, err := k8s.GetGrafanaAuth()
     if err != nil {
@@ -137,7 +137,6 @@ func getGrafanaUsers() ([]GrafanaUserResponse, error) {
 
 func removeGrafanaUserAPICall(userID int) error {
 
-    grafanaDomain = os.Getenv("GRAFANA_DOMAIN")
     auth, err := k8s.GetGrafanaAuth()
     if err != nil {
         return fmt.Errorf("failed to get Grafana credentials: %w", err)

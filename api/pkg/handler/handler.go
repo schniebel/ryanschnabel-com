@@ -10,9 +10,17 @@ import (
     "github.com/schniebel/ryanschnabel-com/api/pkg/utils"
 )
 
+var {
+	secretName = "whitelist-secret"
+	secretNamespace = "traefik-forward-auth"
+	secretDataKey = "whitelist"
+	deploymentName = "traefik-forward-auth"
+	deploymentNamespace = "traefik-forward-auth"
+}
+
 func GetUsersHandler() http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
-		usersArray, err := k8s.GetKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist")
+		usersArray, err := k8s.GetKubernetesSecretData(secretName, secretName, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -31,7 +39,7 @@ func AddUserHandler() http.HandlerFunc {
 			return
 		}
 	
-		usersArray, err := k8s.GetKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist")
+		usersArray, err := k8s.GetKubernetesSecretData(secretName, secretName, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -46,12 +54,12 @@ func AddUserHandler() http.HandlerFunc {
 	
 		updatedUsers := strings.Join(append(usersArray, inputText), ",")
 	
-		if err := k8s.UpdateKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist", updatedUsers); err != nil {
+		if err := k8s.UpdateKubernetesSecretData(secretName, secretName, secretDataKey, updatedUsers); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	
-		if err := k8s.RolloutRestartDeployment("traefik-forward-auth", "traefik-forward-auth"); err != nil {
+		if err := k8s.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
 			http.Error(w, fmt.Sprintf("Failed to restart deployment: %v", err), http.StatusInternalServerError)
 			return
 		}
@@ -94,7 +102,7 @@ func RemoveUserHandler() http.HandlerFunc {
 			return
 		}
 	
-		usersArray, err := k8s.GetKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist")
+		usersArray, err := k8s.GetKubernetesSecretData(secretName, secretName, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -115,12 +123,12 @@ func RemoveUserHandler() http.HandlerFunc {
 			return
 		}
 	
-		if err := k8s.UpdateKubernetesSecretData("whitelist-secret", "traefik-forward-auth", "whitelist", strings.Join(updatedUsers, ",")); err != nil {
+		if err := k8s.UpdateKubernetesSecretData(secretName, secretName, secretDataKey, strings.Join(updatedUsers, ",")); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	
-		if err := k8s.RolloutRestartDeployment("traefik-forward-auth", "traefik-forward-auth"); err != nil {
+		if err := k8s.RolloutRestartDeployment(deploymentName, deploymentNamespace); err != nil {
 			http.Error(w, fmt.Sprintf("Failed to restart deployment: %v", err), http.StatusInternalServerError)
 			return
 		}

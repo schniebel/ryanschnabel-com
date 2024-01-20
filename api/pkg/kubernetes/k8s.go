@@ -12,6 +12,10 @@ import (
     "k8s.io/client-go/rest"
 )
 
+var (
+    grafanaNamespace         = "monitoring"
+    grafanaCredentialsSecret = "grafana-admin-credentials"
+)
 
 func GetKubernetesSecretData(secretName, namespace, secretDataKey string) ([]string, error) {
     config, err := rest.InClusterConfig()
@@ -88,9 +92,6 @@ func RolloutRestartDeployment(deploymentName, namespace string) error {
 }
 
 func GetGrafanaAuth() (string, error) {
-
-    grafanaNamespace = "monitoring"
-    grafanaCredentialsSecret = "grafana-admin-credentials"
 
     config, err := rest.InClusterConfig()
     if err != nil {
