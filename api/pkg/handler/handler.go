@@ -20,7 +20,7 @@ var {
 
 func GetUsersHandler() http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
-		usersArray, err := k8s.GetKubernetesSecretData(secretName, secretName, secretDataKey)
+		usersArray, err := k8s.GetKubernetesSecretData(secretName, secretNamespace, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -39,7 +39,7 @@ func AddUserHandler() http.HandlerFunc {
 			return
 		}
 	
-		usersArray, err := k8s.GetKubernetesSecretData(secretName, secretName, secretDataKey)
+		usersArray, err := k8s.GetKubernetesSecretData(secretName, secretNamespace, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -54,7 +54,7 @@ func AddUserHandler() http.HandlerFunc {
 	
 		updatedUsers := strings.Join(append(usersArray, inputText), ",")
 	
-		if err := k8s.UpdateKubernetesSecretData(secretName, secretName, secretDataKey, updatedUsers); err != nil {
+		if err := k8s.UpdateKubernetesSecretData(secretName, secretNamespace, secretDataKey, updatedUsers); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
@@ -102,7 +102,7 @@ func RemoveUserHandler() http.HandlerFunc {
 			return
 		}
 	
-		usersArray, err := k8s.GetKubernetesSecretData(secretName, secretName, secretDataKey)
+		usersArray, err := k8s.GetKubernetesSecretData(secretName, secretNamespace, secretDataKey)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -123,7 +123,7 @@ func RemoveUserHandler() http.HandlerFunc {
 			return
 		}
 	
-		if err := k8s.UpdateKubernetesSecretData(secretName, secretName, secretDataKey, strings.Join(updatedUsers, ",")); err != nil {
+		if err := k8s.UpdateKubernetesSecretData(secretName, secretNamespace, secretDataKey, strings.Join(updatedUsers, ",")); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
