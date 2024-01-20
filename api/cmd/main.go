@@ -35,9 +35,9 @@ func main() {
     }
 
     mux := http.NewServeMux()
-    mux.HandleFunc("/getUsers", getUsersHandler)
-    mux.HandleFunc("/addUser", addUserHandler)
-    mux.HandleFunc("/removeUser", removeUserHandler)
+    mux.HandleFunc("/getUsers", handler.GetUsersHandler(secretName, namespace, secretDataKey))
+    mux.HandleFunc("/addUser", handler.AddUserHandler(secretName, namespace, secretDataKey, deploymentName, deploymentNamespace, grafanaDomain, grafanaNamespace, grafanaCredentialsSecret))
+    mux.HandleFunc("/removeUser", handler.RemoveUserHandler(secretName, namespace, secretDataKey, deploymentName, deploymentNamespace, grafanaDomain, grafanaNamespace, grafanaCredentialsSecret))
 
     handler := validateAPIKeyMiddleware(mux)
 

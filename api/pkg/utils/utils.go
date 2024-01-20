@@ -6,7 +6,7 @@ import (
     "os"
 )
 
-func generateRandomPassword(length int) (string, error) {
+func GenerateRandomPassword(length int) (string, error) {
     const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     b := make([]byte, length)
     if _, err := rand.Read(b); err != nil {
@@ -18,7 +18,7 @@ func generateRandomPassword(length int) (string, error) {
     return string(b), nil
 }
 
-func validateAPIKeyMiddleware(next http.Handler) http.Handler {
+func ValidateAPIKeyMiddleware(next http.Handler) http.Handler {
     apiKey := os.Getenv("API_KEY")
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         authHeader := r.Header.Get("Authorization")

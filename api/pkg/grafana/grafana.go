@@ -5,7 +5,6 @@ import (
     "encoding/json"
     "fmt"
     "net/http"
-    "encoding/base64"
 )
 
 type GrafanaUser struct {
@@ -23,9 +22,9 @@ type GrafanaUserResponse struct {
     Email string `json:"email"`
 }
 
-func addGrafanaUserAPICall(user GrafanaUser) error {
+func AddGrafanaUserAPICall(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret string, user GrafanaUser) error {
 
-    auth, err := getGrafanaAuth()
+    auth, err := GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret)
     if err != nil {
         return fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
@@ -59,11 +58,11 @@ func addGrafanaUserAPICall(user GrafanaUser) error {
     return nil
 }
 
-func removeGrafanaUser(w http.ResponseWriter, r *http.Request) error {
+func RemoveGrafanaUser(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret string, w http.ResponseWriter, r *http.Request) error {
 
     inputText := r.URL.Query().Get("inputText")
 
-    users, err := getGrafanaUsers()
+    users, err := getGrafanaUsers(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret)
     if err != nil {
         return fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
@@ -83,7 +82,7 @@ func removeGrafanaUser(w http.ResponseWriter, r *http.Request) error {
         log.Printf("Found user ID: %d", userID)
     }
 
-    err = removeGrafanaUserAPICall(userID)
+    err = removeGrafanaUserAPICall(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret, userID)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return err
@@ -92,9 +91,9 @@ func removeGrafanaUser(w http.ResponseWriter, r *http.Request) error {
     return nil
 }
 
-func getGrafanaUsers() ([]GrafanaUserResponse, error) {
+func getGrafanaUsers(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret string) ([]GrafanaUserResponse, error) {
 
-    auth, err := getGrafanaAuth()
+    auth, err := GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret)
     if err != nil {
         return nil, fmt.Errorf("failed to get Grafana credentials: %w", err)
     }
@@ -128,8 +127,8 @@ func getGrafanaUsers() ([]GrafanaUserResponse, error) {
     return users, nil
 }
 
-func removeGrafanaUserAPICall(userID int) error {
-    auth, err := getGrafanaAuth()
+func removeGrafanaUserAPICall(grafanaDomain, grafanaNamespace, grafanaCredentialsSecret string, userID int) error {
+    auth, err := GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret)
     if err != nil {
         return fmt.Errorf("failed to get Grafana credentials: %w", err)
     }

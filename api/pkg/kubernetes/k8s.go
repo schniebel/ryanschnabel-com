@@ -4,6 +4,8 @@ import (
     "context"
     "fmt"
     "strings"
+    "time"
+    "encoding/base64"
 
     metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
     "k8s.io/client-go/kubernetes"
@@ -11,7 +13,7 @@ import (
 )
 
 
-func getKubernetesSecretData(secretName, namespace, secretDataKey string) ([]string, error) {
+func GetKubernetesSecretData(secretName, namespace, secretDataKey string) ([]string, error) {
     config, err := rest.InClusterConfig()
     if err != nil {
         return nil, err
@@ -36,7 +38,7 @@ func getKubernetesSecretData(secretName, namespace, secretDataKey string) ([]str
     return usersArray, nil
 }
 
-func updateKubernetesSecretData(secretName, namespace, secretDataKey, updatedData string) error {
+func UpdateKubernetesSecretData(secretName, namespace, secretDataKey, updatedData string) error {
     config, err := rest.InClusterConfig()
     if err != nil {
         return err
@@ -58,7 +60,7 @@ func updateKubernetesSecretData(secretName, namespace, secretDataKey, updatedDat
     return err
 }
 
-func rolloutRestartDeployment(deploymentName, namespace string) error {
+func RolloutRestartDeployment(deploymentName, namespace string) error {
     config, err := rest.InClusterConfig()
     if err != nil {
         return err
@@ -85,7 +87,7 @@ func rolloutRestartDeployment(deploymentName, namespace string) error {
     return err
 }
 
-func getGrafanaAuth() (string, error) {
+func GetGrafanaAuth(grafanaNamespace, grafanaCredentialsSecret string) (string, error) {
     config, err := rest.InClusterConfig()
     if err != nil {
         return "", fmt.Errorf("failed to get in-cluster config: %w", err)
