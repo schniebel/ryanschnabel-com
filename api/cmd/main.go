@@ -4,8 +4,8 @@ import (
     "log"
     "net/http"
     "os"
-    "myapp/pkg/handler"
-    "myapp/pkg/utils"
+    "api/pkg/handler"
+    "api/pkg/utils"
 )
 
 var (
