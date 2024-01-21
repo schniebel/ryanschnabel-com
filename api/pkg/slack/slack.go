@@ -3,6 +3,7 @@ package slack
 import (
     "os"
     "log"
+    "fmt"
 
     "github.com/slack-go/slack"
 )
@@ -11,7 +12,7 @@ func SendSlackMessage(channel, message string) error {
     token := os.Getenv("SLACK_TOKEN")
     if token == "" {
         log.Println("SLACK_TOKEN is not set.")
-        return errors.New("SLACK_TOKEN is not set")
+        return fmt.Errorf("SLACK_TOKEN is not set")
     }
     
     api := slack.New(token)
