@@ -21,8 +21,3 @@ spec:
       kubernetes.io/hostname: slave1
     pms:
       configStorage: 600Gi
-  valuesFrom:
-    - kind: Secret
-      name: kube-plex-claim-token
-      valuesKey: CLAIM_TOKEN
-      targetPath: claimToken
