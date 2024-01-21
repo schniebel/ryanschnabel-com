@@ -11,3 +11,5 @@ spec:
     - kind: Service
       name: plex-plex-media-server
       port: 32400
+    middlewares:
+      - name: traefik-forward-auth
