@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: plex-ingressroute
+  namespace: plex
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`plex.ryanschnabel.com`)
+    services:
+    - kind: Service
+      name: plex-plex-media-server
+      port: 32400
