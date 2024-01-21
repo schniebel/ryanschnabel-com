@@ -6,7 +6,7 @@ metadata:
 spec:
   routes:
   - kind: Rule
-    match: Host(`api.ryanschnabel.com`)
+    match: Host(`api.ryanschnabel.io`)
     services:
     - kind: Service
       name: api-service
