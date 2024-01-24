@@ -6,8 +6,6 @@ COPY /build-cache /output
 # Download Day of Defeat: Source
 RUN /app/steamcmd.sh +force_install_dir /output +login anonymous +app_update 232290 validate +quit;
 
-COPY ./dist/linux/ll-tests /output/ll-tests
-
 #=======================================================================
 FROM debian:bookworm-slim
 
