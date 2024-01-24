@@ -1,8 +1,5 @@
 FROM lacledeslan/steamcmd:linux as dods-builder
 
-# Copy cached build files (if any)
-COPY /build-cache /output
-
 # Download Day of Defeat: Source
 RUN /app/steamcmd.sh +force_install_dir /output +login anonymous +app_update 232290 validate +quit;
 
