@@ -10,5 +10,5 @@ RUN ./steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/dods 
 # Set the entry point for the container
 ENTRYPOINT ["./srcds_run"]
 
-# Default command, can be overridden
+# Default command, can be overridden -
 CMD ["-game dod +map dod_avalanche +maxplayers 32"]
