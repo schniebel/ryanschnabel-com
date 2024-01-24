@@ -27,7 +27,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./dods
+          context: ./game-server/dods
           file: ./game-server/dods/Dockerfile
           push: true
           tags: schniebel/dods-gameserver:${{ github.sha }}
