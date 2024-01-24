@@ -1,14 +1,40 @@
-# Use a base image with SteamCMD installed
-FROM cm2network/steamcmd:latest
+FROM lacledeslan/steamcmd:linux as dods-builder
 
-# Set the working directory
-WORKDIR /home/steam/dods
+# Copy cached build files (if any)
+COPY /build-cache /output
 
-# Install Day of Defeat: Source using SteamCMD
-RUN ./steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/dods +app_update 232290 validate +quit
+# Download Day of Defeat: Source
+RUN /app/steamcmd.sh +force_install_dir /output +login anonymous +app_update 232290 validate +quit;
 
-# Set the entry point for the container
-ENTRYPOINT ["./srcds_run"]
+COPY ./dist/linux/ll-tests /output/ll-tests
 
-# Default command, can be overridden 
-CMD ["-game dod +map dod_avalanche +maxplayers 32"]
+#=======================================================================
+FROM debian:bookworm-slim
+
+ARG BUILDNODE=unspecified
+ARG SOURCE_COMMIT=unspecified
+
+HEALTHCHECK NONE
+
+RUN dpkg --add-architecture i386 &&`
+    apt-get update && apt-get install -y `
+        ca-certificates lib32gcc-s1 libncurses5:i386 libsdl2-2.0-0:i386 libstdc++6 libstdc++6:i386 locales locales-all tmux &&`
+    apt-get clean &&`
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*;
+
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+# Set up Enviornment
+RUN useradd --home /app --gid root --system DODS &&`
+    mkdir -p /app/.steam/sdk32 &&`
+    chown DODS:root -R /app;
+
+COPY --chown=DODS:root --from=dods-builder /output /app
+
+USER DODS
+
+WORKDIR /app
+
+CMD ["/bin/bash"]
+
+ONBUILD USER root
