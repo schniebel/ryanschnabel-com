@@ -26,8 +26,8 @@ RUN dpkg --add-architecture i386 && \
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 # Set up Enviornment
-RUN useradd --home /app --gid root --system DODS &&`
-    mkdir -p /app/.steam/sdk32 &&`
+RUN useradd --home /app --gid root --system DODS && \
+    mkdir -p /app/.steam/sdk32 && \
     chown DODS:root -R /app;
 
 COPY --chown=DODS:root --from=dods-builder /output /app
