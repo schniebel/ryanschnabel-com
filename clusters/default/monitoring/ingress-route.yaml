@@ -11,3 +11,8 @@ spec:
     - kind: Service
       name: grafana
       port: 3000
+  - kind: Rule
+    match: Host(`prom.ryanschnabel.com`)
+    services:
+    - name: prometheus-k8s
+      port: 9090
