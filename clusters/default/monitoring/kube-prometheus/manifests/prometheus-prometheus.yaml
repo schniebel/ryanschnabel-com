@@ -45,7 +45,8 @@ spec:
     runAsUser: 1000
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: 
-    matchLabels: {}
+    matchLabels:
+      prometheus: monitorable
   serviceMonitorSelector: {}
   version: 2.32.1
   volumes:
