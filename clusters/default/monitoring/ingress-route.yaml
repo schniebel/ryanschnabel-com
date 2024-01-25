@@ -16,3 +16,5 @@ spec:
     services:
     - name: prometheus-k8s
       port: 9090
+    middlewares:
+      - name: traefik-forward-auth
