@@ -66,20 +66,20 @@ spec:
 
 ---
 
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: cadvisor-servicemonitor
-  namespace: monitoring
-  labels:
-    app: cadvisor
-spec:
-  selector:
-    matchLabels:
-      app: cadvisor
-  namespaceSelector:
-    matchNames:
-    - monitoring
-  endpoints:
-    - port: "8080"
-      interval: 30s
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   name: cadvisor-servicemonitor
+#   namespace: monitoring
+#   labels:
+#     app: cadvisor
+# spec:
+#   selector:
+#     matchLabels:
+#       app: cadvisor
+#   namespaceSelector:
+#     matchNames:
+#     - monitoring
+#   endpoints:
+#     - port: "8080"
+#       interval: 30s
