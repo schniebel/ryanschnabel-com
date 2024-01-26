@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cadvisor
-  namespace: monitoring
+  namespace: ryanschnabel
   labels:
     app: cadvisor
 spec:
@@ -53,7 +53,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cadvisor
-  namespace: monitoring
+  namespace: ryanschnabel
   labels:
     app: cadvisor
 spec:
