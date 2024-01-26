@@ -16,4 +16,6 @@ spec:
       insecureSkipVerify: true
   selector:
     matchLabels:
-      app.kubernetes.io/name: source-controller
+      app.kubernetes.io/component: source-controller
+      app.kubernetes.io/instance: flux-system
+      app.kubernetes.io/part-of: flux
