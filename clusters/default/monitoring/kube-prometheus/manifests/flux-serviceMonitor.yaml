@@ -13,6 +13,3 @@ spec:
   selector:
     matchLabels:
       app: source-controller
-  namespaceSelector:
-    matchNames:
-      - flux-system
