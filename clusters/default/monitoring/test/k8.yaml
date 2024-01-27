@@ -84,20 +84,20 @@ spec:
 #     - port: "8080"
 #       interval: 30s
 
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: source-controller-servicemonitor
-  namespace: flux-system
-  labels:
-    app: source-controller
-spec:
-  selector:
-    matchLabels:
-      app: source-controller
-  namespaceSelector:
-    matchNames:
-    - flux-system
-  endpoints:
-    - port: http
-      interval: 30s
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   name: source-controller-servicemonitor
+#   namespace: flux-system
+#   labels:
+#     app: source-controller
+# spec:
+#   selector:
+#     matchLabels:
+#       app: source-controller
+#   namespaceSelector:
+#     matchNames:
+#     - flux-system
+#   endpoints:
+#     - port: http
+#       interval: 30s
