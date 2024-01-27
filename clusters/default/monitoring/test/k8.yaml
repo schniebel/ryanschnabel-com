@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cadvisor
-  namespace: ryanschnabel
+  namespace: monitoring
   labels:
     app: cadvisor
 spec:
@@ -53,7 +53,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cadvisor
-  namespace: ryanschnabel
+  namespace: monitoring
   labels:
     app: cadvisor
 spec:
@@ -65,6 +65,23 @@ spec:
       targetPort: 8080
 
 ---
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: cadvisor
+    app.kubernetes.io/part-of: kube-prometheus
+  name: cadvisor
+  namespace: monitoring
+spec:
+  endpoints:
+  - port: "8080"
+    interval: 30s
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cadvisor
+
 
 # apiVersion: monitoring.coreos.com/v1
 # kind: ServiceMonitor
