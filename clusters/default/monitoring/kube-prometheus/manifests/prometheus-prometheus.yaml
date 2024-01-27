@@ -13,9 +13,9 @@ spec:
   alerting:
     alertmanagers:
     - apiVersion: v2
-      name: alertmanager-main
+      name: alertmanager
       namespace: monitoring
-      port: web
+      port: http
   enableFeatures: []
   externalLabels: {}
   image: quay.io/prometheus/prometheus:v2.32.1
