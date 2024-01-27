@@ -3463,6 +3463,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.0.1
     control-plane: controller
+    app: source-controller
   name: source-controller
   namespace: flux-system
 spec:

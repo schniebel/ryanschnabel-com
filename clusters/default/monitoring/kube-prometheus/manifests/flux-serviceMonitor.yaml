@@ -8,12 +8,11 @@ metadata:
   namespace: monitoring
 spec:
   endpoints:
-  - interval: 30s
-    path: /metrics
-    port: http
+  - port: "http"
+    interval: 30s
   namespaceSelector:
     matchNames:
     - flux-system
   selector:
     matchLabels:
-      app.kubernetes.io/name: source-controller
+      app: source-controller
