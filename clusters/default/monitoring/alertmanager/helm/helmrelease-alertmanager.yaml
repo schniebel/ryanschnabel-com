@@ -28,5 +28,5 @@ spec:
             channel: '#monitoring'
             send_resolved: true
             bearer_token_file: '/etc/alertmanager/slack/TOKEN'
-            title: '{{ .CommonAnnotations.summary }}'
-            text: '{{ .CommonAnnotations.description }}'
+            text: '{{ template "slack.default.text" . }}'
+            title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
