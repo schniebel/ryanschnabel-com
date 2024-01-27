@@ -18,3 +18,5 @@ spec:
         image: schniebel/ryanschnabel-com:9e573418ab5de2518ed8cf356d945cc3cf002b7e
         ports:
         - containerPort: 80
+      nodeSelector:
+        kubernetes.io/arch: arm64
