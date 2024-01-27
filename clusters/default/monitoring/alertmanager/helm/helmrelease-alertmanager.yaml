@@ -10,7 +10,7 @@ spec:
       version: 1.7.0
       sourceRef:
         kind: GitRepository
-        name: grafana
+        name: alertmanager
         namespace: flux-system
   interval: 1h
   values:
