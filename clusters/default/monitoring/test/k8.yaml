@@ -76,11 +76,11 @@ metadata:
   namespace: monitoring
 spec:
   endpoints:
-  - port: "8080"
+  - port: 8080
     interval: 30s
   selector:
     matchLabels:
-      app.kubernetes.io/name: cadvisor
+      app: cadvisor
 
 
 # apiVersion: monitoring.coreos.com/v1
