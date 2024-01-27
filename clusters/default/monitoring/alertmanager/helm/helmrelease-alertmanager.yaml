@@ -27,6 +27,6 @@ spec:
           - api_url: 'https://slack.com/api/chat.postMessage'
             channel: '#monitoring'
             send_resolved: true
-            bearer_token_file: '/etc/alertmanager/slack/token'
+            bearer_token_file: '/etc/alertmanager/slack/TOKEN'
             title: '{{ .CommonAnnotations.summary }}'
             text: '{{ .CommonAnnotations.description }}'
