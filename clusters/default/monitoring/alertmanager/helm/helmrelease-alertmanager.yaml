@@ -16,3 +16,17 @@ spec:
   values:
     nodeSelector:
       kubernetes.io/hostname: prometheus
+    extraSecretMounts:
+      - name: slack-token
+        mountPath: /etc/alertmanager/slack
+        secretName: slack-token
+        readOnly: true    
+    receivers:
+      - name: default-receiver
+        slack_configs:
+          - api_url: 'https://slack.com/api/chat.postMessage'
+            channel: '#monitoring'
+            send_resolved: true
+            bearer_token_file: '/etc/alertmanager/slack/token'
+            title: '{{ .CommonAnnotations.summary }}'
+            text: '{{ .CommonAnnotations.description }}'
