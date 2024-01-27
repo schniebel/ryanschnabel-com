@@ -8,7 +8,9 @@ theme = "glim-midnight"
     links = [
     {name = "Landing", url = "https://ryanschnabel.com"},    
     {name = "Traefik", url = "https://dashboard.ryanschnabel.com"},    
-    {name = "Monitoring", url = "https://monitoring.ryanschnabel.com/"},    
+    {name = "Monitoring", url = "https://monitoring.ryanschnabel.com/"},  
+    {name = "Prometheus", url = "https://prom.ryanschnabel.com/"},  
+    {name = "Alertmanager", url = "https://alerts.ryanschnabel.com/"},    
     {name = "Github", url = "https://github.com/schniebel/ryanschnabel-com"},     
     ] 
     background = "bg.mp4"
