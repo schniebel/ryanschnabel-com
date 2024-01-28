@@ -25,7 +25,7 @@ spec:
       global:
         slack_api_url: 'https://hooks.slack.com/services/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'
       route:
-        reciever: 'slack-notifications'
+        receiver: 'slack-notifications'
       receivers:
         - name: slack-notifications
           slack_configs:
