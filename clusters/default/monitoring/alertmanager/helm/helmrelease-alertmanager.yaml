@@ -20,13 +20,13 @@ spec:
       - name: slack-token
         mountPath: /etc/alertmanager/slack
         secretName: slack-token
-        readOnly: true    
+        readOnly: true
+    global:
+      slack_api_url: 'https://hooks.slack.com/services/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'
+    route:
+      reciever: 'slack-notifications'    
     receivers:
-      - name: default-receiver
+      - name: slack-notifications
         slack_configs:
-          - api_url: 'https://slack.com/api/chat.postMessage'
-            channel: '#monitoring'
+          - channel: '#monitoring'
             send_resolved: true
-            bearer_token_file: '/etc/alertmanager/slack/TOKEN'
-            text: '{{ template "slack.default.text" . }}'
-            title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
