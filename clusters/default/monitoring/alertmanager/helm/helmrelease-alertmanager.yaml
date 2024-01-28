@@ -21,16 +21,9 @@ spec:
         mountPath: /etc/alertmanager/slack
         secretName: slack-token
         readOnly: true
-    extraInitContainers:
-      - name: token-injector
-        image: alpine:latest
-        command: ['sh', '-c', 'cp /etc/alertmanager/alertmanager.yml /tmp/alertmanager.yml && sed -i "s|<YOUR_SLACK_TOKEN>|$(cat /etc/alertmanager/slack/token)|" /tmp/alertmanager.yml && mv /tmp/alertmanager.yml /etc/alertmanager/alertmanager.yml']
-        volumeMounts:
-          - name: config
-            mountPath: /etc/alertmanager
-          - name: slack-token
-            mountPath: /etc/alertmanager/slack
     config:
+      http_config:
+        bearer_token_file: '/etc/alertmanager/slack/token'
       route:
         receiver: 'slack-notifications'
       receivers:
@@ -39,4 +32,3 @@ spec:
             - api_url: 'https://slack.com/api/chat.postMessage'
               channel: '#monitoring'
               send_resolved: true
-              bearer_token: '<YOUR_SLACK_TOKEN>'
