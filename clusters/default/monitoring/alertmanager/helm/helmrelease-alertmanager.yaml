@@ -18,7 +18,7 @@ spec:
       kubernetes.io/hostname: prometheus
     config:
       global:
-        slack_api_url: 'https://hooks.slack.com/services/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'
+        slack_api_url: 'https://hooks.slack.com/services/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'
       route:
         receiver: 'slack-notifications'
       receivers:
