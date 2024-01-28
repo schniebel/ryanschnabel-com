@@ -24,7 +24,7 @@ spec:
     extraInitContainers:
       - name: token-injector
         image: alpine:latest
-        command: ['sh', '-c', 'sed -i "s|<YOUR_SLACK_TOKEN>|$(cat /etc/alertmanager/slack/token)|" /etc/alertmanager/alertmanager.yml']
+        command: ['sh', '-c', 'cp /etc/alertmanager/alertmanager.yml /tmp/alertmanager.yml && sed -i "s|<YOUR_SLACK_TOKEN>|$(cat /etc/alertmanager/slack/token)|" /tmp/alertmanager.yml && mv /tmp/alertmanager.yml /etc/alertmanager/alertmanager.yml']
         volumeMounts:
           - name: config
             mountPath: /etc/alertmanager
