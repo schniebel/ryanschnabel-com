@@ -16,13 +16,18 @@ spec:
   values:
     nodeSelector:
       kubernetes.io/hostname: prometheus
+    extraSecretMounts:
+      - name: slack-token
+        mountPath: /etc/alertmanager/slack
+        secretName: slack-token
+        readOnly: true
     config:
-      global:
-        slack_api_url: 'https://hooks.slack.com/services/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'
       route:
         receiver: 'slack-notifications'
       receivers:
         - name: slack-notifications
           slack_configs:
-            - channel: '#monitoring'
+            - api_url: 'https://slack.com/api/chat.postMessage'
+              channel: '#monitoring'
               send_resolved: true
+              bearer_token_file: '/etc/alertmanager/slack/token'
