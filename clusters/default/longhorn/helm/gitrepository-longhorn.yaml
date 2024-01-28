@@ -7,4 +7,4 @@ spec:
   interval: 1m
   url: https://github.com/longhorn/charts
   ref:
-    branch: v1.5x
+    branch: v1.5.x
