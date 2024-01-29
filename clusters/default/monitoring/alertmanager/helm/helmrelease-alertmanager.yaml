@@ -16,15 +16,15 @@ spec:
   values:
     nodeSelector:
       kubernetes.io/hostname: prometheus
-      config:
-        route:
-          receiver: 'slack-notifications'
-        receivers:
-          - name: slack-notifications
-            slack_configs:
-              - api_url: 'https://slack.com/api/chat.postMessage'
-                channel: '#monitoring'
-                send_resolved: true
-                http_config:
-                  authorization:
-                    credentials: <xoxb-my-bot-token>
+    config:
+      route:
+        receiver: 'slack-notifications'
+      receivers:
+        - name: slack-notifications
+          slack_configs:
+            - api_url: 'https://slack.com/api/chat.postMessage'
+              channel: '#monitoring'
+              send_resolved: true
+              http_config:
+                authorization:
+                  credentials: <xoxb-my-bot-token>
