@@ -18,3 +18,10 @@ spec:
       port: 9090
     middlewares:
       - name: traefik-forward-auth
+  - kind: Rule
+    match: Host(`alerts.ryanschnabel.com`)
+    services:
+    - name: alertmanager
+      port: 9093
+    middlewares:
+      - name: traefik-forward-auth

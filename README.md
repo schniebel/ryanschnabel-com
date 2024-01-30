@@ -12,19 +12,33 @@ Any changes to the `ryanschnabel-com` folder on the `main` branch triggers a git
 
 Once done, and the image is pushed to the [Docker Hub](https://hub.docker.com/) repo, github actions will update the `deployment.yaml` tag to match the new build's image. Triggering a `Flux reconciliation` and deploying the image onto the kubernetes cluster.
 
+A similar pattern is followed for `admin-bff`, `admin`, and `api`
+
 ## Flux
 
-Kubernetes cluster has [Flux](https://fluxcd.io/) deployed onto it. Reconciling any changes made to the `clusters` folder. Currently deployed the following resources onto the cluster via Flux:
+Kubernetes cluster has [Flux](https://fluxcd.io/) deployed onto it. Reconciling any changes made to the `clusters` folder.
 
-### monitoring
+## admin-bff
 
-Using [Grafana](https://grafana.com/grafana/), [Prometheus](https://prometheus.io/), and [Loki](https://grafana.com/oss/loki/) for log and metric aggregation, as well as displaying that data. Dashboard currently deployed to monitoring.ryanschnabel.com
+Go app that acts as a "backend for frontent" for my [admin console](https://admin.ryanschnabel.com) html/javascript client, and my backend `api`.
 
-### ryanschnabel-com
+## admin
 
-kubernetes resources that define the hosting of the Hugo content.
+html/javascript frontend client, built with Hugo. Injecting my custom html and javascript that invoke the `admin-bff`, and the backend `api`
 
-### Ingress
+## api
+
+Bacekden Go app that has endpoints and helper methods to assist in admin functions, slack integration, and interactions with the cluster.
+
+## ryanschnabel-com
+
+Hugo resources used to build landing page.
+
+## Monitoring
+
+Using [Grafana](https://grafana.com/grafana/), [Prometheus](https://prometheus.io/), [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/), and [Loki](https://grafana.com/oss/loki/) for log and metric aggregation, as well as displaying that data. Dashboard currently deployed to monitoring.ryanschnabel.com
+
+## Ingress
 
 Exposure to outside traffic is handled using [Traefik](https://traefik.io/traefik/). Using the ingressRoute resource ([example](https://github.com/schniebel/ryanschnabel-com/blob/main/clusters/default/ryanschnabel-com/ingressRoute.yaml))
 

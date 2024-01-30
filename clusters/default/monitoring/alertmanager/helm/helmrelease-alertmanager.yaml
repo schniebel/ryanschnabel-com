@@ -1,0 +1,30 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: alertmanager
+  namespace: monitoring
+spec:
+  chart:
+    spec:
+      chart: ./charts/alertmanager
+      version: 1.7.0
+      sourceRef:
+        kind: GitRepository
+        name: alertmanager
+        namespace: flux-system
+  interval: 1h
+  values:
+    nodeSelector:
+      kubernetes.io/hostname: prometheus
+    config:
+      route:
+        receiver: 'slack-notifications'
+      receivers:
+        - name: slack-notifications
+          slack_configs:
+            - api_url: 'https://slack.com/api/chat.postMessage'
+              channel: '#monitoring'
+              send_resolved: true
+              http_config:
+                authorization:
+                  credentials: <xoxb-my-bot-token>

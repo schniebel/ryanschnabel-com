@@ -26,3 +26,5 @@ spec:
               key: API_KEY
         - name: DOMAIN
           value: "api.ryanschnabel.io"
+      nodeSelector:
+        kubernetes.io/arch: arm64

@@ -15,6 +15,8 @@ spec:
     spec:
       containers:
       - name: admin-console
-        image: schniebel/admin:e579474aa586dce8ebfacf8508d7346b3af66356
+        image: schniebel/admin:29c57008f0dd81dcee84d6a0fcff3c64cc1333ab
         ports:
         - containerPort: 80
+      nodeSelector:
+        kubernetes.io/arch: arm64
