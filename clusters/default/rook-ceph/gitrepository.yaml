@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: rook-ceph
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/rook/rook
+  ref:
+    branch: master
