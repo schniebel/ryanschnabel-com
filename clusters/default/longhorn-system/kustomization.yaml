@@ -5,3 +5,4 @@ resources:
 - namespace.yaml
 - gitrepository.yaml
 - helmrelease.yaml
+- ingressroute.yaml
