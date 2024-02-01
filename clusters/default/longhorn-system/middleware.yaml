@@ -1,37 +1,37 @@
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: admin-auth
-#   namespace: longhorn-system
-# spec:
-#   basicAuth:
-#     secret: authsecret
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: admin-auth
+  namespace: longhorn-system
+spec:
+  basicAuth:
+    secret: authsecret
 
-# ---
+---
 
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: cors-allow-all
-#   namespace: longhorn-system
-# spec:
-#   headers:
-#     accessControlAllowCredentials: true
-#     accessControlAllowMethods:
-#       - "*"
-#     accessControlAllowOriginList:
-#       - "*"
-#     accessControlMaxAge: 100
-#     addVaryHeader: true
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: cors-allow-all
+  namespace: longhorn-system
+spec:
+  headers:
+    accessControlAllowCredentials: true
+    accessControlAllowMethods:
+      - "*"
+    accessControlAllowOriginList:
+      - "*"
+    accessControlMaxAge: 100
+    addVaryHeader: true
 
-# ---
+---
 
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: svc-wss-headers
-#   namespace: longhorn-system
-# spec:
-#   headers:
-#     customRequestHeaders:
-#       X-Forwarded-Proto: "https"
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: svc-wss-headers
+  namespace: longhorn-system
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: "https"
