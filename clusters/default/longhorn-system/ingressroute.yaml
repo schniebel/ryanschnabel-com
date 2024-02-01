@@ -11,7 +11,7 @@ spec:
     - kind: Service
       name: longhorn-frontend
       port: 80
-    middlewares:
-      - name: cors-allow-all
-      - name: admin-auth
-      - name: svc-wss-headers
+    # middlewares:
+    #   - name: cors-allow-all
+    #   - name: admin-auth
+    #   - name: svc-wss-headers
