@@ -20,20 +20,20 @@ spec:
 
 ---
 
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: IngressRoute
-# metadata:
-#   name: longhorn-ing-traefik
-#   namespace: longhorn-system
-# spec:
-#   entryPoints:
-#     - web
-#   routes:
-#     - match: Host(`longhorn.ryanschnabel.com`)
-#       kind: Rule
-#       services:
-#         - name: longhorn-int-svc
-#           port: http
-#       middlewares:
-#         - name: longhorn-add-trailing-slash
-#         - name: longhorn-stripprefix
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn-ing-traefik
+  namespace: longhorn-system
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`longhorn.ryanschnabel.com`) && PathPrefix(`/longhorn`)
+      kind: Rule
+      services:
+        - name: longhorn-int-svc
+          port: http
+      middlewares:
+        - name: longhorn-add-trailing-slash
+        - name: longhorn-stripprefix
