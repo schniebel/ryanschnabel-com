@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - sync.yaml
 - namespace.yaml
-#- gitrepository.yaml
-#- helmrelease.yaml
+- gitrepository.yaml
+- helmrelease.yaml
 #- middleware.yaml
 #- ingressroute.yaml
