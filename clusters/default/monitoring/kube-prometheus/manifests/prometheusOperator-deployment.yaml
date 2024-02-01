@@ -66,7 +66,6 @@ spec:
           runAsUser: 65532
       nodeSelector:
         kubernetes.io/os: linux
-        kubernetes.io/hostname: prometheus
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534

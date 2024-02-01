@@ -83,7 +83,6 @@ spec:
       hostPID: true
       nodeSelector:
         kubernetes.io/os: linux
-        kubernetes.io/hostname: prometheus
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534

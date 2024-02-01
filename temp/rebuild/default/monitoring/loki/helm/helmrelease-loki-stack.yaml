@@ -13,6 +13,3 @@ spec:
         name: grafana
         namespace: flux-system
   interval: 1h
-  values:
-    nodeSelector:
-      kubernetes.io/hostname: prometheus
