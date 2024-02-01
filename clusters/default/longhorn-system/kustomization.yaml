@@ -5,6 +5,3 @@ resources:
 - namespace.yaml
 - gitrepository.yaml
 - helmrelease.yaml
-- middleware.yaml
-- service.yaml
-- ingress.yaml
