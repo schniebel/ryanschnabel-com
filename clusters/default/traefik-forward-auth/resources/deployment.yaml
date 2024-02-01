@@ -50,5 +50,3 @@ spec:
             secretKeyRef:
               name: whitelist-secret
               key: whitelist
-      nodeSelector:
-        kubernetes.io/hostname: master
