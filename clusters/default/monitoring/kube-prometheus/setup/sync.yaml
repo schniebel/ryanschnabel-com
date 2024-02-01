@@ -7,7 +7,7 @@ spec:
   dependsOn:
     - name: monitoring-persistence
   interval: 1m
-  path: ./clusters/default/monitoring/setup
+  path: ./clusters/default/monitoring/kube-prometheus/setup
   prune: true
   wait: true
   sourceRef:
