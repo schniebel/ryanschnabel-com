@@ -35,3 +35,27 @@ spec:
   headers:
     customRequestHeaders:
       X-Forwarded-Proto: "https"
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: longhorn-add-trailing-slash
+  namespace: longhorn-system
+spec:
+  redirectRegex:
+    regex: ^.*/longhorn$
+    replacement: /longhorn/
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: longhorn-stripprefix
+  namespace: longhorn-system
+spec:
+  stripPrefix:
+    prefixes:
+      - /longhorn

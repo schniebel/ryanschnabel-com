@@ -17,3 +17,23 @@ spec:
             name: longhorn-int-svc
             port:
               number: 8000
+
+---
+
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: longhorn-ing-traefik
+#   namespace: longhorn-system
+# spec:
+#   entryPoints:
+#     - web
+#   routes:
+#     - match: Host(`longhorn.ryanschnabel.com`)
+#       kind: Rule
+#       services:
+#         - name: longhorn-int-svc
+#           port: http
+#       middlewares:
+#         - name: longhorn-add-trailing-slash
+#         - name: longhorn-stripprefix
