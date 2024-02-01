@@ -1,10 +1,10 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: GitRepository
-metadata:
-  name: longhorn-system
-  namespace: flux-system
-spec:
-  interval: 1m
-  url: https://github.com/longhorn/charts
-  ref:
-    branch: v1.5.x
+# apiVersion: source.toolkit.fluxcd.io/v1beta1
+# kind: GitRepository
+# metadata:
+#   name: longhorn-system
+#   namespace: flux-system
+# spec:
+#   interval: 1m
+#   url: https://github.com/longhorn/charts
+#   ref:
+#     branch: v1.5.x
