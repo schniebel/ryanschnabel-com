@@ -10,4 +10,8 @@ spec:
     services:
     - kind: Service
       name: longhorn-frontend
-      port: 8000
+      port: 80
+    middlewares:
+      - name: cors-allow-all
+      - name: admin-auth
+      - name: svc-wss-headers
