@@ -10,4 +10,4 @@ spec:
     services:
     - kind: Service
       name: longhorn-frontend
-      port: 80
+      port: 8000
