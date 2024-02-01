@@ -6,4 +6,4 @@ resources:
 - gitrepository.yaml
 - helmrelease.yaml
 - middleware.yaml
-- ingressroute.yaml
+- service.yaml
