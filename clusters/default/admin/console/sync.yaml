@@ -4,6 +4,8 @@ metadata:
   name: admin-console
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: admin-bff
   interval: 1m
   path: ./clusters/default/admin/console
   prune: true
