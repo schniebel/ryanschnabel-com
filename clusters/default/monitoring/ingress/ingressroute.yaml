@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: monitoring-ingressroute
+  name: monitoring
   namespace: monitoring
 spec:
   routes:
