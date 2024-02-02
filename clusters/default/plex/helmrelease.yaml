@@ -17,3 +17,5 @@ spec:
     pms:
       storageClassName: longhorn
       configStorage: 5Gi
+    extraEnv:
+      PLEX_CLAIM: "claim-zLkQCw4GkvgJpyR241bT"
