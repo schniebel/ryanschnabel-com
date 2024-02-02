@@ -46,7 +46,7 @@ jobs:
 
       - name: Update deployment.yaml with new image tag
         run: |
-          sed -i 's|schniebel/admin-bff:.*|schniebel/admin-bff:'${{ github.sha }}'|' ./clusters/default/admin/admin-bff/deployment.yaml
+          sed -i 's|schniebel/admin-bff:.*|schniebel/admin-bff:'${{ github.sha }}'|' ./clusters/default/admin/bff/deployment.yaml
       
       - name: Commit and push changes
         run: |
