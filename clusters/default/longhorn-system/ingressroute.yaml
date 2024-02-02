@@ -11,5 +11,5 @@ spec:
     - kind: Service
       name: longhorn-frontend
       port: 80
-#    middlewares:
-#      - name: traefik-forward-auth
+    middlewares:
+      - name: traefik-forward-auth
