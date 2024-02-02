@@ -14,10 +14,6 @@ spec:
         namespace: flux-system
   interval: 1m
   values:
-    image:
-      repository: maxlbch/pms-docker-arm64
-      tag: latest
-    nodeSelector:
-      kubernetes.io/hostname: slave1
     pms:
-      configStorage: 600Gi
+      storageClassName: longhorn
+      configStorage: 5Gi
