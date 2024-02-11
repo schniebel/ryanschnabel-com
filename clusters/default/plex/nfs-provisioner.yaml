@@ -1,9 +1,4 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: longhorn-nfs-provisioner
-  namespace: longhorn-system
----
+
 kind: Service
 apiVersion: v1
 metadata:
@@ -67,7 +62,6 @@ spec:
       labels:
         app: longhorn-nfs-provisioner
     spec:
-      serviceAccount: longhorn-nfs-provisioner
       containers:
         - name: longhorn-nfs-provisioner
           image: quay.io/kubernetes_incubator/nfs-provisioner:latest
