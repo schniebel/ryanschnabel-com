@@ -71,3 +71,4 @@ resources:
 - prometheusOperator-service.yaml
 - prometheusOperator-serviceAccount.yaml
 - prometheusOperator-serviceMonitor.yaml
+- longhorn-serviceMonitor.yaml
