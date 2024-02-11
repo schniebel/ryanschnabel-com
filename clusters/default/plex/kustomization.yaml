@@ -5,6 +5,5 @@ resources:
 - namespace.yaml
 - gitrepository.yaml
 - helmrelease.yaml
-- nfs-provisioner.yaml
 - middleware.yaml
 - ingressroute.yaml
