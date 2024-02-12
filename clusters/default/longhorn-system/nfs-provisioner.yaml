@@ -61,7 +61,6 @@ spec:
       labels:
         app: longhorn-nfs-provisioner
     spec:
-      serviceAccount: longhorn-nfs-provisioner
       containers:
         - name: longhorn-nfs-provisioner
           image: quay.io/kubernetes_incubator/nfs-provisioner:latest
