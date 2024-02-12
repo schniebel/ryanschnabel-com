@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - sync.yaml
 - namespace.yaml
+- pvc.yaml
 - gitrepository.yaml
 - helmrelease.yaml
 - middleware.yaml

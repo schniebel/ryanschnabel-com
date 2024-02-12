@@ -1,0 +1,12 @@
+piVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-test
+  namespace: plex
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: longhorn-nfs
+  resources:
+    requests:
+      storage: 15Gi
