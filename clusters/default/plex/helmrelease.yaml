@@ -17,12 +17,12 @@ spec:
     pms:
       storageClassName: longhorn
       configStorage: 5Gi
-    extraVolumeMounts:
-      - mountPath: /mnt/nfs-test
-        name: nfs-test
-    extraVolumes:
-      - name: nfs-test
-        persistentVolumeClaim:
-        claimName: nfs-test
+    # extraVolumeMounts:
+    #   - mountPath: /mnt/nfs-test
+    #     name: nfs-test
+    # extraVolumes:
+    #   - name: nfs-test
+    #     persistentVolumeClaim:
+    #     claimName: nfs-test
     extraEnv:
       PLEX_CLAIM: "claim-zLkQCw4GkvgJpyR241bT"
