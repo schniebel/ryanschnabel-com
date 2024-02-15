@@ -13,5 +13,3 @@ spec:
         name: weave-gitops
         namespace: flux-system
   interval: 1m
-  values:
-    viewSecretsResourceNames: ["oidc-auth"]
