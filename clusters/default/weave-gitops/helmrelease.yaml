@@ -10,6 +10,6 @@ spec:
       version: 4.0.36
       sourceRef:
         kind: GitRepository
-        name: longhorn-system
+        name: weave-gitops
         namespace: flux-system
   interval: 1m
