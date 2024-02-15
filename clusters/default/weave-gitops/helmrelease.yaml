@@ -13,3 +13,6 @@ spec:
         name: weave-gitops
         namespace: flux-system
   interval: 1m
+  values:
+    adminUser:
+      create: true
