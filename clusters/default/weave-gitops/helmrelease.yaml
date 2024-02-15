@@ -16,3 +16,4 @@ spec:
   values:
     adminUser:
       create: true
+      passwordHash: test
