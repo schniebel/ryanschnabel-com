@@ -14,6 +14,9 @@ spec:
         namespace: flux-system
   interval: 1m
   values:
+    metrics: 
+      enabled: true
     adminUser:
       create: true
-      passwordHash: $2a$10$0BN3y6CUDfbeupUg3326euu03ErGA/JaNdDtjFO/60rlmDKoZEEhK
+      username: schniebel
+      passwordHash: $2a$10$qUdCHk68GLqkZQ3oP8hO7OblOkgPkOE2MJ9rGOlPKLc96gkN2ss3O
