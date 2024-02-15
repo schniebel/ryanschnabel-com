@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: weave-gitops
+  namespace: flux-system
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`flux.ryanschnabel.com`)
+    services:
+    - kind: Service
+      name: weave-gitops
+      port: 9001

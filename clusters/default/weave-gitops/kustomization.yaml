@@ -4,3 +4,4 @@ resources:
 - sync.yaml
 - gitrepository.yaml
 - helmrelease.yaml
+- ingressroute.yaml
