@@ -6,13 +6,14 @@ theme = "glim-midnight"
     title = "Ryan Schnabel"
     phrases = ["Admin", "Console"]
     links = [
-    {name = "Landing", url = "https://ryanschnabel.com"},   
-    {name = "Plex", url = "https://plex.ryanschnabel.com"},  
-    {name = "Traefik", url = "https://dashboard.ryanschnabel.com"},    
-    {name = "Monitoring", url = "https://monitoring.ryanschnabel.com/"}, 
-    {name = "Longhorn", url = "https://longhorn.ryanschnabel.com"},   
-    {name = "Prometheus", url = "https://prom.ryanschnabel.com/"},  
     {name = "Alertmanager", url = "https://alerts.ryanschnabel.com/"},    
+    {name = "Flux", url = "https://flux.ryanschnabel.com"},
     {name = "Github", url = "https://github.com/schniebel/ryanschnabel-com"},     
+    {name = "Landing", url = "https://ryanschnabel.com"},
+    {name = "Longhorn", url = "https://longhorn.ryanschnabel.com"},      
+    {name = "Monitoring", url = "https://monitoring.ryanschnabel.com/"}, 
+    {name = "Plex", url = "https://plex.ryanschnabel.com"},  
+    {name = "Prometheus", url = "https://prom.ryanschnabel.com/"},  
+    {name = "Traefik", url = "https://dashboard.ryanschnabel.com"},    
     ] 
     background = "bg.mp4"
