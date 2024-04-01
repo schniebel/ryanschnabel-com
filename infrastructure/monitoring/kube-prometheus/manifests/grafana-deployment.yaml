@@ -160,8 +160,8 @@ spec:
         kubernetes.io/os: linux
       securityContext:
         fsGroup: 65534
-        runAsNonRoot: true
-        runAsUser: 65534
+        #runAsNonRoot: true
+        #runAsUser: 65534
       serviceAccountName: grafana
       volumes:
       - persistentVolumeClaim:
