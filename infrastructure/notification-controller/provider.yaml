@@ -1,0 +1,11 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Provider
+metadata:
+  name: slack
+  namespace: flux-system
+spec:
+  type: slack
+  channel: flux
+  address: https://slack.com/api/chat.postMessage
+  secretRef:
+    name: flux-notifiction-secret
