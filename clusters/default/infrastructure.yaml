@@ -1,14 +1,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: admin-bff
+  name: infrastructure
   namespace: flux-system
 spec:
-  interval: 1m
-  path: ./clusters/default/admin/bff
-  prune: true
-  wait: true
+  interval: 10m0s
   sourceRef:
     kind: GitRepository
     name: flux-system
-  timeout: 2m
+  path: ./infrastructure
+  prune: true
+  wait: true
+  timeout: 5m0s
