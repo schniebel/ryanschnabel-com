@@ -15,4 +15,6 @@ spec:
   interval: 1m
   values:
     cloudflare:
+      tunnelName: "ryanschnabel-com"
+      tunnelId: "5b95e788-4f87-4c50-be9d-64cfa67bf0a6"
       secretName: tunnel-credentials
