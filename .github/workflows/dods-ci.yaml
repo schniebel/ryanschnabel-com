@@ -24,13 +24,17 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Get Unix timestamp
+        id: timestamp
+        run: echo "::set-output name=timestamp::$(date +%s)"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: ./game-server/dods
           file: ./game-server/dods/Dockerfile
           push: true
-          tags: schniebel/dods-gameserver:${{ github.sha }}
+          tags: schniebel/dods-gameserver::${{ steps.timestamp.outputs.timestamp }}
 
       - name: Image digest
         run: echo ${{ steps.meta.outputs.digest }}

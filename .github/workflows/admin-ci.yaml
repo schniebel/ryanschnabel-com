@@ -32,26 +32,15 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
+      - name: Get Unix timestamp
+        id: timestamp
+        run: echo "::set-output name=timestamp::$(date +%s)"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: ./admin
           file: ./admin/Dockerfile
           push: true
-          tags: schniebel/admin:${{ github.sha }}
+          tags: schniebel/admin:${{ steps.timestamp.outputs.timestamp }}
           platforms: linux/arm64
-
-      - name: Pull latest changes from the repository
-        run: git pull origin main
-      
-      - name: Update deployment.yaml with new image tag
-        run: |
-          sed -i 's|schniebel/admin:.*|schniebel/admin:'${{ github.sha }}'|' ./clusters/default/admin/console/deployment.yaml
-      
-      - name: Commit and push changes
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<github-actions@github.com>"
-          git add .
-          git commit -m "Update admin console image tag in deployment.yaml to ${{ github.sha }}"
-          git push

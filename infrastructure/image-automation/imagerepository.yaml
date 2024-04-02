@@ -6,3 +6,47 @@ metadata:
 spec:
   image: docker.io/schniebel/ryanschnabel-com
   interval: 1m
+
+---
+
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: admin
+  namespace: flux-system
+spec:
+  image: docker.io/schniebel/admin
+  interval: 1m
+
+---
+
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: ryanschnabel-api
+  namespace: flux-system
+spec:
+  image: docker.io/schniebel/ryanschnabel-api
+  interval: 1m
+
+---
+
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: admin-bff
+  namespace: flux-system
+spec:
+  image: docker.io/schniebel/admin-bff
+  interval: 1m
+
+---
+
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: dods-gameserver
+  namespace: flux-system
+spec:
+  image: docker.io/schniebel/dods-gameserver
+  interval: 1m

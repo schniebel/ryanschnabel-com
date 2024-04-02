@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: admin-console
-        image: schniebel/admin:e86822054e0455aa3b1f1f9c6303f9162de83944
+        image: schniebel/admin:e86822054e0455aa3b1f1f9c6303f9162de83944 # {"$imagepolicy": "flux-system:admin"}
         ports:
         - containerPort: 80
       nodeSelector:

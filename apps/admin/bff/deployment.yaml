@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: admin-bff
-        image: schniebel/admin-bff:605d890e80ce181bc3b2247257b154f635b81c4c
+        image: schniebel/admin-bff:605d890e80ce181bc3b2247257b154f635b81c4c # {"$imagepolicy": "flux-system:admin-bff"}
         ports:
         - containerPort: 80
         env:

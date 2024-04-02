@@ -11,3 +11,67 @@ spec:
       order: asc
   filterTags:
     pattern: '^\d+$'
+
+---
+
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: admin
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: admin
+  policy:
+    numerical:
+      order: asc
+  filterTags:
+    pattern: '^\d+$'
+
+---
+
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: ryanschnabel-api
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: ryanschnabel-api
+  policy:
+    numerical:
+      order: asc
+  filterTags:
+    pattern: '^\d+$'
+
+---
+
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: admin-bff
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: admin-bff
+  policy:
+    numerical:
+      order: asc
+  filterTags:
+    pattern: '^\d+$'
+
+---
+
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: dods-gameserver
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: dods-gameserver
+  policy:
+    numerical:
+      order: asc
+  filterTags:
+    pattern: '^\d+$'

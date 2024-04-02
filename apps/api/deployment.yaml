@@ -18,7 +18,7 @@ spec:
         kubernetes.io/arch: arm64
       containers:
       - name: api
-        image: schniebel/ryanschnabel-api:ba5632dea2558ac7493f6759ddc193e4cea39db3
+        image: schniebel/ryanschnabel-api:ba5632dea2558ac7493f6759ddc193e4cea39db3 # {"$imagepolicy": "flux-system:ryanschnabel-api"}
         ports:
         - containerPort: 8080
         env:
