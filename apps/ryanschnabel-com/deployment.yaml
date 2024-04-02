@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: ryanschnabel
-        image: schniebel/ryanschnabel-com:4563a44d73c9568803886a3d529f6357284694d3 # {"$imagepolicy": "flux-system:ryanschnabel-com"}
+        image: docker.io/schniebel/ryanschnabel-com:latest # {"$imagepolicy": "flux-system:ryanschnabel-com"}
         ports:
         - containerPort: 80
       nodeSelector:
