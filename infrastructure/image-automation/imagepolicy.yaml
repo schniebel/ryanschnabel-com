@@ -1,11 +1,11 @@
-# apiVersion: image.toolkit.fluxcd.io/v1beta2
-# kind: ImagePolicy
-# metadata:
-#   name: ryanschnabel-com
-#   namespace: flux-system
-# spec:
-#   imageRepositoryRef:
-#     name: ryanschnabel-com
-#   policy:
-#     alphabetical:
-#       order: asc
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: ryanschnabel-com
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: ryanschnabel-com
+  policy:
+    alphabetical:
+      order: asc

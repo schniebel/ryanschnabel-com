@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - imagerepository.yaml
-  #- imagepolicy.yaml
+  - imagepolicy.yaml
