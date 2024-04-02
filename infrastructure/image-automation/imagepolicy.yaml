@@ -7,5 +7,7 @@ spec:
   imageRepositoryRef:
     name: ryanschnabel-com
   policy:
-    alphabetical:
+    numerical:
       order: asc
+  filterTags:
+    pattern: '^\d+$'

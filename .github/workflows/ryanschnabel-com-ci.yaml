@@ -32,11 +32,15 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
+      - name: Get Unix timestamp
+        id: timestamp
+        run: echo "::set-output name=timestamp::$(date +%s)"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: ./ryanschnabel-com
           file: ./ryanschnabel-com/Dockerfile
           push: true
-          tags: schniebel/ryanschnabel-com:${{ github.sha }}
+          tags: schniebel/ryanschnabel-com:${{ steps.timestamp.outputs.timestamp }}
           platforms: linux/arm64
