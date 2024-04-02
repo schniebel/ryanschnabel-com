@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - source/ryanschnabel-com/**
+      - ryanschnabel-com/**
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       
       - name: Update submodules
         run: git submodule update --init --recursive
-        working-directory: source/ryanschnabel-com
+        working-directory: ryanschnabel-com
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -35,8 +35,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./source/ryanschnabel-com
-          file: ./source/ryanschnabel-com/Dockerfile
+          context: ./ryanschnabel-com
+          file: ./ryanschnabel-com/Dockerfile
           push: true
           tags: schniebel/ryanschnabel-com:${{ github.sha }}
           platforms: linux/arm64
