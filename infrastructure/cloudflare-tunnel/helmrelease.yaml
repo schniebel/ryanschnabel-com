@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: default
+  namespace: cloudflare-tunnel
+spec:
+  chart:
+    spec:
+      chart: ./charts/cloudflare-tunnel
+      version:  0.3.0
+      sourceRef:
+        kind: GitRepository
+        name: cloudflare-tunnel
+        namespace: flux-system
+  interval: 1m
+  values:
+    cloudflare:
+      secretName: tunnel-credentials
