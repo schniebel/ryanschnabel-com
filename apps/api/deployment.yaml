@@ -13,12 +13,12 @@ spec:
       labels:
         app: api
     spec:
-      serviceAccountName: api-service-account 
+      serviceAccountName: api-service-account
       nodeSelector:
         kubernetes.io/arch: arm64
       containers:
       - name: api
-        image: schniebel/ryanschnabel-api:ba5632dea2558ac7493f6759ddc193e4cea39db3 # {"$imagepolicy": "flux-system:ryanschnabel-api"}
+        image: docker.io/schniebel/ryanschnabel-api:1712087276 # {"$imagepolicy": "flux-system:ryanschnabel-api"}
         ports:
         - containerPort: 8080
         env:
