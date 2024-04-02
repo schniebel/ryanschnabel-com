@@ -7,7 +7,7 @@ on:
     paths:
       - game-server/dods/**
   workflow_dispatch:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
           context: ./game-server/dods
           file: ./game-server/dods/Dockerfile
           push: true
-          tags: schniebel/dods-gameserver::${{ steps.timestamp.outputs.timestamp }}
+          tags: schniebel/dods-gameserver:${{ steps.timestamp.outputs.timestamp }}
 
       - name: Image digest
         run: echo ${{ steps.meta.outputs.digest }}
