@@ -40,6 +40,3 @@ jobs:
           push: true
           tags: schniebel/ryanschnabel-com:${{ github.sha }}
           platforms: linux/arm64
-
-      - name: Pull latest changes from the repository
-        run: git pull origin main
