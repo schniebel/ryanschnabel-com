@@ -7,8 +7,8 @@
 [submodule "hugo/ryanschnabel/themes/vncnt-hugo-ryanschnabel"]
 	path = hugo/ryanschnabel/themes/vncnt-hugo-ryanschnabel
 	url = https://github.com/schniebel/vncnt-hugo-ryanschnabel
-[submodule "ryanschnabel-com/themes/vncnt-hugo"]
-	path = ryanschnabel-com/themes/vncnt-hugo
+[submodule "source/ryanschnabel-com/themes/vncnt-hugo"]
+	path = source/ryanschnabel-com/themes/vncnt-hugo
 	url = https://github.com/fncnt/vncnt-hugo
 [submodule "admin/themes/glim-midnight"]
 	path = admin/themes/glim-midnight
