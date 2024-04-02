@@ -6,7 +6,8 @@ on:
       - main
     paths:
       - admin/**
-
+  workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-latest

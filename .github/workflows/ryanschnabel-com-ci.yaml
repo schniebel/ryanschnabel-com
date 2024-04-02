@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - ryanschnabel-com/**
+  workflow_dispatch:
 
 jobs:
   build:
