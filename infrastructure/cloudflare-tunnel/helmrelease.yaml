@@ -20,4 +20,4 @@ spec:
       secretName: tunnel-credentials
     ingress:
       - hostname: ryanschnabel.com
-        service: http://traefik.kube-system.svc.cluster.local:443
+        service: http://ryanschnabel.ryanschnabel.svc.cluster.local:80
