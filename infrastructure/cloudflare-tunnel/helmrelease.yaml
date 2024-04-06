@@ -21,3 +21,5 @@ spec:
     ingress:
       - hostname: ryanschnabel.com
         service: http://ryanschnabel.ryanschnabel.svc.cluster.local:80
+      - hostname: hello.ryanschnabel.com
+        service: hello_world
