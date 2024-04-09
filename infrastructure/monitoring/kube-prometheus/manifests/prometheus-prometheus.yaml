@@ -55,3 +55,5 @@ spec:
     volumeMounts:
     - mountPath: /prometheus
       name: prometheus-k8s-data
+  retention: 10d
+  retentionSize: 50GB
