@@ -4,8 +4,5 @@ resources:
 - namespace.yaml
 - gitrepository.yaml
 - helmrelease.yaml
-- storageclass.yaml
-- pvc.yaml
-- nfs-provisioner.yaml
 - middleware.yaml
 - ingressroute.yaml
