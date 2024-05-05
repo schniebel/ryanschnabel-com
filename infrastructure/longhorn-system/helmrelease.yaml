@@ -4,6 +4,10 @@ metadata:
   name: longhorn-system
   namespace: longhorn-system
 spec:
+  install:
+    timeout: 10m  # Increase this as necessary
+  upgrade:
+    timeout: 10m  # Increase this as necessary
   chart:
     spec:
       chart: ./charts/longhorn
