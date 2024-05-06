@@ -15,11 +15,9 @@ spec:
   interval: 1m
   values:
     cloudflare:
-      tunnelName: "ryanschnabel-com"
-      tunnelId: "5b95e788-4f87-4c50-be9d-64cfa67bf0a6"
+      tunnelName: "ryanschnabel-tunnel"
+      tunnelId: "dac35fb2-3e79-482a-9817-530d9f53a0d2"
       secretName: tunnel-credentials
     ingress:
-      - hostname: ryanschnabel.com
-        service: http://traefik.kube-system.svc.cluster.local:80
-      - hostname: hello.ryanschnabel.com
-        service: hello_world
+      - hostname: longhorn.ryanschnabel.com
+        service: longhorn-frontend.default.svc.cluster.local:80
