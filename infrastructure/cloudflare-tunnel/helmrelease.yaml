@@ -20,4 +20,4 @@ spec:
       secretName: tunnel-credentials
     ingress:
       - hostname: longhorn.ryanschnabel.com
-        service: longhorn-frontend.default.svc.cluster.local:80
+        service: longhorn-frontend.longhorn-system.svc.cluster.local:80
