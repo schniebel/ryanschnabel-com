@@ -18,6 +18,6 @@ spec:
       tunnelName: "ryanschnabel-tunnel"
       tunnelId: "dac35fb2-3e79-482a-9817-530d9f53a0d2"
       secretName: tunnel-credentials
-    ingress:
-      - hostname: longhorn.ryanschnabel.com
-        service: longhorn-frontend.longhorn-system.svc.cluster.local:8000
+      ingress:
+        - hostname: tunnel.ryanschnabel.com
+          service: http://web-service:80
