@@ -21,3 +21,5 @@ spec:
       ingress:
         - hostname: tunnel.ryanschnabel.com
           service: http://web-service:80
+        - hostname: longhorn.ryanschnabel.com
+          service: http://traefik.kube-system.svc.cluster.local:80
