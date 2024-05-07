@@ -19,7 +19,7 @@ spec:
       tunnelId: "dac35fb2-3e79-482a-9817-530d9f53a0d2"
       secretName: tunnel-credentials
       ingress:
-        - hostname: tunnel.ryanschnabel.com
+        - hostname: tunnel.ryanschnabel.com #tunnel test
           service: http://web-service:80
         - hostname: longhorn.ryanschnabel.com
           service: http://traefik.kube-system.svc.cluster.local:80
