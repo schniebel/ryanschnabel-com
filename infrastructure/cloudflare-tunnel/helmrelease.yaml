@@ -25,3 +25,5 @@ spec:
           service: http://traefik.kube-system.svc.cluster.local:80
         - hostname: dashboard.ryanschnabel.com
           service: http://traefik.kube-system.svc.cluster.local:80
+        - hostname: flux.ryanschnabel.com
+          service: http://traefik.kube-system.svc.cluster.local:80

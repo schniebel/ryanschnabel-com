@@ -11,3 +11,5 @@ spec:
     - kind: Service
       name: weave-gitops
       port: 9001
+    middlewares:
+      - name: traefik-forward-auth
