@@ -4,3 +4,4 @@ resources:
 - gitrepository.yaml
 - helmrelease.yaml
 - ingressroute.yaml
+- middleware.yaml
