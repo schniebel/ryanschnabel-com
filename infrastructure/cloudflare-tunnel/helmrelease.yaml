@@ -16,7 +16,7 @@ spec:
   values:
     cloudflare:
       tunnelName: "ryanschnabel-tunnel"
-      tunnelId: "b1beeb90-8d3f-4637-8091-9b680d273394"
+      tunnelId: "b9842435-ec89-4d37-9dc9-083a397a51a4"
       secretName: tunnel-credentials
       ingress:
         - hostname: tunnel.ryanschnabel.com
