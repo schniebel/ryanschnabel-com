@@ -1,12 +1,30 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-pv
+  name: nfs-graf-pv
   labels:
-    type: nfs
+    type: nfs-graf-pv
 spec:
   capacity:
-    storage: 170Gi
+    storage: 40Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /var/nfs/general
+    server: 10.128.0.20 # VM internal IP
+  persistentVolumeReclaimPolicy: Retain
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-prom-pv
+  labels:
+    type: nfs-prom-pv
+spec:
+  capacity:
+    storage: 70Gi
   accessModes:
     - ReadWriteMany
   nfs:

@@ -11,5 +11,5 @@ spec:
       storage: 30Gi
   selector:
     matchLabels:
-      type: nfs
+      type: nfs-graf-pv
   storageClassName: ""  # Explicitly set to not use a storage class
