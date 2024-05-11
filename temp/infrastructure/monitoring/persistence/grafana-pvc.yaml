@@ -5,8 +5,10 @@ metadata:
   namespace: monitoring
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
+    - ReadWriteMany
   resources:
     requests:
       storage: 30Gi
+  selector:
+    matchLabels:
+      type: nfs
