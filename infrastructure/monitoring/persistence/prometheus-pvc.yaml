@@ -12,3 +12,4 @@ spec:
   selector:
     matchLabels:
       type: nfs
+  storageClassName: ""  # Explicitly set to use no storage class
