@@ -4,10 +4,10 @@ metadata:
   name: nfs-pv
 spec:
   capacity:
-    storage: 190Gi
+    storage: 170Gi
   accessModes:
     - ReadWriteMany
   nfs:
     path: /var/nfs/general
-    server: 10.128.0.16 # VM internal IP
+    server: 10.128.0.20 # VM internal IP
   persistentVolumeReclaimPolicy: Retain
