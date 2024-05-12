@@ -29,3 +29,5 @@ spec:
           service: http://traefik.kube-system.svc.cluster.local:80
         - hostname: monitoring.ryanschnabel.com
           service: http://traefik.kube-system.svc.cluster.local:80
+        - hostname: prom.ryanschnabel.com
+          service: http://traefik.kube-system.svc.cluster.local:80
