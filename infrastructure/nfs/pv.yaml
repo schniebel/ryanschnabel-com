@@ -10,7 +10,7 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    path: /var/nfs/general
+    path: /var/nfs/general/grafana
     server: 10.128.0.20 # VM internal IP
   persistentVolumeReclaimPolicy: Retain
 
@@ -28,6 +28,6 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    path: /var/nfs/general
+    path: /var/nfs/general/prometheus
     server: 10.128.0.20 # VM internal IP
   persistentVolumeReclaimPolicy: Retain
