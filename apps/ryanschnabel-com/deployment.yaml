@@ -18,5 +18,3 @@ spec:
         image: docker.io/schniebel/ryanschnabel-com:1712665409 # {"$imagepolicy": "flux-system:ryanschnabel-com"}
         ports:
         - containerPort: 80
-      nodeSelector:
-        kubernetes.io/arch: arm64
