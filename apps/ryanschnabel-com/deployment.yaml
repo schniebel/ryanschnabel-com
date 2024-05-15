@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: ryanschnabel
-        image: docker.io/schniebel/ryanschnabel-com:1712665409 # {"$imagepolicy": "flux-system:ryanschnabel-com"}
+        image: docker.io/schniebel/ryanschnabel-com:1715801694 # {"$imagepolicy": "flux-system:ryanschnabel-com"}
         ports:
         - containerPort: 80
