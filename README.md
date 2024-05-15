@@ -40,7 +40,7 @@ Using [Grafana](https://grafana.com/grafana/), [Prometheus](https://prometheus.i
 
 ## Ingress
 
-Exposure to outside traffic is handled using [Traefik](https://traefik.io/traefik/). Using the ingressRoute resource ([example](https://github.com/schniebel/ryanschnabel-com/blob/main/clusters/default/ryanschnabel-com/ingressRoute.yaml))
+Exposure to outside traffic is handled using [Cloudflare Tunnels](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/). Ingress Controller is [Traefik](https://traefik.io/traefik/). Using the ingressRoute resource ([example](https://github.com/schniebel/ryanschnabel-com/blob/main/clusters/default/ryanschnabel-com/ingressRoute.yaml))
 
 ## DNS/SSL
 
