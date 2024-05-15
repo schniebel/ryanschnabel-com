@@ -21,18 +21,18 @@ spec:
                   - key: "app"
                     operator: "In"
                     values:
-                    - ryanschnabel
+                      - ryanschnabel
               topologyKey: "kubernetes.io/hostname"
       containers:
-      - name: ryanschnabel
-        image: docker.io/schniebel/ryanschnabel-com:1715801694 # {"$imagepolicy": "flux-system:ryanschnabel-com"}
-        ports:
-        - containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 80
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 80
+        - name: ryanschnabel
+          image: docker.io/schniebel/ryanschnabel-com:1715802628 # {"$imagepolicy": "flux-system:ryanschnabel-com"}
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 80
