@@ -1,26 +1,26 @@
-# apiVersion: image.toolkit.fluxcd.io/v1beta1
-# kind: ImageUpdateAutomation
-# metadata:
-#   name: ryanschnabel-com
-#   namespace: flux-system
-# spec:
-#   interval: 1m0s
-#   sourceRef:
-#     kind: GitRepository
-#     name: flux-system
-#     namespace: flux-system
-#   git:
-#     checkout:
-#       ref:
-#         branch: main
-#     commit:
-#       author:
-#         name: fluxcdbot
-#         email: fluxcdbot@users.noreply.github.com
-#       messageTemplate: 'Update image tag for {{range .Updated.Images}}{{.}}{{end}}'
-#   update:
-#     path: ./apps/ryanschnabel-com
-#     strategy: Setters
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: ryanschnabel-com
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
+      messageTemplate: 'Update image tag for {{range .Updated.Images}}{{.}}{{end}}'
+  update:
+    path: ./apps/ryanschnabel-com
+    strategy: Setters
 
 # ---
 
