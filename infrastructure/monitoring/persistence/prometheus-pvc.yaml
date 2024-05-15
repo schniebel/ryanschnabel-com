@@ -9,7 +9,4 @@ spec:
   resources:
     requests:
       storage: 60Gi
-  selector:
-    matchLabels:
-      type: nfs-prom-pv
   storageClassName: "nfs-client"
