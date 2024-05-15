@@ -4,7 +4,7 @@ metadata:
   name: ryanschnabel
   namespace: ryanschnabel
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: ryanschnabel
@@ -13,8 +13,26 @@ spec:
       labels:
         app: ryanschnabel
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: "In"
+                    values:
+                    - ryanschnabel
+              topologyKey: "kubernetes.io/hostname"
       containers:
       - name: ryanschnabel
         image: docker.io/schniebel/ryanschnabel-com:1715801694 # {"$imagepolicy": "flux-system:ryanschnabel-com"}
         ports:
         - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 80
