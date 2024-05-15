@@ -15,7 +15,5 @@ spec:
   interval: 1m
   values:
     nfs:
-      server: 192.168.50.10
+      server: 10.128.0.20
       path: /opt/dynamic-storage
-    nodeSelector:
-      kubernetes.io/hostname: master
