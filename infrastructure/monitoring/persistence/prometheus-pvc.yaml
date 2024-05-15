@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: graf-pvc
+  name: prom-pvc
   namespace: monitoring
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 30Gi
+      storage: 60Gi
   selector:
     matchLabels:
-      type: nfs-graf-pv
-  storageClassName: ""  # Explicitly set to not use a storage class
+      type: nfs-prom-pv
+  storageClassName: "nfs-client"
