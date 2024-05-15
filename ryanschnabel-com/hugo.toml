@@ -27,7 +27,7 @@ _merge = "none"
   # use [params.contact.email] instead.
   #email = "john.doe@example.com"
   description = "Landing Page"
-  bio = "Cloud Engineer.  \nThis site was built using Hugo, and is hosted on a K3 Kubernetes cluster made up of Raspberry Pi 4s. See Github for details."
+  bio = "Cloud Engineer.  \nThis site was built using Hugo, and is hosted on a K3 Kubernetes cluster. See Github for details."
   avatar = "img/ryan-schnabel.jpg"
   favicon = "img/favicon.png"
   error404 = "There is no such page."

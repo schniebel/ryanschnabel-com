@@ -44,4 +44,4 @@ jobs:
           file: ./ryanschnabel-com/Dockerfile
           push: true
           tags: schniebel/ryanschnabel-com:${{ steps.timestamp.outputs.timestamp }}
-          platforms: linux/arm64
+          platforms: linux/amd64
